@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(findViewById(R.id.toolbar))
+
         preferences = this.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
         dateTextView = findViewById(R.id.date)
 
