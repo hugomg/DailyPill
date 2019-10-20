@@ -13,7 +13,8 @@ import java.util.*
 //import java.time.format.DateTimeFormatter
 //import java.time.format.FormatStyle
 
-const val PREFS_DATE_KEY: String = "last_date"
+const val PREFS_FILE_NAME = "com.example.thyroidhelper.preferences"
+const val PREFS_DATE_KEY = "last_date"
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        preferences = this.getSharedPreferences("com.example.thyroidhelper.preferences", Context.MODE_PRIVATE)
+        preferences = this.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
         dateTextView = findViewById(R.id.date)
 
         // Clear preferences
