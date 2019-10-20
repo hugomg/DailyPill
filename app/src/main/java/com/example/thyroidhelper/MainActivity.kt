@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.SharedPreferences
+import android.opengl.Visibility
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import java.text.DateFormat
 import java.util.*
@@ -21,7 +23,9 @@ const val PREFS_DATE_KEY = "last_date"
 class MainActivity : AppCompatActivity() {
 
     lateinit var preferences: SharedPreferences
-    lateinit var dateTextView: TextView
+    lateinit var buttonView: Button
+    lateinit var messageBeforeView: TextView
+    lateinit var messageAfterView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         preferences = this.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
-        dateTextView = findViewById(R.id.date)
+
+        buttonView        = findViewById(R.id.button)
+        messageBeforeView = findViewById(R.id.message_before)
+        messageAfterView  = findViewById(R.id.message_after)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -55,10 +62,16 @@ class MainActivity : AppCompatActivity() {
         today.set(Calendar.MILLISECOND, 0)
 
         if (lastClick.before(today)) {
-            dateTextView.text = "---"
+            buttonView.visibility        = View.VISIBLE
+            messageBeforeView.visibility = View.VISIBLE
+            messageAfterView.visibility  = View.GONE
         } else {
-            dateTextView.text =
-                DateFormat.getTimeInstance(DateFormat.SHORT).format(lastClick.time)
+            val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(lastClick.time)
+            messageAfterView.text = String.format("Remédio tomado\n%s", time)
+
+            buttonView.visibility        = View.GONE
+            messageBeforeView.visibility = View.GONE
+            messageAfterView.visibility  = View.VISIBLE
         }
     }
 
