@@ -18,7 +18,7 @@ const val PREFS_DATE_KEY = "last_date"
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var preferences: SharedPreferences;
+    lateinit var preferences: SharedPreferences
     lateinit var dateTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,25 +42,25 @@ class MainActivity : AppCompatActivity() {
     private fun redraw() {
         val timestamp = preferences.getLong(PREFS_DATE_KEY, 0)
         val lastClick = Calendar.getInstance()
-        lastClick.setTimeInMillis(timestamp)
+        lastClick.timeInMillis = timestamp
 
         val today = Calendar.getInstance()
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
+        today.set(Calendar.HOUR_OF_DAY, 0)
+        today.set(Calendar.MINUTE, 0)
+        today.set(Calendar.SECOND, 0)
+        today.set(Calendar.MILLISECOND, 0)
 
         if (lastClick.before(today)) {
             dateTextView.text = "---"
         } else {
             dateTextView.text =
-                DateFormat.getTimeInstance(DateFormat.SHORT).format(lastClick.getTime())
+                DateFormat.getTimeInstance(DateFormat.SHORT).format(lastClick.time)
         }
     }
 
 
     fun updateTime(btn: View) {
-        val timestamp = Calendar.getInstance().getTimeInMillis()
+        val timestamp = Calendar.getInstance().timeInMillis
 
         val ok = preferences.edit()
             .putLong(PREFS_DATE_KEY, timestamp)
