@@ -155,6 +155,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Onclick handler for the button
+    @Suppress("UNUSED_PARAMETER")
     fun updateTime(btn: View) {
         if (isAnimating) return
         val timestamp = Calendar.getInstance().timeInMillis
