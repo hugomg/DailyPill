@@ -20,12 +20,12 @@ enum class AppState {
 
 class MainActivity : AppCompatActivity() {
 
-    var state = AppState.START
-    var isAnimating = false
+    private var state = AppState.START
+    private var isAnimating = false
 
-    lateinit var buttonView: Button
-    lateinit var drugNotTakenMessageView: TextView
-    lateinit var drugTakenMessageView: TextView
+    private lateinit var buttonView: Button
+    private lateinit var drugNotTakenMessageView: TextView
+    private lateinit var drugTakenMessageView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
