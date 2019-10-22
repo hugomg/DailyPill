@@ -2,10 +2,8 @@ package com.example.thyroidhelper
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.content.SharedPreferences
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,13 +11,6 @@ import android.widget.Button
 import android.widget.TextView
 import java.text.DateFormat
 import java.util.*
-
-//import java.time.LocalDateTime
-//import java.time.format.DateTimeFormatter
-//import java.time.format.FormatStyle
-
-const val PREFS_FILE_NAME = "com.example.thyroidhelper.preferences"
-const val PREFS_DATE_KEY = "last_date"
 
 const val fadeDuration = 150L
 
@@ -32,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     var state = AppState.START
     var isAnimating = false
 
-    lateinit var preferences: SharedPreferences
     lateinit var buttonView: Button
     lateinit var drugNotTakenMessageView: TextView
     lateinit var drugTakenMessageView: TextView
@@ -42,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(findViewById(R.id.toolbar))
-
-        preferences = this.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
 
         buttonView              = findViewById(R.id.button)
         drugNotTakenMessageView = findViewById(R.id.not_taken_message)
@@ -56,43 +44,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        if (hasTakenDrugToday()) {
+        if (hasTakenDrugToday(this)) {
             gotoDrugTaken(true)
         } else {
             gotoDrugNotTaken(true)
         }
 
         super.onResume()
-    }
-
-    //
-    // Data
-    //
-
-    private fun getDrugTakenTime(): Long {
-        return preferences.getLong(PREFS_DATE_KEY, 0)
-    }
-
-    private fun setDrugTakenTime(timestamp: Long) {
-        preferences.edit()
-            .putLong(PREFS_DATE_KEY, timestamp)
-            .apply()
-    }
-
-    private fun unsetDrugTakenTime() {
-        preferences.edit()
-            .remove(PREFS_DATE_KEY)
-            .apply()
-    }
-
-    private fun hasTakenDrugToday(): Boolean {
-        val today = Calendar.getInstance()
-        today.set(Calendar.HOUR_OF_DAY, 0)
-        today.set(Calendar.MINUTE, 0)
-        today.set(Calendar.SECOND, 0)
-        today.set(Calendar.MILLISECOND, 0)
-
-        return today.timeInMillis <= getDrugTakenTime()
     }
 
     //
@@ -104,8 +62,9 @@ class MainActivity : AppCompatActivity() {
         if (state == AppState.DRUG_TAKEN) { return }
         state = AppState.DRUG_TAKEN
 
-        val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(getDrugTakenTime())
-        drugTakenMessageView.text = String.format("Remédio tomado\n%s", time)
+        val timestamp = getDrugTakenTime(this)
+        val timestr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
+        drugTakenMessageView.text = String.format("Remédio tomado\n%s", timestr)
 
         if (instant) {
             finishGotoDrugTaken()
@@ -191,7 +150,7 @@ class MainActivity : AppCompatActivity() {
 
     // Menu action
     private fun forgetLastTime() {
-        unsetDrugTakenTime()
+        unsetDrugTakenTime(this)
         gotoDrugNotTaken(false)
     }
 
@@ -199,7 +158,7 @@ class MainActivity : AppCompatActivity() {
     fun updateTime(btn: View) {
         if (isAnimating) return
         val timestamp = Calendar.getInstance().timeInMillis
-        setDrugTakenTime(timestamp)
+        setDrugTakenTime(this, timestamp)
         gotoDrugTaken(false)
     }
 
