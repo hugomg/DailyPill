@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -162,8 +163,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle(R.string.reset_confirmation_title)
             .setMessage(R.string.reset_confirmation_message)
             .setPositiveButton(R.string.reset_confirmation_ok,
-                @Suppress("UNUSED_PARAMETER")
-                DialogInterface.OnClickListener { dialog, id ->
+                DialogInterface.OnClickListener { _, _ ->
                     unsetDrugTakenTime(this)
                     gotoDrugNotTaken(false)
                 })
