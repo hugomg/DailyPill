@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Thyroid Helper</string>
     <string name="drug_not_taken_message">Você ainda não tomou o remédio de hoje</string>
-    <string name="drug_taken_message">Remédio tomado\n%s</string>
+    <string name="drug_taken_message">Remédio tomado %s</string>
     <string name="action_take_drug">Tomar o remédio</string>
     <string name="action_reset">Reset</string>
     <string name="reset_confirmation_title">Esquecer último horário?</string>
