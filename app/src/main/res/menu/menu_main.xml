@@ -8,4 +8,8 @@
         android:title="@string/action_reset"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/action_reminder"
+        android:title="Reminder"
+        app:showAsAction="never"/>
+
 </menu>

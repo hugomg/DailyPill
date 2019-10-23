@@ -2,6 +2,7 @@ package com.example.thyroidhelper
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
@@ -11,7 +12,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import java.text.DateFormat
-import java.util.*
 
 const val fadeDuration = 150L
 
@@ -67,15 +67,14 @@ class MainActivity : AppCompatActivity() {
     //
 
     private fun gotoDrugTaken(instant: Boolean) {
-
-        if (state == AppState.DRUG_TAKEN) { return }
-        state = AppState.DRUG_TAKEN
-
         val timestamp = getDrugTakenTime(this)
         val timeStr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
         // Use non-breaking space to avoid a line-break between 6:00 and AM
         val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
         drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
+
+        if (state == AppState.DRUG_TAKEN) { return }
+        state = AppState.DRUG_TAKEN
 
         if (instant) {
             finishGotoDrugTaken()
@@ -111,9 +110,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun finishGotoDrugTaken() {
+        drugTakenMessageView.alpha    = 1.0f
+
         buttonView.visibility              = View.GONE
         drugNotTakenMessageView.visibility = View.GONE
         drugTakenMessageView.visibility    = View.VISIBLE
+
         resetMenuItem?.isEnabled = true
     }
 
@@ -155,6 +157,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun finishGotoDrugNotTaken() {
+        buttonView.alpha              = 1.0f
+        drugNotTakenMessageView.alpha = 1.0f
+
         buttonView.visibility              = View.VISIBLE
         drugNotTakenMessageView.visibility = View.VISIBLE
         drugTakenMessageView.visibility    = View.GONE
@@ -177,12 +182,17 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    private fun performReminder() {
+        val intent = Intent(this, ReminderActivity::class.java)
+        startActivity(intent)
+    }
+
+
     // Onclick handler for the button
     @Suppress("UNUSED_PARAMETER")
     fun performUpdateTime(btn: View) {
         if (isAnimating) return
-        val timestamp = Calendar.getInstance().timeInMillis
-        setDrugTakenTime(this, timestamp)
+        setDrugTakenTime(this, currentTime())
         gotoDrugTaken(false)
     }
 
@@ -190,6 +200,10 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.action_reset -> {
                 performReset()
+                return true
+            }
+            R.id.action_reminder -> {
+                performReminder()
                 return true
             }
             else -> {

@@ -31,6 +31,10 @@ fun unsetDrugTakenTime(ctx: Context) {
         .apply()
 }
 
+fun currentTime(): Long {
+    return Calendar.getInstance().timeInMillis
+}
+
 fun hasTakenDrugToday(ctx: Context): Boolean {
     val today = Calendar.getInstance()
     today.set(Calendar.HOUR_OF_DAY, 0)
