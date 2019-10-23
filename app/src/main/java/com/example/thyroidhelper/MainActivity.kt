@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var drugTakenMessage: String
 
+    private var resetMenuItem: MenuItem? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,6 +49,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        resetMenuItem = menu.findItem(R.id.action_reset)
+        resetMenuItem!!.isEnabled = (state == AppState.DRUG_TAKEN)
         return true
     }
 
@@ -110,6 +114,7 @@ class MainActivity : AppCompatActivity() {
         buttonView.visibility              = View.GONE
         drugNotTakenMessageView.visibility = View.GONE
         drugTakenMessageView.visibility    = View.VISIBLE
+        resetMenuItem?.isEnabled = true
     }
 
     private fun gotoDrugNotTaken(instant: Boolean) {
@@ -153,6 +158,7 @@ class MainActivity : AppCompatActivity() {
         buttonView.visibility              = View.VISIBLE
         drugNotTakenMessageView.visibility = View.VISIBLE
         drugTakenMessageView.visibility    = View.GONE
+        resetMenuItem?.isEnabled = false
     }
 
     // Menu action
