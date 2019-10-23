@@ -2,11 +2,9 @@ package com.example.thyroidhelper
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -74,8 +72,8 @@ class MainActivity : AppCompatActivity() {
         state = AppState.DRUG_TAKEN
 
         val timestamp = getDrugTakenTime(this)
-        val timestr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
-        drugTakenMessageView.text = String.format(drugTakenMessage, timestr)
+        val timeStr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
+        drugTakenMessageView.text = String.format(drugTakenMessage, timeStr)
 
         if (instant) {
             finishGotoDrugTaken()
@@ -168,11 +166,10 @@ class MainActivity : AppCompatActivity() {
         val dialog = AlertDialog.Builder(this)
             .setTitle(R.string.reset_confirmation_title)
             .setMessage(R.string.reset_confirmation_message)
-            .setPositiveButton(R.string.reset_confirmation_ok,
-                DialogInterface.OnClickListener { _, _ ->
+            .setPositiveButton(R.string.reset_confirmation_ok) { _, _ ->
                     unsetDrugTakenTime(this)
                     gotoDrugNotTaken(false)
-                })
+                }
             .setNegativeButton(R.string.reset_confirmation_cancel,null)
             .create()
         dialog.show()
