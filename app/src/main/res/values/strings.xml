@@ -4,6 +4,8 @@
     <string name="drug_taken_message">Remédio tomado %s</string>
     <string name="action_take_drug">Tomar o remédio</string>
     <string name="action_reset">Reset</string>
+
+    <!-- note: button name should match "action_take_drug" -->
     <string name="reset_confirmation_title">Esquecer último horário?</string>
     <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>Tomar o Remédio</i></string>
     <string name="reset_confirmation_ok">Esquecer</string>
