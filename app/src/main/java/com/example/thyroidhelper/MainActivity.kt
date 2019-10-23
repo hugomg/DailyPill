@@ -2,7 +2,9 @@ package com.example.thyroidhelper
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -153,14 +155,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Menu action
-    private fun forgetLastTime() {
-        unsetDrugTakenTime(this)
-        gotoDrugNotTaken(false)
+    private fun performReset() {
+        if (state == AppState.DRUG_NOT_TAKEN) return
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(R.string.reset_confirmation_title)
+            .setMessage(R.string.reset_confirmation_message)
+            .setPositiveButton(R.string.reset_confirmation_ok,
+                @Suppress("UNUSED_PARAMETER")
+                DialogInterface.OnClickListener { dialog, id ->
+                    unsetDrugTakenTime(this)
+                    gotoDrugNotTaken(false)
+                })
+            .setNegativeButton(R.string.reset_confirmation_cancel,null)
+            .create()
+        dialog.show()
     }
 
     // Onclick handler for the button
     @Suppress("UNUSED_PARAMETER")
-    fun updateTime(btn: View) {
+    fun performUpdateTime(btn: View) {
         if (isAnimating) return
         val timestamp = Calendar.getInstance().timeInMillis
         setDrugTakenTime(this, timestamp)
@@ -170,7 +184,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_reset -> {
-                forgetLastTime()
+                performReset()
                 return true
             }
             else -> {
