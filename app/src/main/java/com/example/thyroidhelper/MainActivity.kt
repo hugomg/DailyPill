@@ -73,7 +73,9 @@ class MainActivity : AppCompatActivity() {
 
         val timestamp = getDrugTakenTime(this)
         val timeStr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
-        drugTakenMessageView.text = String.format(drugTakenMessage, timeStr)
+        // Use non-breaking space to avoid a line-break between 6:00 and AM
+        val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
+        drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
 
         if (instant) {
             finishGotoDrugTaken()
