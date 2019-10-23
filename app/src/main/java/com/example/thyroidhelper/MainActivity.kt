@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drugNotTakenMessageView: TextView
     private lateinit var drugTakenMessageView: TextView
 
+    private lateinit var drugTakenMessage: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         buttonView              = findViewById(R.id.button)
         drugNotTakenMessageView = findViewById(R.id.not_taken_message)
         drugTakenMessageView    = findViewById(R.id.taken_message)
+
+        drugTakenMessage = resources.getString(R.string.drug_taken_message)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
         val timestamp = getDrugTakenTime(this)
         val timestr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
-        drugTakenMessageView.text = String.format("Remédio tomado\n%s", timestr)
+        drugTakenMessageView.text = String.format(drugTakenMessage, timestr)
 
         if (instant) {
             finishGotoDrugTaken()

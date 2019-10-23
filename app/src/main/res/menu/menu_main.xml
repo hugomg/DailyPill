@@ -5,7 +5,7 @@
 
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_reset"
-        android:title="Reset"
+        android:title="@string/action_reset"
         app:showAsAction="never"/>
 
 </menu>
