@@ -13,4 +13,5 @@
     <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>Tomar o Remédio</i></string>
     <string name="reset_confirmation_ok">Esquecer</string>
     <string name="reset_confirmation_cancel">Cancelar</string>
+    <string name="reminder_title">Lembrete Diário</string>
 </resources>

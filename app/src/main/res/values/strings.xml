@@ -13,4 +13,7 @@
     <string name="reset_confirmation_message">Undoes the last time you pressed the <i>Take Medicine</i> button</string>
     <string name="reset_confirmation_ok">Forget</string>
     <string name="reset_confirmation_cancel">Cancel</string>
+
+    <!-- ReminderActivity-->
+    <string name="reminder_title">Daily Reminder</string>
 </resources>

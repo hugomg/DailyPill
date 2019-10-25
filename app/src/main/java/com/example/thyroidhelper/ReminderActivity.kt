@@ -9,9 +9,7 @@ class ReminderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder)
-
-        setSupportActionBar(findViewById(R.id.toolbar))
-        getSupportActionBar()?.setTitle("Daily Reminder")
+        setTitle("Daily Reminder")
     }
 
     @Suppress("UNUSED_PARAMETER")
