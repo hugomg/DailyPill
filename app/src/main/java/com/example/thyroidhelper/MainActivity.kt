@@ -1,5 +1,6 @@
 package com.example.thyroidhelper
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "#Test"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val importance = NotificationManager.IMPORTANCE_LOW
             val channel = NotificationChannel(CHANNEL_ID, name, importance)
             channel.description = "#This is a test"
 
@@ -109,7 +110,6 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Create an explicit intent for an Activity in your app
         val intent = Intent(this, ReminderActivity::class.java)
         intent.flags =
             Intent.FLAG_ACTIVITY_NEW_TASK or
@@ -117,17 +117,17 @@ class MainActivity : AppCompatActivity() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         // Send the notification
-        var notification = NotificationCompat.Builder(this, CHANNEL_ID)
+        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("My notification")
             .setContentText("Hello World")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setContentIntent(pendingIntent)
-            .build()
 
         val NOTIFICATION_ID = 0
         with (NotificationManagerCompat.from(this)) {
-            notify(NOTIFICATION_ID, notification)
+            notify(NOTIFICATION_ID, builder.build())
         }
     }
 
