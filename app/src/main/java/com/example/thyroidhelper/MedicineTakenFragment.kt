@@ -10,8 +10,8 @@ import java.text.DateFormat
 
 class MedicineTakenFragment : Fragment() {
 
-    lateinit var drugTakenMessage: String
-    lateinit var drugTakenMessageView: TextView
+    private lateinit var drugTakenMessage: String
+    private lateinit var drugTakenMessageView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

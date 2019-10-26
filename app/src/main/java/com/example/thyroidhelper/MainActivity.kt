@@ -1,6 +1,5 @@
 package com.example.thyroidhelper
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -17,11 +16,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.app.PendingIntent
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -92,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun performRegisterNotification() {
+    private fun performRegisterNotification() {
 
         val CHANNEL_ID = "channel_01"
 
@@ -117,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         // Send the notification
-        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("My notification")
             .setContentText("Hello World")
