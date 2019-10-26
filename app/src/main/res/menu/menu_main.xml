@@ -11,4 +11,8 @@
     <item android:id="@+id/action_reminder"
         android:title="#Reminder"
         app:showAsAction="never"/>
+
+    <item android:id="@+id/action_register_notification"
+        android:title="#Notification"
+        app:showAsAction="never"/>
 </menu>
