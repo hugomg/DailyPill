@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         resetMenuItem = menu.findItem(R.id.action_reset)
+        resetMenuItem?.isEnabled = hasTakenDrugToday(this)
         return true
     }
 

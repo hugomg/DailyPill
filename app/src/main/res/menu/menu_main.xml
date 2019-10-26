@@ -6,10 +6,9 @@
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_reset"
         android:title="@string/action_reset"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/action_reminder"
-        android:title="Reminder"
+        android:title="#Reminder"
         app:showAsAction="never"/>
-
 </menu>
