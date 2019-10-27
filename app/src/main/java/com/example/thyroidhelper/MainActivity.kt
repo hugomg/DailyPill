@@ -1,21 +1,14 @@
 package com.example.thyroidhelper
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import android.app.PendingIntent
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         gotoDrugTaken(true)
     }
 
-    private fun performReset() {
+    private fun doReset() {
         val dialog = AlertDialog.Builder(this)
             .setTitle(R.string.reset_confirmation_title)
             .setMessage(R.string.reset_confirmation_message)
@@ -81,62 +74,27 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun performReminder() {
+    private fun doReminder() {
         val intent = Intent(this, ReminderActivity::class.java)
         startActivity(intent)
     }
 
-    private fun performRegisterNotification() {
-
-        val CHANNEL_ID = "channel_01"
-
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "#Test"
-            val importance = NotificationManager.IMPORTANCE_LOW
-            val channel = NotificationChannel(CHANNEL_ID, name, importance)
-            channel.description = "#This is a test"
-
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        val intent = Intent(this, ReminderActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_NEW_TASK or
-            Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-
-        // Send the notification
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("My notification")
-            .setContentText("Hello World")
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setCategory(NotificationCompat.CATEGORY_REMINDER)
-            .setContentIntent(pendingIntent)
-
-        val NOTIFICATION_ID = 0
-        with (NotificationManagerCompat.from(this)) {
-            notify(NOTIFICATION_ID, builder.build())
-        }
+    private fun doAddNotification() {
+        sendMorningReminderNotification(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_reset -> {
-                performReset()
+                doReset()
                 return true
             }
             R.id.action_reminder -> {
-                performReminder()
+                doReminder()
                 return true
             }
             R.id.action_register_notification -> {
-                performRegisterNotification()
+                doAddNotification()
                 return true
             }
         }
