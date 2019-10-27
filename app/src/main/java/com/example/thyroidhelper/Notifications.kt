@@ -12,12 +12,12 @@ import androidx.core.app.NotificationManagerCompat
 private val MORNING_REMINDER_CHANNEL_ID = "channel_01"
 private val MORNING_NOTIFICATION_ID = 1
 
-fun createNotificationChannels(context: Context) {
+fun createNotificationChannels(ctx: Context) {
     // Android O introduces mandatory notification channels.
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
         val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val channel01 = NotificationChannel(
             MORNING_REMINDER_CHANNEL_ID,
@@ -30,18 +30,18 @@ fun createNotificationChannels(context: Context) {
     }
 }
 
-fun sendMorningReminderNotification(context: Context) {
+fun sendMorningReminderNotification(ctx: Context) {
 
-    val intent = Intent(context, ReminderActivity::class.java)
+    val intent = Intent(ctx, ReminderActivity::class.java)
     intent.flags =
         Intent.FLAG_ACTIVITY_NEW_TASK or
         Intent.FLAG_ACTIVITY_CLEAR_TASK
 
     val pendingIntent =
-        PendingIntent.getActivity(context, 0, intent, 0)
+        PendingIntent.getActivity(ctx, 0, intent, 0)
 
     val builder =
-        NotificationCompat.Builder(context, MORNING_REMINDER_CHANNEL_ID)
+        NotificationCompat.Builder(ctx, MORNING_REMINDER_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("#My notification")
             .setContentText("#Hello World")
@@ -49,6 +49,16 @@ fun sendMorningReminderNotification(context: Context) {
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setContentIntent(pendingIntent)
 
-    val manager = NotificationManagerCompat.from(context)
+    val manager = NotificationManagerCompat.from(ctx)
     manager.notify(MORNING_NOTIFICATION_ID, builder.build())
+}
+
+fun updateNotifications(ctx: Context) {
+    val manager = NotificationManagerCompat.from(ctx)
+
+    if (hasTakenDrugToday(ctx)) {
+        manager.cancel(MORNING_NOTIFICATION_ID)
+    } else {
+        // TODO
+    }
 }

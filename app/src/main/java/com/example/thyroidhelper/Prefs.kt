@@ -23,12 +23,14 @@ fun setDrugTakenTime(ctx: Context, timestamp: Long) {
     getPrefs(ctx).edit()
         .putLong(PREFS_DATE_KEY, timestamp)
         .apply()
+    updateNotifications(ctx)
 }
 
 fun unsetDrugTakenTime(ctx: Context) {
     getPrefs(ctx).edit()
         .remove(PREFS_DATE_KEY)
         .apply()
+    updateNotifications(ctx)
 }
 
 fun currentTime(): Long {
