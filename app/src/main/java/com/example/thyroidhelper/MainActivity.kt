@@ -7,13 +7,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.os.SystemClock
+import android.view.*
+import android.widget.TextView
 import android.widget.Toast
+import java.text.DateFormat
 import java.util.*
 
 
@@ -150,5 +150,46 @@ class MainActivity : AppCompatActivity() {
         }
         // Fallback
         return super.onOptionsItemSelected(item)
+    }
+
+    class MedicineNotTakenFragment : Fragment() {
+
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            return inflater.inflate(R.layout.fragment_medicine_not_taken, container, false)
+        }
+    }
+
+    class MedicineTakenFragment : Fragment() {
+
+        private lateinit var drugTakenMessage: String
+        private lateinit var drugTakenMessageView: TextView
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            drugTakenMessage =  getString(R.string.drug_taken_message)
+        }
+
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val root = inflater.inflate(R.layout.fragment_medicine_taken, container, false)
+            drugTakenMessageView = root.findViewById(R.id.drug_taken_message)
+            return root
+        }
+
+        override fun onResume() {
+            val timestamp = getDrugTakenTime(context!!)
+            val timeStr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
+            // Use non-breaking space to avoid a line-break between 6:00 and AM
+            val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
+            drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
+
+            super.onResume()
+        }
+
     }
 }
