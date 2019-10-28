@@ -19,4 +19,8 @@
     <item android:id="@+id/action_register_alarm"
         android:title="#Alarm"
         app:showAsAction="never"/>
+
+    <item android:id="@+id/action_settings"
+        android:title="@string/settings_title"
+        app:showAsAction="never"/>
 </menu>

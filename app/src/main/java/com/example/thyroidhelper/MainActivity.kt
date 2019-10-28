@@ -143,6 +143,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_register_alarm -> {
                 doAddAlarm()
             }
+            R.id.action_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+            }
         }
         // Fallback
         return super.onOptionsItemSelected(item)
