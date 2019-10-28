@@ -13,6 +13,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.os.SystemClock
+import android.widget.Toast
 import java.util.*
 
 
@@ -120,6 +121,9 @@ class MainActivity : AppCompatActivity() {
             nextTime.timeInMillis,
             AlarmManager.INTERVAL_DAY,
             pendingIntent)
+
+        val toast = Toast.makeText(this, "#Set morning alarm", Toast.LENGTH_SHORT)
+        toast.show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
