@@ -1,5 +1,8 @@
 package com.example.thyroidhelper
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
@@ -9,6 +12,9 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import android.os.SystemClock
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -83,6 +89,39 @@ class MainActivity : AppCompatActivity() {
         sendMorningReminderNotification(this)
     }
 
+    private fun doAddAlarm() {
+        val alarm_hour   = 4
+        val alarm_minute = 0
+
+        val now = Calendar.getInstance()
+
+        val timeToday = Calendar.getInstance()
+        timeToday.set(Calendar.HOUR_OF_DAY, alarm_hour)
+        timeToday.set(Calendar.MINUTE,      alarm_minute)
+        timeToday.set(Calendar.SECOND, 0)
+        timeToday.set(Calendar.MILLISECOND, 0)
+
+        val timeTomorrow = Calendar.getInstance()
+        timeTomorrow.add(Calendar.DATE, 1)
+        timeTomorrow.set(Calendar.HOUR_OF_DAY, alarm_hour)
+        timeTomorrow.set(Calendar.MINUTE,      alarm_minute)
+        timeTomorrow.set(Calendar.SECOND, 0)
+        timeTomorrow.set(Calendar.MILLISECOND, 0)
+
+        val nextTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
+
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            nextTime.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_reset -> {
@@ -96,6 +135,9 @@ class MainActivity : AppCompatActivity() {
             R.id.action_register_notification -> {
                 doAddNotification()
                 return true
+            }
+            R.id.action_register_alarm -> {
+                doAddAlarm()
             }
         }
         // Fallback
