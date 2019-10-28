@@ -21,11 +21,9 @@ fun createNotificationChannels(ctx: Context) {
 
         val channel01 = NotificationChannel(
             MORNING_REMINDER_CHANNEL_ID,
-            "#Morning reminders",
+            ctx.getString(R.string.notification_channel_name_1),
             NotificationManager.IMPORTANCE_HIGH)
-        channel01.description =
-            "#This reminder is sent in the middle of the night, while you are sleeping. " +
-            "It opens the Daily Reminder dialog so that it is the first thing you see when you wake up."
+        channel01.description = ctx.getString(R.string.notification_channel_description_1)
         notificationManager.createNotificationChannel(channel01)
     }
 }
@@ -43,8 +41,8 @@ fun sendMorningReminderNotification(ctx: Context) {
     val builder =
         NotificationCompat.Builder(ctx, MORNING_REMINDER_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("#My notification")
-            .setContentText("#Hello World")
+            .setContentTitle(ctx.getString(R.string.notification_morning_title))
+            .setContentText(ctx.getString(R.string.notification_morning_description))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setFullScreenIntent(pendingIntent, true)
