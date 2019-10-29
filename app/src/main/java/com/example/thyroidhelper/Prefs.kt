@@ -2,15 +2,20 @@ package com.example.thyroidhelper
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import java.util.*
 
 //
 
-private const val PREFS_FILE_NAME = "com.example.thyroidhelper.preferences"
+private const val PREFS_FILE_NAME = "com.example.thyroidhelper"
 private const val PREFS_DATE_KEY = "last_date"
 
 private fun getPrefs(ctx: Context) : SharedPreferences{
     return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+}
+
+private fun getSettings(ctx: Context): SharedPreferences {
+    return PreferenceManager.getDefaultSharedPreferences(ctx)
 }
 
 // Public functions
@@ -45,4 +50,18 @@ fun hasTakenDrugToday(ctx: Context): Boolean {
     today.set(Calendar.MILLISECOND, 0)
 
     return today.timeInMillis <= getDrugTakenTime(ctx)
+}
+
+//
+
+fun getMedicineTimeHours(ctx: Context) : Int {
+    val str = getSettings(ctx).getString("medicine_time", null)
+    val timeStr = str.split(":")[0]
+    return Integer.parseInt(timeStr)
+}
+
+fun getMedicineTimeMinutes(ctx: Context) : Int {
+    val str = getSettings(ctx).getString("medicine_time", null)
+    val timeStr = str.split(":")[1]
+    return Integer.parseInt(timeStr)
 }

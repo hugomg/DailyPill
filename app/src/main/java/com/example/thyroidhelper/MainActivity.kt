@@ -91,8 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun doAddAlarm() {
-        val alarm_hour   = 4
-        val alarm_minute = 0
+        val alarm_hour   = getMedicineTimeHours(this)
+        val alarm_minute = getMedicineTimeMinutes(this)
 
         val now = Calendar.getInstance()
 
@@ -122,7 +122,8 @@ class MainActivity : AppCompatActivity() {
             AlarmManager.INTERVAL_DAY,
             pendingIntent)
 
-        val toast = Toast.makeText(this, "#Set morning alarm", Toast.LENGTH_SHORT)
+        val toast_msg = String.format("#Set alarm for %02d:%02d", alarm_hour, alarm_minute)
+        val toast = Toast.makeText(this, toast_msg, Toast.LENGTH_SHORT)
         toast.show()
     }
 

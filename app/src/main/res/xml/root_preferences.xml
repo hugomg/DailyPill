@@ -3,6 +3,7 @@
         <EditTextPreference
             app:key="medicine_time"
             app:title="@string/preferences_medicine_time"
+            app:defaultValue="04:00"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 </PreferenceScreen>
