@@ -5,6 +5,7 @@ import android.app.Application;
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        createNotificationChannels(this)
+        DataModel.init(this)
+        Notifications.init(this)
     }
 }

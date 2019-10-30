@@ -4,12 +4,12 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import android.os.SystemClock
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -17,7 +17,7 @@ import java.text.DateFormat
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
     private var resetMenuItem: MenuItem? = null
 
@@ -31,41 +31,46 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         resetMenuItem = menu.findItem(R.id.action_reset)
-        resetMenuItem?.isEnabled = DataModel.hasTakenDrugToday(this)
+        resetMenuItem!!.isEnabled = DataModel.hasTakenDrugToday()
         return true
     }
 
-    override fun onResume() {
-        if (DataModel.hasTakenDrugToday(this)) {
-            gotoDrugTaken(false)
-        } else {
-            gotoDrugNotTaken(false)
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)) {
+            updateUI(true)
         }
-        super.onResume()
     }
 
-    private fun switchFragment(useFade: Boolean, fragment: Fragment) {
+    override fun onResume() {
+        super.onResume()
+        updateUI(false)
+        DataModel.addListener(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        DataModel.removeListener(this)
+    }
+
+    private fun updateUI(useFade: Boolean) {
+        val drugTaken = DataModel.hasTakenDrugToday()
+        val fragment =
+            if (drugTaken) { MedicineTakenFragment()    }
+            else           { MedicineNotTakenFragment() }
+
+        resetMenuItem?.isEnabled = drugTaken
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container, fragment)
-            if (useFade) { setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE) }
+            if (useFade) {
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            }
             commit()
         }
     }
 
-    private fun gotoDrugTaken(useFade: Boolean) {
-        resetMenuItem?.isEnabled = true
-        switchFragment(useFade, MedicineTakenFragment())
-    }
-
-    private fun gotoDrugNotTaken(useFade: Boolean) {
-        resetMenuItem?.isEnabled = false
-        switchFragment(useFade, MedicineNotTakenFragment())
-    }
-
     @Suppress("UNUSED_PARAMETER")
     fun performUpdateTime(btn: View) {
-        DataModel.setDrugTakenTimestamp(this, DataModel.currentTimestamp())
-        gotoDrugTaken(true)
+        DataModel.setDrugTakenTimestamp(DataModel.currentTimestamp())
     }
 
     private fun doReset() {
@@ -73,8 +78,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle(R.string.reset_confirmation_title)
             .setMessage(R.string.reset_confirmation_message)
             .setPositiveButton(R.string.reset_confirmation_ok) { _, _ ->
-                DataModel.unsetDrugTakenTimestamp(this)
-                gotoDrugNotTaken(false)
+                DataModel.unsetDrugTakenTimestamp()
             }
             .setNegativeButton(R.string.reset_confirmation_cancel,null)
             .create()
@@ -87,25 +91,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun doAddNotification() {
-        sendMorningReminderNotification(this)
+        Notifications.sendMorningReminderNotification()
     }
 
     private fun doAddAlarm() {
-        val alarm_hour   = DataModel.getMedicationTimeHours(this)
-        val alarm_minute = DataModel.getMedicationTimeMinutes(this)
+        val alarmHour   = DataModel.getMedicationTimeHours()
+        val alarmMinute = DataModel.getMedicationTimeMinutes()
 
         val now = Calendar.getInstance()
 
         val timeToday = Calendar.getInstance()
-        timeToday.set(Calendar.HOUR_OF_DAY, alarm_hour)
-        timeToday.set(Calendar.MINUTE,      alarm_minute)
+        timeToday.set(Calendar.HOUR_OF_DAY, alarmHour)
+        timeToday.set(Calendar.MINUTE,      alarmMinute)
         timeToday.set(Calendar.SECOND, 0)
         timeToday.set(Calendar.MILLISECOND, 0)
 
         val timeTomorrow = Calendar.getInstance()
         timeTomorrow.add(Calendar.DATE, 1)
-        timeTomorrow.set(Calendar.HOUR_OF_DAY, alarm_hour)
-        timeTomorrow.set(Calendar.MINUTE,      alarm_minute)
+        timeTomorrow.set(Calendar.HOUR_OF_DAY, alarmHour)
+        timeTomorrow.set(Calendar.MINUTE,      alarmMinute)
         timeTomorrow.set(Calendar.SECOND, 0)
         timeTomorrow.set(Calendar.MILLISECOND, 0)
 
@@ -122,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             AlarmManager.INTERVAL_DAY,
             pendingIntent)
 
-        val toast_msg = String.format("#Set alarm for %02d:%02d", alarm_hour, alarm_minute)
+        val toast_msg = String.format("#Set alarm for %02d:%02d", alarmHour, alarmMinute)
         val toast = Toast.makeText(this, toast_msg, Toast.LENGTH_SHORT)
         toast.show()
     }
@@ -183,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onResume() {
-            val timestamp = DataModel.getDrugTakenTimestamp(context!!)
+            val timestamp = DataModel.getDrugTakenTimestamp()
             val timeStr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
             // Use non-breaking space to avoid a line-break between 6:00 and AM
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
