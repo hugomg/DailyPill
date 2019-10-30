@@ -3,7 +3,6 @@ package com.example.thyroidhelper
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import android.provider.ContactsContract
 import java.util.*
 
 typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChangeListener
@@ -79,7 +78,7 @@ object DataModel {
     //
 
     // We hold a strong reference to the listeners. Otherwise they might be GC-ed and ignored
-    val listeners: MutableSet<SharedPreferencesListener> = mutableSetOf()
+    private val listeners: MutableSet<SharedPreferencesListener> = mutableSetOf()
 
     fun addListener(listener: SharedPreferencesListener) {
         listeners.add(listener)

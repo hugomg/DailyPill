@@ -25,12 +25,12 @@
             android:name=".ReminderActivity"
             android:excludeFromRecents="true"
             android:taskAffinity=""
-            android:theme="@style/Theme.AppCompat.Light.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings_title"></activity>
+            android:label="@string/settings_title"/>
 
-        <receiver android:name=".AlarmReceiver"></receiver>
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

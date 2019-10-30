@@ -126,8 +126,8 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
             AlarmManager.INTERVAL_DAY,
             pendingIntent)
 
-        val toast_msg = String.format("#Set alarm for %02d:%02d", alarmHour, alarmMinute)
-        val toast = Toast.makeText(this, toast_msg, Toast.LENGTH_SHORT)
+        val toastMsg = String.format("#Set alarm for %02d:%02d", alarmHour, alarmMinute)
+        val toast = Toast.makeText(this, toastMsg, Toast.LENGTH_SHORT)
         toast.show()
     }
 
