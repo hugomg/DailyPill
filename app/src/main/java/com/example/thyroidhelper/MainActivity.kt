@@ -31,12 +31,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         resetMenuItem = menu.findItem(R.id.action_reset)
-        resetMenuItem?.isEnabled = hasTakenDrugToday(this)
+        resetMenuItem?.isEnabled = DataModel.hasTakenDrugToday(this)
         return true
     }
 
     override fun onResume() {
-        if (hasTakenDrugToday(this)) {
+        if (DataModel.hasTakenDrugToday(this)) {
             gotoDrugTaken(false)
         } else {
             gotoDrugNotTaken(false)
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     @Suppress("UNUSED_PARAMETER")
     fun performUpdateTime(btn: View) {
-        setDrugTakenTime(this, currentTime())
+        DataModel.setDrugTakenTimestamp(this, DataModel.currentTimestamp())
         gotoDrugTaken(true)
     }
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle(R.string.reset_confirmation_title)
             .setMessage(R.string.reset_confirmation_message)
             .setPositiveButton(R.string.reset_confirmation_ok) { _, _ ->
-                unsetDrugTakenTime(this)
+                DataModel.unsetDrugTakenTimestamp(this)
                 gotoDrugNotTaken(false)
             }
             .setNegativeButton(R.string.reset_confirmation_cancel,null)
@@ -91,8 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun doAddAlarm() {
-        val alarm_hour   = getMedicineTimeHours(this)
-        val alarm_minute = getMedicineTimeMinutes(this)
+        val alarm_hour   = DataModel.getMedicineTimeHours(this)
+        val alarm_minute = DataModel.getMedicineTimeMinutes(this)
 
         val now = Calendar.getInstance()
 
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onResume() {
-            val timestamp = getDrugTakenTime(context!!)
+            val timestamp = DataModel.getDrugTakenTimestamp(context!!)
             val timeStr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
             // Use non-breaking space to avoid a line-break between 6:00 and AM
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )

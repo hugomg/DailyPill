@@ -22,7 +22,7 @@ class ReminderActivity : AppCompatActivity() {
 
     @Suppress("UNUSED_PARAMETER")
     fun performUpdateTime(btn: View) {
-        setDrugTakenTime(this, currentTime())
+        DataModel.setDrugTakenTimestamp(this, DataModel.currentTimestamp())
         finish()
     }
 }

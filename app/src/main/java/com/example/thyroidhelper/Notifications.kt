@@ -54,7 +54,7 @@ fun sendMorningReminderNotification(ctx: Context) {
 fun updateNotifications(ctx: Context) {
     val manager = NotificationManagerCompat.from(ctx)
 
-    if (hasTakenDrugToday(ctx)) {
+    if (DataModel.hasTakenDrugToday(ctx)) {
         manager.cancel(MORNING_NOTIFICATION_ID)
     } else {
         // TODO
