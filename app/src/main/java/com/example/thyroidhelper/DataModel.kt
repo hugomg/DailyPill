@@ -5,14 +5,14 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import java.util.*
 
+/*
+ * The application state is defined by the last time the main button was pressed, and by app
+ * settings. For simplicity, we store everything in the default SharedPreferences file.
+ */
+
 //
 
-private const val PREFS_FILE_NAME = "com.example.thyroidhelper"
-private const val PREFS_DATE_KEY = "last_date"
-
-private fun getPrefs(ctx: Context) : SharedPreferences{
-    return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
-}
+private const val PREFS_DATE_KEY = "drug_taken_timestamp"
 
 private fun getSettings(ctx: Context): SharedPreferences {
     return PreferenceManager.getDefaultSharedPreferences(ctx)
@@ -21,18 +21,18 @@ private fun getSettings(ctx: Context): SharedPreferences {
 // Public functions
 
 fun getDrugTakenTime(ctx: Context): Long {
-    return getPrefs(ctx).getLong(PREFS_DATE_KEY, 0)
+    return getSettings(ctx).getLong(PREFS_DATE_KEY, 0)
 }
 
 fun setDrugTakenTime(ctx: Context, timestamp: Long) {
-    getPrefs(ctx).edit()
+    getSettings(ctx).edit()
         .putLong(PREFS_DATE_KEY, timestamp)
         .apply()
     updateNotifications(ctx)
 }
 
 fun unsetDrugTakenTime(ctx: Context) {
-    getPrefs(ctx).edit()
+    getSettings(ctx).edit()
         .remove(PREFS_DATE_KEY)
         .apply()
     updateNotifications(ctx)
