@@ -91,8 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun doAddAlarm() {
-        val alarm_hour   = DataModel.getMedicineTimeHours(this)
-        val alarm_minute = DataModel.getMedicineTimeMinutes(this)
+        val alarm_hour   = DataModel.getMedicationTimeHours(this)
+        val alarm_minute = DataModel.getMedicationTimeMinutes(this)
 
         val now = Calendar.getInstance()
 

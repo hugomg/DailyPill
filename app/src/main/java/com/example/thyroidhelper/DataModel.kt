@@ -54,14 +54,14 @@ object DataModel {
 
 //
 
-    fun getMedicineTimeHours(ctx: Context): Int {
-        val str = getSettings(ctx).getString("medicine_time", null)
+    fun getMedicationTimeHours(ctx: Context): Int {
+        val str = getSettings(ctx).getString(MEDICATION_TIME, null)
         val timeStr = str.split(":")[0]
         return Integer.parseInt(timeStr)
     }
 
-    fun getMedicineTimeMinutes(ctx: Context): Int {
-        val str = getSettings(ctx).getString("medicine_time", null)
+    fun getMedicationTimeMinutes(ctx: Context): Int {
+        val str = getSettings(ctx).getString(MEDICATION_TIME, null)
         val timeStr = str.split(":")[1]
         return Integer.parseInt(timeStr)
     }
