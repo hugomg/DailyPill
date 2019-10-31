@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import java.text.DateFormat
 
 class MainActivity : AppCompatActivity(), SharedPreferencesListener {

@@ -3,6 +3,7 @@ package com.example.thyroidhelper
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import java.lang.IllegalArgumentException
 
 /**
  *  It is necessary to update the system alarms whenever the device reboots, or the system clock
@@ -10,6 +11,14 @@ import android.content.Intent
  */
 class AlarmInitReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        Notifications.setAlarm()
+        // TIME_CHANGED instead of TIME_SET is intentional.
+        when (intent.action) {
+            Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCALE_CHANGED,
+            Intent.ACTION_MY_PACKAGE_REPLACED,
+            Intent.ACTION_TIME_CHANGED, Intent.ACTION_TIMEZONE_CHANGED ->
+                Notifications.setAlarm()
+            else->
+                throw IllegalArgumentException("Unexpected action " + intent.action)
+        }
     }
 }

@@ -84,8 +84,6 @@ object Notifications: SharedPreferencesListener {
         val manager = NotificationManagerCompat.from(appContext)
         if (DataModel.hasTakenDrugToday()) {
             manager.cancel(MORNING_NOTIFICATION_ID)
-        } else {
-            // TODO
         }
     }
 

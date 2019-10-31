@@ -37,6 +37,7 @@
             android:name=".AlarmInitReceiver"
             android:enabled="true">
             <intent-filter>
+                <!-- Make sure to update AlarmInitReceiver.kt after editing this list -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />

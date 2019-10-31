@@ -24,7 +24,7 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
         // Force the button to use the whole available width. By default the width is set to
         // WRAP_CONTENT, and apparently only changing it here works. Setting the layout size on the
         // XML file is not enough.
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
     override fun onResume() {
