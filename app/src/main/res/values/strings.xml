@@ -4,25 +4,24 @@
     <!-- MainActivity -->
     <string name="drug_not_taken_message">You have not taken today\'s medicine</string>
     <string name="drug_taken_message">Medicine taken %s</string>
-    <string name="action_take_drug">Take medicine</string>
+    <string name="action_take_drug">Yes, I just have</string>
     <string name="action_reset">Reset</string>
 
     <!-- Reset confirmation dialog -->
     <!-- note: the button name should match "action_take_drug" -->
     <string name="reset_confirmation_title">Forget last time?</string>
-    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>Take Medicine</i> button</string>
+    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>Yes, I Just Have</i> button</string>
     <string name="reset_confirmation_ok">Forget</string>
     <string name="reset_confirmation_cancel">Cancel</string>
 
     <!-- ReminderActivity-->
-    <string name="reminder_title">Daily Reminder</string>
+    <string name="reminder_title">Took your pill?</string>
 
     <!-- Notifications -->
-    <!-- note: the dialog name should match "reminder_title" -->
     <string name="notification_channel_name_1">Wake-up reminder</string>
     <string name="notification_channel_description_1">This reminder is sent in the middle of the night, while you are sleeping. It opens the Daily Reminder screen so it is the first thing that you will see when you pick up the device for the first time in the morning.</string>
     <string name="notification_morning_title">It\'s time to take your medicine</string>
-    <string name="notification_morning_description">Tap here after you have taken it</string>
+    <string name="notification_morning_description">Tap here when you have taken it</string>
 
     <!-- Preferences -->
     <string name="settings_title">Settings</string>

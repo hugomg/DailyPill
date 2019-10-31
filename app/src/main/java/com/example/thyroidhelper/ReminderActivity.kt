@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 
 class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
@@ -15,10 +16,15 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
         setTitle(R.string.reminder_title)
 
         if (Build.VERSION.SDK_INT < 27) {
-            this.window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
+            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
         } else {
             setShowWhenLocked(true)
         }
+
+        // Force the button to use the whole available width. By default the width is set to
+        // WRAP_CONTENT, and apparently only changing it here works. Setting the layout size on the
+        // XML file is not enough.
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     override fun onResume() {
