@@ -80,17 +80,8 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         dialog.show()
     }
 
-    private fun doReminder() {
-        val intent = Intent(this, ReminderActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun doAddNotification() {
         Notifications.sendMorningReminderNotification()
-    }
-
-    private fun doAddAlarm() {
-        Notifications.setAlarm()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -99,16 +90,9 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
                 doReset()
                 return true
             }
-            R.id.action_reminder -> {
-                doReminder()
-                return true
-            }
             R.id.action_register_notification -> {
                 doAddNotification()
                 return true
-            }
-            R.id.action_register_alarm -> {
-                doAddAlarm()
             }
             R.id.action_settings -> {
                 val intent = Intent(this, SettingsActivity::class.java)

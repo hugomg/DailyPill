@@ -8,16 +8,8 @@
         android:title="@string/action_reset"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/action_reminder"
-        android:title="#Reminder"
-        app:showAsAction="never"/>
-
     <item android:id="@+id/action_register_notification"
         android:title="#Notification"
-        app:showAsAction="never"/>
-
-    <item android:id="@+id/action_register_alarm"
-        android:title="#Alarm"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_settings"
