@@ -1,8 +1,5 @@
 package com.example.thyroidhelper
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +11,6 @@ import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import java.text.DateFormat
-import java.util.*
-
 
 class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
@@ -95,40 +90,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     }
 
     private fun doAddAlarm() {
-        val alarmHour   = DataModel.getMedicationTimeHours()
-        val alarmMinute = DataModel.getMedicationTimeMinutes()
-
-        val now = Calendar.getInstance()
-
-        val timeToday = Calendar.getInstance()
-        timeToday.set(Calendar.HOUR_OF_DAY, alarmHour)
-        timeToday.set(Calendar.MINUTE,      alarmMinute)
-        timeToday.set(Calendar.SECOND, 0)
-        timeToday.set(Calendar.MILLISECOND, 0)
-
-        val timeTomorrow = Calendar.getInstance()
-        timeTomorrow.add(Calendar.DATE, 1)
-        timeTomorrow.set(Calendar.HOUR_OF_DAY, alarmHour)
-        timeTomorrow.set(Calendar.MINUTE,      alarmMinute)
-        timeTomorrow.set(Calendar.SECOND, 0)
-        timeTomorrow.set(Calendar.MILLISECOND, 0)
-
-        val nextTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
-
-        val intent = Intent(this, AlarmReceiver::class.java)
-        val pendingIntent =
-            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            nextTime.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent)
-
-        val toastMsg = String.format("#Set alarm for %02d:%02d", alarmHour, alarmMinute)
-        val toast = Toast.makeText(this, toastMsg, Toast.LENGTH_SHORT)
-        toast.show()
+        Notifications.setAlarm()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

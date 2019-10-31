@@ -1,5 +1,6 @@
 package com.example.thyroidhelper
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -7,8 +8,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import java.util.*
 
 private const val MORNING_REMINDER_CHANNEL_ID = "channel_01"
 private const val MORNING_NOTIFICATION_ID = 1
@@ -71,6 +74,10 @@ object Notifications: SharedPreferencesListener {
         if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)) {
             updateNotifications()
         }
+
+        if (key.equals(DataModel.MEDICATION_TIME)) {
+            setAlarm()
+        }
     }
 
     private fun updateNotifications() {
@@ -82,4 +89,40 @@ object Notifications: SharedPreferencesListener {
         }
     }
 
+    fun setAlarm() {
+        val alarmHour   = DataModel.getMedicationTimeHours()
+        val alarmMinute = DataModel.getMedicationTimeMinutes()
+
+        val now = Calendar.getInstance()
+
+        val timeToday = Calendar.getInstance()
+        timeToday.set(Calendar.HOUR_OF_DAY, alarmHour)
+        timeToday.set(Calendar.MINUTE,      alarmMinute)
+        timeToday.set(Calendar.SECOND, 0)
+        timeToday.set(Calendar.MILLISECOND, 0)
+
+        val timeTomorrow = Calendar.getInstance()
+        timeTomorrow.add(Calendar.DATE, 1)
+        timeTomorrow.set(Calendar.HOUR_OF_DAY, alarmHour)
+        timeTomorrow.set(Calendar.MINUTE,      alarmMinute)
+        timeTomorrow.set(Calendar.SECOND, 0)
+        timeTomorrow.set(Calendar.MILLISECOND, 0)
+
+        val nextTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
+
+        val intent = Intent(appContext, AlarmReceiver::class.java)
+        val pendingIntent =
+            PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            nextTime.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent)
+
+        val toastMsg = String.format("#Set alarm for %02d:%02d", alarmHour, alarmMinute)
+        val toast = Toast.makeText(appContext, toastMsg, Toast.LENGTH_SHORT)
+        toast.show()
+    }
 }
