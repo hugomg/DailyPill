@@ -28,7 +28,6 @@
     <string name="settings_title">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="preferences_morning_section">Wake-up reminder</string>
-    <string name="preferences_medication_time">Time</string>
+    <string name="preferences_medication_time">Automatic morning reminder</string>
     <string name="preferences_default_medication_time" translatable="false">4:00</string>
 </resources>
