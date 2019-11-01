@@ -5,7 +5,6 @@
     <com.example.thyroidhelper.TimePreference
         app:key="medication_time"
         app:title="@string/preferences_medication_time"
-        app:defaultValue="@string/preferences_default_medication_time"
-        app:useSimpleSummaryProvider="true" />
+        app:defaultValue="@string/preferences_default_medication_time" />
 
 </PreferenceScreen>

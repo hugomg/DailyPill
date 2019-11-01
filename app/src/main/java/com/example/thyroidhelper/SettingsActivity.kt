@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import java.text.DateFormat
+import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -26,6 +28,8 @@ class SettingsActivity : AppCompatActivity() {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+            val medication_time = findPreference<TimePreference>("medication_time")
+            medication_time?.summaryProvider = MedicationTimeSummaryProvider()
         }
 
         // The preference library has a boneheaded and inextensible design so we need to override
@@ -40,6 +44,17 @@ class SettingsActivity : AppCompatActivity() {
             } else {
                 super.onDisplayPreferenceDialog(preference)
             }
+        }
+    }
+
+    class MedicationTimeSummaryProvider: Preference.SummaryProvider<TimePreference> {
+        override fun provideSummary(preference: TimePreference): String {
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.HOUR_OF_DAY, preference.hour)
+            calendar.set(Calendar.MINUTE, preference.minute)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+            return DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar.time)
         }
     }
 }
