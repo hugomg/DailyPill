@@ -106,7 +106,8 @@ object Notifications: SharedPreferencesListener {
         timeTomorrow.set(Calendar.SECOND, 0)
         timeTomorrow.set(Calendar.MILLISECOND, 0)
 
-        val nextTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
+        //val nextTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
+        val nextTime =  timeToday
 
         val intent = Intent(appContext, AlarmReceiver::class.java)
         val pendingIntent =
