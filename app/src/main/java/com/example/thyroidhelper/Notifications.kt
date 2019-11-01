@@ -65,6 +65,8 @@ object Notifications: SharedPreferencesListener {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setFullScreenIntent(pendingIntent, true)
+                .setOngoing(true)
+                .setTimeoutAfter(14*60*1000) // 14h later
 
         val manager = NotificationManagerCompat.from(appContext)
         manager.notify(MORNING_NOTIFICATION_ID, builder.build())
