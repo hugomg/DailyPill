@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
-import android.telecom.Call
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -102,9 +101,11 @@ object Notifications: SharedPreferencesListener {
         val nowIsAfterTodaysMedicine = now.after(timeToday)
         val alarmTime = if (nowIsAfterTodaysMedicine) { timeTomorrow } else { timeToday }
 
-        // If we have missed today's alarm, send today's missed notification immediately.
-        // (The regular alarm still gets registered for tomorrow)
-        if (nowIsAfterTodaysMedicine && !DataModel.hasTakenDrugInTheSameDayAs(now)) {
+        // Do we have missed notifications? If we just installed the app, assume that the user has
+        // already taken their medicine earlier today.
+        val hasTakenMedicine =
+            DataModel.isFirstDay() || DataModel.hasTakenDrugInTheSameDayAs(now)
+        if (nowIsAfterTodaysMedicine && !hasTakenMedicine) {
             sendMorningReminderNotification()
         }
 

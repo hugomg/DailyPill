@@ -18,8 +18,12 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        if (DataModel.isFirstDay()) {
+            // This could be the first time we have opened the app since it was installed.
+            Notifications.setAlarm()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
     @Suppress("UNUSED_PARAMETER")
     fun performUpdateTime(btn: View) {
-        DataModel.setDrugTakenTimestamp(DataModel.currentTimestamp())
+        DataModel.takeDrugNow()
     }
 
     private fun doReset() {

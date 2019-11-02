@@ -52,6 +52,6 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
 
     @Suppress("UNUSED_PARAMETER")
     fun performUpdateTime(btn: View) {
-        DataModel.setDrugTakenTimestamp(DataModel.currentTimestamp())
+        DataModel.takeDrugNow()
     }
 }
