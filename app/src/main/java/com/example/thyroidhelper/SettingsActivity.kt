@@ -28,8 +28,8 @@ class SettingsActivity : AppCompatActivity() {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
-            val medication_time = findPreference<TimePreference>("medication_time")
-            medication_time?.summaryProvider = MedicationTimeSummaryProvider()
+            val medicationTime = findPreference<TimePreference>("medication_time")
+            medicationTime?.summaryProvider = MedicationTimeSummaryProvider()
         }
 
         // The preference library has a boneheaded and inextensible design so we need to override

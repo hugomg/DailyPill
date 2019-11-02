@@ -36,8 +36,8 @@ fun parseTime(value: String): Pair<Int, Int> {
         throw IllegalArgumentException("Minutes is not a number")
     }
 
-    if (! (0 <= t0 && t0 < 24)) { throw IllegalArgumentException("Hours is out of range") }
-    if (! (0 <= t1 && t1 < 60)) { throw IllegalArgumentException("Minutes is out of range") }
+    if (t0 !in 0..23) { throw IllegalArgumentException("Hours is out of range") }
+    if (t1 !in 0..59) { throw IllegalArgumentException("Minutes is out of range") }
     return Pair(t0, t1)
 }
 
@@ -54,16 +54,21 @@ fun parseTime(value: String): Pair<Int, Int> {
  * to the old version. One of the differences is that the old version has an OldCreateDialogView
  * method, that isn't present in the androidx version of the library.
  */
+
 class TimePreference : DialogPreference {
 
     public var hour   = 0
     public var minute = 0
     private var valueIsSet = false
 
-    constructor(context: Context): super(context) {}
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int): super(context,attrs,defStyleAttr) {}
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr, defStyleRes) {}
+    @Suppress("unused")
+    constructor(context: Context): super(context)
+    @Suppress("unused")
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    @Suppress("unused")
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int): super(context,attrs,defStyleAttr)
+    @Suppress("unused")
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr, defStyleRes)
 
     override fun onGetDefaultValue(arr: TypedArray, i: Int): Any {
         return arr.getString(i) as Any
