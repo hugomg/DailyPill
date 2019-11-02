@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
+import android.telecom.Call
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -92,20 +93,18 @@ object Notifications: SharedPreferencesListener {
     }
 
     fun setAlarm() {
-        val (alarmHour, alarmMinute) = DataModel.getMedicationTime()
-
         val now = Calendar.getInstance()
         val timeToday = DataModel.medicationTimeForTheSameDayAs(now)
 
         val timeTomorrow = timeToday.clone() as Calendar
         timeTomorrow.add(Calendar.DATE, 1)
 
-        val isToday = now.before(timeToday)
-        val alarmTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
+        val nowIsAfterTodaysMedicine = now.after(timeToday)
+        val alarmTime = if (nowIsAfterTodaysMedicine) { timeTomorrow } else { timeToday }
 
         // If we have missed today's alarm, send today's missed notification immediately.
         // (The regular alarm still gets registered for tomorrow)
-        if (!isToday && !DataModel.hasTakenDrugInTheSameDayAs(now)) {
+        if (nowIsAfterTodaysMedicine && !DataModel.hasTakenDrugInTheSameDayAs(now)) {
             sendMorningReminderNotification()
         }
 
@@ -121,8 +120,9 @@ object Notifications: SharedPreferencesListener {
             pendingIntent)
 
         val toastMsg = String.format("#Set alarm for %s, %02d:%02d",
-            (if (isToday) {"today"} else {"tomorrow"}),
-            alarmHour, alarmMinute)
+            (if (nowIsAfterTodaysMedicine) {"tomorrow"} else {"today"}),
+            alarmTime.get(Calendar.HOUR_OF_DAY),
+            alarmTime.get(Calendar.MINUTE))
         val toast = Toast.makeText(appContext, toastMsg, Toast.LENGTH_SHORT)
         toast.show()
     }
