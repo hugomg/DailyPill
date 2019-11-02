@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Meu Remédio Matinal</string>
+    <string name="app_name">Remédio Matinal</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Você não tomou o remédio de hoje</string>
