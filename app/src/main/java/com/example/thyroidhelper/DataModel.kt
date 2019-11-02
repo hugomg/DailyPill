@@ -12,17 +12,17 @@ object DataModel {
     const val IS_FIRST_DAY             = "is_first_day"
     const val DRUG_TAKEN_TIMESTAMP     = "drug_taken_timestamp"
     const val MORNING_REMINDER_ENABLED = "morning_reminder_enabled"
-    const val MEDICATION_TIME          = "morning_reminder_time"
+    const val MORNING_REMINDER_TIME    = "morning_reminder_time"
 
     private lateinit var sharedPrefs: SharedPreferences
-    private lateinit var defaultMedicationTime: String
+    private lateinit var defaultReminderTime: String
 
     /**
      * This should be called on application startup, before anything else.
      */
     fun init(context: Context) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
-        defaultMedicationTime = context.getString(R.string.preferences_default_morning_reminder_time)
+        defaultReminderTime = context.getString(R.string.preferences_default_morning_reminder_time)
     }
 
     //
@@ -77,22 +77,22 @@ object DataModel {
     }
 
     //
-    // MEDICATION_TIME
+    // MORNING_REMINDER_TIME
     //
 
-    fun getMedicationTime(): Pair<Int,Int> {
-        val str = sharedPrefs.getString(MEDICATION_TIME, defaultMedicationTime)!!
+    fun getMorningReminderTime(): Pair<Int,Int> {
+        val str = sharedPrefs.getString(MORNING_REMINDER_TIME, defaultReminderTime)!!
         return parseTime(str)
     }
 
-    fun medicationTimeForTheSameDayAs(now: Calendar): Calendar {
-        val (hour, minute) = getMedicationTime()
-        val medicationCal = now.clone() as Calendar
-        medicationCal.set(Calendar.HOUR_OF_DAY, hour)
-        medicationCal.set(Calendar.MINUTE,      minute)
-        medicationCal.set(Calendar.SECOND, 0)
-        medicationCal.set(Calendar.MILLISECOND, 0)
-        return medicationCal
+    fun morningReminderTimeForTheSameDayAs(now: Calendar): Calendar {
+        val (hour, minute) = getMorningReminderTime()
+        val reminderCal = now.clone() as Calendar
+        reminderCal.set(Calendar.HOUR_OF_DAY, hour)
+        reminderCal.set(Calendar.MINUTE,      minute)
+        reminderCal.set(Calendar.SECOND, 0)
+        reminderCal.set(Calendar.MILLISECOND, 0)
+        return reminderCal
     }
 
     //

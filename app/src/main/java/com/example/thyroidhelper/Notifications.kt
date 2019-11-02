@@ -74,13 +74,13 @@ object Notifications: SharedPreferencesListener {
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)
-            || key.equals(DataModel.MEDICATION_TIME)
-            || key.equals(DataModel.MORNING_REMINDER_ENABLED)) {
+            || key.equals(DataModel.MORNING_REMINDER_ENABLED)
+            || key.equals(DataModel.MORNING_REMINDER_TIME)) {
             updateNotifications()
         }
 
-        if (key.equals(DataModel.MEDICATION_TIME)
-            || key.equals(DataModel.MORNING_REMINDER_ENABLED)) {
+        if (key.equals(DataModel.MORNING_REMINDER_ENABLED)
+            ||key.equals(DataModel.MORNING_REMINDER_TIME)) {
             setAlarm()
         }
     }
@@ -89,7 +89,7 @@ object Notifications: SharedPreferencesListener {
         val now = Calendar.getInstance()
         val reminderEnabled= DataModel.reminderIsEnabled()
         val hasMedicated= DataModel.hasTakenDrugInTheSameDayAs(now)
-        val reminderTime= DataModel.medicationTimeForTheSameDayAs(now)
+        val reminderTime= DataModel.morningReminderTimeForTheSameDayAs(now)
         if (!reminderEnabled || hasMedicated || now.before(reminderTime)) {
             NotificationManagerCompat.from(appContext).cancel(MORNING_NOTIFICATION_ID)
         }
@@ -106,7 +106,7 @@ object Notifications: SharedPreferencesListener {
 
     private fun addAlarm() {
         val now = Calendar.getInstance()
-        val timeToday = DataModel.medicationTimeForTheSameDayAs(now)
+        val timeToday = DataModel.morningReminderTimeForTheSameDayAs(now)
 
         val timeTomorrow = timeToday.clone() as Calendar
         timeTomorrow.add(Calendar.DATE, 1)
