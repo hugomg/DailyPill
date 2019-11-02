@@ -73,25 +73,38 @@ object Notifications: SharedPreferencesListener {
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP) || key.equals(DataModel.MEDICATION_TIME)) {
+        if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)
+            || key.equals(DataModel.MEDICATION_TIME)
+            || key.equals(DataModel.MORNING_REMINDER_ENABLED)) {
             updateNotifications()
         }
 
-        if (key.equals(DataModel.MEDICATION_TIME)) {
+        if (key.equals(DataModel.MEDICATION_TIME)
+            || key.equals(DataModel.MORNING_REMINDER_ENABLED)) {
             setAlarm()
         }
     }
 
     private fun updateNotifications() {
         val now = Calendar.getInstance()
-        val hasMedicated = DataModel.hasTakenDrugInTheSameDayAs(now)
-        val medicineTime = DataModel.medicationTimeForTheSameDayAs(now)
-        if (hasMedicated || now.before(medicineTime)) {
+        val reminderEnabled= DataModel.reminderIsEnabled()
+        val hasMedicated= DataModel.hasTakenDrugInTheSameDayAs(now)
+        val reminderTime= DataModel.medicationTimeForTheSameDayAs(now)
+        if (!reminderEnabled || hasMedicated || now.before(reminderTime)) {
             NotificationManagerCompat.from(appContext).cancel(MORNING_NOTIFICATION_ID)
         }
     }
 
-    fun setAlarm() {
+    private fun alarmPendingIntent(): PendingIntent {
+        val intent = Intent(appContext, AlarmReceiver::class.java)
+        return PendingIntent.getBroadcast(
+            appContext,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT)
+    }
+
+    private fun addAlarm() {
         val now = Calendar.getInstance()
         val timeToday = DataModel.medicationTimeForTheSameDayAs(now)
 
@@ -109,9 +122,7 @@ object Notifications: SharedPreferencesListener {
             sendMorningReminderNotification()
         }
 
-        val intent = Intent(appContext, AlarmReceiver::class.java)
-        val pendingIntent =
-            PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = alarmPendingIntent()
 
         val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setInexactRepeating(
@@ -126,5 +137,18 @@ object Notifications: SharedPreferencesListener {
             alarmTime.get(Calendar.MINUTE))
         val toast = Toast.makeText(appContext, toastMsg, Toast.LENGTH_SHORT)
         toast.show()
+    }
+
+    private fun removeAlarm() {
+        val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.cancel(alarmPendingIntent())
+    }
+
+    fun setAlarm() {
+        if (DataModel.reminderIsEnabled()) {
+            addAlarm()
+        } else {
+            removeAlarm()
+        }
     }
 }

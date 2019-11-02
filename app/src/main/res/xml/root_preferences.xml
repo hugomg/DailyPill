@@ -1,10 +1,17 @@
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.example.thyroidhelper.TimePreference
-        app:key="medication_time"
-        app:title="@string/preferences_medication_time"
-        app:defaultValue="@string/preferences_default_medication_time" />
-
+    <PreferenceCategory
+        app:key="preference_morning_reminders"
+        app:title="@string/preferences_morning_reminder">
+        <SwitchPreference
+            app:key="morning_reminder_enabled"
+            app:title="@string/preferences_morning_reminder_enabled"
+            app:defaultValue="true"/>
+        <com.example.thyroidhelper.TimePreference
+            app:key="morning_reminder_time"
+            app:title="@string/preferences_morning_reminder_time"
+            app:defaultValue="@string/preferences_default_morning_reminder_time"
+            app:dependency="morning_reminder_enabled"/>
+    </PreferenceCategory>
 </PreferenceScreen>

@@ -27,5 +27,7 @@
     <string name="settings_title">Configurações</string>
 
     <!-- Preference Titles -->
-    <string name="preferences_medication_time">Lembrete matinal automático</string>
+    <string name="preferences_morning_reminder">Lembretes diários</string>
+    <string name="preferences_morning_reminder_enabled">Lembrete ao acordar</string>
+    <string name="preferences_morning_reminder_time">Hora do lembrete</string>
 </resources>

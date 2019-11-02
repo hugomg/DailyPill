@@ -9,9 +9,10 @@ typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChange
 
 object DataModel {
 
-    const val IS_FIRST_DAY         = "is_first_day"
-    const val DRUG_TAKEN_TIMESTAMP = "drug_taken_timestamp"
-    const val MEDICATION_TIME      = "medication_time"
+    const val IS_FIRST_DAY             = "is_first_day"
+    const val DRUG_TAKEN_TIMESTAMP     = "drug_taken_timestamp"
+    const val MORNING_REMINDER_ENABLED = "morning_reminder_enabled"
+    const val MEDICATION_TIME          = "morning_reminder_time"
 
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var defaultMedicationTime: String
@@ -21,7 +22,7 @@ object DataModel {
      */
     fun init(context: Context) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
-        defaultMedicationTime = context.getString(R.string.preferences_default_medication_time)
+        defaultMedicationTime = context.getString(R.string.preferences_default_morning_reminder_time)
     }
 
     //
@@ -30,6 +31,14 @@ object DataModel {
 
     fun isFirstDay(): Boolean {
         return sharedPrefs.getBoolean(IS_FIRST_DAY, true)
+    }
+
+    //
+    //
+    //
+
+    fun reminderIsEnabled(): Boolean {
+        return sharedPrefs.getBoolean(MORNING_REMINDER_ENABLED, true)
     }
 
     //
