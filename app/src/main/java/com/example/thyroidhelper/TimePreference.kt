@@ -2,6 +2,7 @@ package com.example.thyroidhelper
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.os.Build
 import android.text.format.DateFormat
 import android.util.AttributeSet
 import androidx.preference.DialogPreference
@@ -114,14 +115,30 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
         super.onBindDialogView(view)
         timePicker.setIs24HourView(DateFormat.is24HourFormat(context))
         val pref = preference as TimePreference
-        timePicker.currentHour   = pref.hour
-        timePicker.currentMinute = pref.minute
+        if (Build.VERSION.SDK_INT >= 23) {
+            timePicker.hour   = pref.hour
+            timePicker.minute = pref.minute
+        } else @Suppress("DEPRECATION") {
+            timePicker.currentHour   = pref.hour
+            timePicker.currentMinute = pref.minute
+        }
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
         if (positiveResult) {
             val pref = preference as TimePreference
-            val value = Pair(timePicker.currentHour, timePicker.currentMinute)
+
+            val newHour: Int
+            val newMinute: Int
+            if (Build.VERSION.SDK_INT >= 23) {
+                newHour   = timePicker.hour
+                newMinute = timePicker.minute
+            } else @Suppress("DEPRECATION") {
+                newHour   = timePicker.currentHour
+                newMinute = timePicker.currentMinute
+            }
+
+            val value = Pair(newHour, newMinute)
             if (pref.callChangeListener(value)) {
                 pref.setTime(value)
             }

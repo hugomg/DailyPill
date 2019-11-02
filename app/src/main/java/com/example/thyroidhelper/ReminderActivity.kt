@@ -15,10 +15,10 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
         setContentView(R.layout.activity_reminder)
         setTitle(R.string.reminder_title)
 
-        if (Build.VERSION.SDK_INT < 27) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-        } else {
+        if (Build.VERSION.SDK_INT >= 27) {
             setShowWhenLocked(true)
+        } else @Suppress("DEPRECATION") {
+            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
         }
 
         // Force the button to use the whole available width. By default the width is set to
