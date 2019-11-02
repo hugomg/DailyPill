@@ -16,11 +16,11 @@ import androidx.preference.PreferenceDialogFragmentCompat
  * use that format when setting the defaultValue attribute.
  */
 
-private fun serializeTime(t0: Int, t1: Int): String {
+fun serializeTime(t0: Int, t1: Int): String {
     return String.format("%02d:%02d", t0, t1)
 }
 
-private fun parseTime(value: String): Pair<Int, Int> {
+fun parseTime(value: String): Pair<Int, Int> {
     val times = value.split(":")
     if (times.size != 2 ) { throw IllegalArgumentException("Invalid date format") }
 

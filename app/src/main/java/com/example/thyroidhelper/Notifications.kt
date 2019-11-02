@@ -73,7 +73,7 @@ object Notifications: SharedPreferencesListener {
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)) {
+        if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP) || key.equals(DataModel.MEDICATION_TIME)) {
             updateNotifications()
         }
 
@@ -83,33 +83,31 @@ object Notifications: SharedPreferencesListener {
     }
 
     private fun updateNotifications() {
-        val manager = NotificationManagerCompat.from(appContext)
-        if (DataModel.hasTakenDrugToday()) {
-            manager.cancel(MORNING_NOTIFICATION_ID)
+        val now = Calendar.getInstance()
+        val hasMedicated = DataModel.hasTakenDrugInTheSameDayAs(now)
+        val medicineTime = DataModel.medicationTimeForTheSameDayAs(now)
+        if (hasMedicated || now.before(medicineTime)) {
+            NotificationManagerCompat.from(appContext).cancel(MORNING_NOTIFICATION_ID)
         }
     }
 
     fun setAlarm() {
-        val alarmHour   = DataModel.getMedicationTimeHours()
-        val alarmMinute = DataModel.getMedicationTimeMinutes()
+        val (alarmHour, alarmMinute) = DataModel.getMedicationTime()
 
         val now = Calendar.getInstance()
+        val timeToday = DataModel.medicationTimeForTheSameDayAs(now)
 
-        val timeToday = Calendar.getInstance()
-        timeToday.set(Calendar.HOUR_OF_DAY, alarmHour)
-        timeToday.set(Calendar.MINUTE,      alarmMinute)
-        timeToday.set(Calendar.SECOND, 0)
-        timeToday.set(Calendar.MILLISECOND, 0)
-
-        val timeTomorrow = Calendar.getInstance()
+        val timeTomorrow = timeToday.clone() as Calendar
         timeTomorrow.add(Calendar.DATE, 1)
-        timeTomorrow.set(Calendar.HOUR_OF_DAY, alarmHour)
-        timeTomorrow.set(Calendar.MINUTE,      alarmMinute)
-        timeTomorrow.set(Calendar.SECOND, 0)
-        timeTomorrow.set(Calendar.MILLISECOND, 0)
 
-        //val nextTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
-        val nextTime =  timeToday
+        val isToday = now.before(timeToday)
+        val alarmTime = if (now.before(timeToday)) { timeToday } else { timeTomorrow }
+
+        // If we have missed today's alarm, send today's missed notification immediately.
+        // (The regular alarm still gets registered for tomorrow)
+        if (!isToday && !DataModel.hasTakenDrugInTheSameDayAs(now)) {
+            sendMorningReminderNotification()
+        }
 
         val intent = Intent(appContext, AlarmReceiver::class.java)
         val pendingIntent =
@@ -118,11 +116,13 @@ object Notifications: SharedPreferencesListener {
         val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
-            nextTime.timeInMillis,
+            alarmTime.timeInMillis,
             AlarmManager.INTERVAL_DAY,
             pendingIntent)
 
-        val toastMsg = String.format("#Set alarm for %02d:%02d", alarmHour, alarmMinute)
+        val toastMsg = String.format("#Set alarm for %s, %02d:%02d",
+            (if (isToday) {"today"} else {"tomorrow"}),
+            alarmHour, alarmMinute)
         val toast = Toast.makeText(appContext, toastMsg, Toast.LENGTH_SHORT)
         toast.show()
     }

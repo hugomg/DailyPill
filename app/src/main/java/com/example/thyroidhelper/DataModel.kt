@@ -47,30 +47,36 @@ object DataModel {
         return Calendar.getInstance().timeInMillis
     }
 
-    fun hasTakenDrugToday(): Boolean {
-        val today = Calendar.getInstance()
-        today.set(Calendar.HOUR_OF_DAY, 0)
-        today.set(Calendar.MINUTE, 0)
-        today.set(Calendar.SECOND, 0)
-        today.set(Calendar.MILLISECOND, 0)
+    fun hasTakenDrugInTheSameDayAs(cal: Calendar): Boolean {
+        val midnight = cal.clone() as Calendar
+        midnight.set(Calendar.HOUR_OF_DAY, 0)
+        midnight.set(Calendar.MINUTE, 0)
+        midnight.set(Calendar.SECOND, 0)
+        midnight.set(Calendar.MILLISECOND, 0)
+        return midnight.timeInMillis <= getDrugTakenTimestamp()
+    }
 
-        return today.timeInMillis <= getDrugTakenTimestamp()
+    fun hasTakenDrugToday(): Boolean {
+        return hasTakenDrugInTheSameDayAs(Calendar.getInstance())
     }
 
     //
     // MEDICATION_TIME
     //
 
-    fun getMedicationTimeHours(): Int {
+    fun getMedicationTime(): Pair<Int,Int> {
         val str = sharedPrefs.getString(MEDICATION_TIME, defaultMedicationTime)!!
-        val timeStr = str.split(":")[0]
-        return Integer.parseInt(timeStr)
+        return parseTime(str)
     }
 
-    fun getMedicationTimeMinutes(): Int {
-        val str = sharedPrefs.getString(MEDICATION_TIME, defaultMedicationTime)!!
-        val timeStr = str.split(":")[1]
-        return Integer.parseInt(timeStr)
+    fun medicationTimeForTheSameDayAs(now: Calendar): Calendar {
+        val (hour, minute) = getMedicationTime()
+        val medicationCal = now.clone() as Calendar
+        medicationCal.set(Calendar.HOUR_OF_DAY, hour)
+        medicationCal.set(Calendar.MINUTE,      minute)
+        medicationCal.set(Calendar.SECOND, 0)
+        medicationCal.set(Calendar.MILLISECOND, 0)
+        return medicationCal
     }
 
     //
