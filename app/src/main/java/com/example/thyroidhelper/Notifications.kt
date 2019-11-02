@@ -59,7 +59,7 @@ object Notifications: SharedPreferencesListener {
 
         val builder =
             NotificationCompat.Builder(appContext, MORNING_REMINDER_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.ic_pill)
                 .setContentTitle(appContext.getString(R.string.notification_morning_title))
                 .setContentText(appContext.getString(R.string.notification_morning_description))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
