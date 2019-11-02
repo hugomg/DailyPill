@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Thyroid Helper</string>
+    <string name="app_name">My Morning Pill</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">You have not taken today\'s medicine</string>
