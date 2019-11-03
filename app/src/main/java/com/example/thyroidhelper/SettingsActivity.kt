@@ -32,8 +32,8 @@ class SettingsActivity : AppCompatActivity(), SharedPreferencesListener {
         morningReminderSwitch = findViewById(R.id.morning_reminder_switch)
         morningReminderSummary = findViewById(R.id.morning_reminder_summary)
 
-        morningReminderEnabledSummary = getString(R.string.preferences_morning_reminder_enabled_summary)
-        morningReminderDisabledSummary = getString(R.string.preferences_morning_reminder_disabled_summary)
+        morningReminderEnabledSummary = getString(R.string.morning_reminder_enabled_summary)
+        morningReminderDisabledSummary = getString(R.string.morning_reminder_disabled_summary)
 
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -18,7 +18,6 @@
     <string name="reminder_title">Took your pill?</string>
 
     <!-- Notifications -->
-    <string name="notification_channel_name_1">Morning reminders</string>
     <string name="notification_channel_description_1">This reminder is sent in the middle of the night, while you are sleeping. It opens the Daily Reminder screen so it is the first thing that you will see when you pick up the device for the first time in the morning.</string>
     <string name="notification_morning_title">It\'s time to take your medicine</string>
     <string name="notification_morning_description">Tap here when you have taken it</string>
@@ -27,7 +26,7 @@
     <string name="settings_title">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="preferences_morning_reminder">Morning reminders</string>
-    <string name="preferences_morning_reminder_enabled_summary">Daily at %s</string>
-    <string name="preferences_morning_reminder_disabled_summary">Disabled</string>
+    <string name="morning_reminder">Morning reminders</string>
+    <string name="morning_reminder_enabled_summary">Daily at %s</string>
+    <string name="morning_reminder_disabled_summary">Disabled</string>
 </resources>

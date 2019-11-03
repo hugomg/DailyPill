@@ -48,7 +48,7 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
-                android:text="@string/preferences_morning_reminder" />
+                android:text="@string/morning_reminder" />
             <TextView
                 android:id="@+id/morning_reminder_summary"
                 android:layout_width="wrap_content"

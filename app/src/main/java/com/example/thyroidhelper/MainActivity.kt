@@ -2,6 +2,7 @@ package com.example.thyroidhelper
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
@@ -9,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.view.*
 import android.widget.TextView
-import java.text.DateFormat
 
 class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
         override fun onResume() {
             val timestamp = DataModel.getDrugTakenTimestamp()
-            val timeStr = DateFormat.getTimeInstance(DateFormat.SHORT).format(timestamp)
+            val timeStr = DateFormat.getTimeFormat(activity).format(timestamp)
             // Use non-breaking space to avoid a line-break between 6:00 and AM
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
             drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)

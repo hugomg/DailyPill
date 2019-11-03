@@ -37,7 +37,7 @@ object Notifications: SharedPreferencesListener {
 
         val channel01 = NotificationChannel(
             MORNING_REMINDER_CHANNEL_ID,
-            appContext.getString(R.string.notification_channel_name_1),
+            appContext.getString(R.string.morning_reminder),
             NotificationManager.IMPORTANCE_HIGH)
         channel01.description = appContext.getString(R.string.notification_channel_description_1)
 
