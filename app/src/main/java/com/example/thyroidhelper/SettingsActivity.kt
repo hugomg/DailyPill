@@ -35,6 +35,9 @@ class SettingsActivity : AppCompatActivity(), SharedPreferencesListener {
         morningReminderEnabledSummary = getString(R.string.morning_reminder_enabled_summary)
         morningReminderDisabledSummary = getString(R.string.morning_reminder_disabled_summary)
 
+        morningReminderLabelArea.setOnClickListener(this::morningReminderLabelClick)
+        morningReminderSwitch.setOnClickListener(this::morningReminderToggle)
+
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -57,12 +60,12 @@ class SettingsActivity : AppCompatActivity(), SharedPreferencesListener {
         DataModel.removeListener(this)
     }
 
-    fun morningReminderLabelClick(v: View) {
+    private fun morningReminderLabelClick(v: View) {
         Log.d("TEST", v.isClickable.toString())
         TimePickerFragment().show(supportFragmentManager, "timePicker")
     }
 
-    fun morningReminderToggle(v: View) {
+    private fun morningReminderToggle(v: View) {
         val switch = v as Switch
         DataModel.setReminderIsEnabled(switch.isChecked)
     }

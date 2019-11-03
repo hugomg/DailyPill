@@ -36,7 +36,6 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:gravity="center_vertical"
-            android:onClick="morningReminderLabelClick"
             android:background="?attr/selectableItemBackground">
 
             <TextView
@@ -73,7 +72,6 @@
             android:layout_height="match_parent"
             android:layout_weight="0"
             android:layout_gravity="center_vertical"
-            android:onClick="morningReminderToggle"
             android:paddingLeft="16dp"/>
     </LinearLayout>
 </LinearLayout>

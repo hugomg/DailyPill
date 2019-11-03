@@ -4,11 +4,15 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Button
 
 class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
+
+    private lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,9 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
         // WRAP_CONTENT, and apparently only changing it here works. Setting the layout size on the
         // XML file is not enough.
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        button = findViewById(R.id.button)!!
+        button.setOnClickListener(this::performUpdateTime)
     }
 
     override fun onResume() {
@@ -45,13 +52,14 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
     }
 
     private fun checkIfFinished() {
+        Log.d("Test", "ONCLICK IS RUNNING")
         if (DataModel.hasTakenDrugToday()) {
             finish()
         }
     }
 
     @Suppress("UNUSED_PARAMETER")
-    fun performUpdateTime(btn: View) {
+    private fun performUpdateTime(btn: View) {
         DataModel.takeDrugNow()
     }
 }

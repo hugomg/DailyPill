@@ -11,7 +11,6 @@
         android:layout_height="175dp"
         android:layout_width="match_parent"
         android:layout_margin="16dp"
-        android:onClick="performUpdateTime"
         android:text="@string/action_take_drug"
         android:textSize="24sp" />
 </LinearLayout>

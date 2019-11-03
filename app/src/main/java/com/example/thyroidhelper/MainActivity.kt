@@ -9,6 +9,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.view.*
+import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), SharedPreferencesListener {
@@ -66,11 +67,6 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    fun performUpdateTime(btn: View) {
-        DataModel.takeDrugNow()
-    }
-
     private fun doReset() {
         val dialog = AlertDialog.Builder(this)
             .setTitle(R.string.reset_confirmation_title)
@@ -108,11 +104,21 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
     class MedicineNotTakenFragment : Fragment() {
 
+        private lateinit var button: Button
+
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
-            return inflater.inflate(R.layout.fragment_medicine_not_taken, container, false)
+            val root = inflater.inflate(R.layout.fragment_medicine_not_taken, container, false)
+            button = root.findViewById(R.id.button)
+            button.setOnClickListener(this::performUpdateTime)
+            return root
+        }
+
+        @Suppress("UNUSED_PARAMETER")
+        private fun performUpdateTime(btn: View) {
+            DataModel.takeDrugNow()
         }
     }
 
@@ -136,14 +142,12 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         }
 
         override fun onResume() {
+            super.onResume()
             val timestamp = DataModel.getDrugTakenTimestamp()
             val timeStr = DateFormat.getTimeFormat(activity).format(timestamp)
             // Use non-breaking space to avoid a line-break between 6:00 and AM
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
             drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
-
-            super.onResume()
         }
-
     }
 }
