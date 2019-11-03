@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -22,21 +21,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ReminderActivity"
             android:excludeFromRecents="true"
             android:taskAffinity=""
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
-
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings_title" />
+            android:label="@string/settings_title"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver
             android:name=".AlarmInitReceiver"
             android:enabled="true">
             <intent-filter>
+
                 <!-- Make sure to update AlarmInitReceiver.kt after editing this list -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
@@ -45,7 +44,6 @@
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".AlarmReceiver" />
     </application>

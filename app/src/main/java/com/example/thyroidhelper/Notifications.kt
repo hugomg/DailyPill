@@ -142,6 +142,8 @@ object Notifications: SharedPreferencesListener {
     private fun removeAlarm() {
         val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(alarmPendingIntent())
+
+        Toast.makeText(appContext, "#Alarm removed", Toast.LENGTH_SHORT).show()
     }
 
     fun setAlarm() {

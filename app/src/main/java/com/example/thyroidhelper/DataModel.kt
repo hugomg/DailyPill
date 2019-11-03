@@ -9,20 +9,18 @@ typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChange
 
 object DataModel {
 
-    const val IS_FIRST_DAY             = "is_first_day"
-    const val DRUG_TAKEN_TIMESTAMP     = "drug_taken_timestamp"
+    const val IS_FIRST_DAY = "is_first_day"
+    const val DRUG_TAKEN_TIMESTAMP = "drug_taken_timestamp"
     const val MORNING_REMINDER_ENABLED = "morning_reminder_enabled"
-    const val MORNING_REMINDER_TIME    = "morning_reminder_time"
+    const val MORNING_REMINDER_TIME = "morning_reminder_time"
 
     private lateinit var sharedPrefs: SharedPreferences
-    private lateinit var defaultReminderTime: String
 
     /**
      * This should be called on application startup, before anything else.
      */
     fun init(context: Context) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
-        defaultReminderTime = context.getString(R.string.preferences_default_morning_reminder_time)
     }
 
     //
@@ -39,6 +37,12 @@ object DataModel {
 
     fun reminderIsEnabled(): Boolean {
         return sharedPrefs.getBoolean(MORNING_REMINDER_ENABLED, true)
+    }
+
+    fun setReminderIsEnabled(v: Boolean) {
+        sharedPrefs.edit()
+            .putBoolean(MORNING_REMINDER_ENABLED, v)
+            .apply()
     }
 
     //
@@ -80,9 +84,24 @@ object DataModel {
     // MORNING_REMINDER_TIME
     //
 
+    private fun serializeTime(hour: Int, minute: Int): Int {
+        return hour * 60 + minute
+    }
+
+    private fun parseTime(totalMinutes: Int): Pair<Int, Int> {
+        return Pair(totalMinutes/60, totalMinutes%60)
+    }
+
     fun getMorningReminderTime(): Pair<Int,Int> {
-        val str = sharedPrefs.getString(MORNING_REMINDER_TIME, defaultReminderTime)!!
-        return parseTime(str)
+        val defaultTime = serializeTime(4,0)
+        val totalMinutes = sharedPrefs.getInt(MORNING_REMINDER_TIME, defaultTime)
+        return parseTime(totalMinutes)
+    }
+
+    fun setMorningReminderTime(hours: Int, minutes: Int) {
+        sharedPrefs.edit()
+            .putInt(MORNING_REMINDER_TIME, serializeTime(hours, minutes))
+            .apply()
     }
 
     fun morningReminderTimeForTheSameDayAs(now: Calendar): Calendar {
