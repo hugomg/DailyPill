@@ -64,6 +64,7 @@ object Notifications: SharedPreferencesListener {
                 .setContentText(appContext.getString(R.string.notification_morning_description))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                .setContentIntent(pendingIntent)
                 .setFullScreenIntent(pendingIntent, true)
                 .setTimeoutAfter(14*60*1000) // 14h later
 
