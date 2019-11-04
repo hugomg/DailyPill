@@ -5,7 +5,8 @@
     tools:context=".MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
         <TextView
             android:id="@+id/not_taken_message"
             android:layout_width="match_parent"
@@ -18,7 +19,6 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="175dp"
-            android:layout_margin="16dp"
             android:text="@string/action_take_drug"
             android:textSize="24sp"/>
 </LinearLayout>
