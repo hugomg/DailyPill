@@ -76,7 +76,7 @@ object Notifications: SharedPreferencesListener {
         if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)
             || key.equals(DataModel.MORNING_REMINDER_ENABLED)
             || key.equals(DataModel.MORNING_REMINDER_TIME)) {
-            updateNotifications()
+            possiblyCancelTheNotification()
         }
 
         if (key.equals(DataModel.MORNING_REMINDER_ENABLED)
@@ -85,7 +85,7 @@ object Notifications: SharedPreferencesListener {
         }
     }
 
-    private fun updateNotifications() {
+    private fun possiblyCancelTheNotification() {
         val now = Calendar.getInstance()
         val reminderEnabled= DataModel.reminderIsEnabled()
         val hasMedicated= DataModel.hasTakenDrugInTheSameDayAs(now)
