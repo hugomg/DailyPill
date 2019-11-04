@@ -44,8 +44,9 @@ object Notifications: SharedPreferencesListener {
         notificationManager.createNotificationChannel(channel01)
     }
 
-    fun sendMorningReminderNotification() {
-        if (DataModel.hasTakenDrugToday()) { return }
+    fun sendMorningReminderNotification(requestFullScreen: Boolean) {
+        val now = Calendar.getInstance()
+        if (DataModel.hasTakenDrugInTheSameDayAs(now)) { return }
 
         createNotificationChannels()
 
@@ -65,8 +66,12 @@ object Notifications: SharedPreferencesListener {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(pendingIntent)
-                .setFullScreenIntent(pendingIntent, true)
                 .setTimeoutAfter(14*60*1000) // 14h later
+                .setWhen(DataModel.morningReminderTimeForTheSameDayAs(now).timeInMillis)
+                .setOnlyAlertOnce(true)
+        if (requestFullScreen) {
+            builder.setFullScreenIntent(pendingIntent, true)
+        }
 
         val manager = NotificationManagerCompat.from(appContext)
         manager.notify(MORNING_NOTIFICATION_ID, builder.build())
@@ -81,17 +86,33 @@ object Notifications: SharedPreferencesListener {
 
         if (key.equals(DataModel.MORNING_REMINDER_ENABLED)
             ||key.equals(DataModel.MORNING_REMINDER_TIME)) {
-            setAlarm(false)
+
+            if (DataModel.reminderIsEnabled()) {
+                addAlarm(Calendar.getInstance(), false)
+            } else {
+                removeAlarm()
+            }
         }
     }
 
-    private fun possiblyCancelTheNotification() {
+    fun possiblyCancelTheNotification() {
         val now = Calendar.getInstance()
         val reminderEnabled= DataModel.reminderIsEnabled()
         val hasMedicated= DataModel.hasTakenDrugInTheSameDayAs(now)
         val reminderTime= DataModel.morningReminderTimeForTheSameDayAs(now)
         if (!reminderEnabled || hasMedicated || now.before(reminderTime)) {
             NotificationManagerCompat.from(appContext).cancel(MORNING_NOTIFICATION_ID)
+        }
+    }
+
+    // Do we have missed notifications? If we just installed the app, assume that the user has
+    // already taken their medicine earlier today.
+    fun possiblyAddMissedNotification(now: Calendar) {
+        val timeToday = DataModel.morningReminderTimeForTheSameDayAs(now)
+        val hasTakenMedicine =
+            DataModel.isFirstDay() || DataModel.hasTakenDrugInTheSameDayAs(now)
+        if (now.after(timeToday) && !hasTakenMedicine) {
+            sendMorningReminderNotification(false)
         }
     }
 
@@ -104,8 +125,7 @@ object Notifications: SharedPreferencesListener {
             PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
-    private fun addAlarm(onlyTomorrow: Boolean) {
-        val now = Calendar.getInstance()
+    fun addAlarm(now: Calendar, onlyTomorrow: Boolean) {
         val timeToday = DataModel.morningReminderTimeForTheSameDayAs(now)
 
         val timeTomorrow = timeToday.clone() as Calendar
@@ -114,14 +134,6 @@ object Notifications: SharedPreferencesListener {
         val nowIsAfterTodaysMedicine = now.after(timeToday)
         val alarmTime =
             if (onlyTomorrow || nowIsAfterTodaysMedicine) { timeTomorrow } else { timeToday }
-
-        // Do we have missed notifications? If we just installed the app, assume that the user has
-        // already taken their medicine earlier today.
-        val hasTakenMedicine =
-            DataModel.isFirstDay() || DataModel.hasTakenDrugInTheSameDayAs(now)
-        if (!onlyTomorrow && nowIsAfterTodaysMedicine && !hasTakenMedicine) {
-            sendMorningReminderNotification()
-        }
 
         val pendingIntent = alarmPendingIntent()
 
@@ -156,18 +168,10 @@ object Notifications: SharedPreferencesListener {
         toast.show()
     }
 
-    private fun removeAlarm() {
+    fun removeAlarm() {
         val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(alarmPendingIntent())
 
         Toast.makeText(appContext, "#Alarm removed", Toast.LENGTH_SHORT).show()
-    }
-
-    fun setAlarm(onlyTomorrow: Boolean) {
-        if (DataModel.reminderIsEnabled()) {
-            addAlarm(onlyTomorrow)
-        } else {
-            removeAlarm()
-        }
     }
 }

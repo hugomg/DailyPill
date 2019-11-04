@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import java.lang.IllegalArgumentException
+import java.util.*
 
 /**
  *  It is necessary to update the system alarms whenever the device reboots, or the system clock
@@ -15,10 +16,14 @@ class AlarmInitReceiver : BroadcastReceiver() {
         when (intent.action) {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCALE_CHANGED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
-            Intent.ACTION_TIME_CHANGED, Intent.ACTION_TIMEZONE_CHANGED ->
-                Notifications.setAlarm(false)
-            else->
+            Intent.ACTION_TIME_CHANGED, Intent.ACTION_TIMEZONE_CHANGED -> {
+                val now = Calendar.getInstance()
+                Notifications.possiblyAddMissedNotification(now)
+                Notifications.addAlarm(now, false)
+            }
+            else-> {
                 throw IllegalArgumentException("Unexpected action " + intent.action)
+            }
         }
     }
 }

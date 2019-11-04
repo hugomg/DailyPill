@@ -20,11 +20,6 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-
-        if (DataModel.isFirstDay()) {
-            // This could be the first time we have opened the app since it was installed.
-            Notifications.setAlarm(false)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -80,7 +75,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     }
 
     private fun doAddNotification() {
-        Notifications.sendMorningReminderNotification()
+        Notifications.sendMorningReminderNotification(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
