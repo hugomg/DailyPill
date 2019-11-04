@@ -27,6 +27,7 @@
 
     <!-- Preference Titles -->
     <string name="morning_reminder">Lembrete ao acordar</string>
+    <string name="morning_reminder_time">Hora</string>
     <string name="morning_reminder_enabled_summary">Diariamente às %s</string>
     <string name="morning_reminder_disabled_summary">Desativado</string>
 </resources>

@@ -27,6 +27,7 @@
 
     <!-- Preference Titles -->
     <string name="morning_reminder">Morning reminders</string>
+    <string name="morning_reminder_time">Starting time</string>
     <string name="morning_reminder_enabled_summary">Daily at %s</string>
     <string name="morning_reminder_disabled_summary">Disabled</string>
 </resources>
