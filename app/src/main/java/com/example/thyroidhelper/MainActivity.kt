@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         resetMenuItem = menu.findItem(R.id.action_reset)
-        resetMenuItem!!.isEnabled = DataModel.hasTakenDrugToday()
+        resetMenuItem!!.isVisible = DataModel.hasTakenDrugToday()
         return true
     }
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
             if (drugTaken) { MedicineTakenFragment()    }
             else           { MedicineNotTakenFragment() }
 
-        resetMenuItem?.isEnabled = drugTaken
+        resetMenuItem?.isVisible = drugTaken
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container, fragment)
             if (useFade) {
