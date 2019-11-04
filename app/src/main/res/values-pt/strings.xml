@@ -18,7 +18,6 @@
     <string name="reminder_title">Tomou o remédio?</string>
 
     <!-- Notifications -->
-    <string name="morning_refactor">Lembrete ao acordar</string>
     <string name="notification_channel_description_1">Este lembrete é enviado no meio da noite, enquanto você ainda está dormindo. Ele abre a tela do Lembrete Diário de forma que ela seja a primeira coisa que você vê quando você pegar o telefone pela primeira vez no dia.</string>
     <string name="notification_morning_title">Está na hora de tomar o remédio</string>
     <string name="notification_morning_description">Toque aqui quanto você tiver tomado ele</string>
