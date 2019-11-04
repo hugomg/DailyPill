@@ -16,7 +16,7 @@ class AlarmInitReceiver : BroadcastReceiver() {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCALE_CHANGED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED, Intent.ACTION_TIMEZONE_CHANGED ->
-                Notifications.setAlarm()
+                Notifications.setAlarm(false)
             else->
                 throw IllegalArgumentException("Unexpected action " + intent.action)
         }

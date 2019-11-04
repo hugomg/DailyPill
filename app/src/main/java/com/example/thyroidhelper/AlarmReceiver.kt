@@ -7,5 +7,6 @@ import android.content.Intent
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         Notifications.sendMorningReminderNotification()
+        Notifications.setAlarm(true)
     }
 }

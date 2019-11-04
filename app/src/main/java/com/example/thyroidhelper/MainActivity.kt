@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
         if (DataModel.isFirstDay()) {
             // This could be the first time we have opened the app since it was installed.
-            Notifications.setAlarm()
+            Notifications.setAlarm(false)
         }
     }
 

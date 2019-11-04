@@ -81,7 +81,7 @@ object Notifications: SharedPreferencesListener {
 
         if (key.equals(DataModel.MORNING_REMINDER_ENABLED)
             ||key.equals(DataModel.MORNING_REMINDER_TIME)) {
-            setAlarm()
+            setAlarm(false)
         }
     }
 
@@ -104,7 +104,7 @@ object Notifications: SharedPreferencesListener {
             PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
-    private fun addAlarm() {
+    private fun addAlarm(onlyTomorrow: Boolean) {
         val now = Calendar.getInstance()
         val timeToday = DataModel.morningReminderTimeForTheSameDayAs(now)
 
@@ -112,24 +112,41 @@ object Notifications: SharedPreferencesListener {
         timeTomorrow.add(Calendar.DATE, 1)
 
         val nowIsAfterTodaysMedicine = now.after(timeToday)
-        val alarmTime = if (nowIsAfterTodaysMedicine) { timeTomorrow } else { timeToday }
+        val alarmTime =
+            if (onlyTomorrow || nowIsAfterTodaysMedicine) { timeTomorrow } else { timeToday }
 
         // Do we have missed notifications? If we just installed the app, assume that the user has
         // already taken their medicine earlier today.
         val hasTakenMedicine =
             DataModel.isFirstDay() || DataModel.hasTakenDrugInTheSameDayAs(now)
-        if (nowIsAfterTodaysMedicine && !hasTakenMedicine) {
+        if (!onlyTomorrow && nowIsAfterTodaysMedicine && !hasTakenMedicine) {
             sendMorningReminderNotification()
         }
 
         val pendingIntent = alarmPendingIntent()
 
-        val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            alarmTime.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent)
+        // Starting with API level 19, alarm delivery on android is inexact, and there is a delivery
+        // window that the system takes advantage of to optimize battery usage. Unfortunately, the
+        // default delivery window for alarms being set to a day from now can be of 18h or more,
+        // which is prohibitive. This precludes us from using the setRepeating family of functions.
+        // The only option is to use `setWindow`, or one of the variations of `setExact`.
+        // By the way, `adb shell dumpsys alarm` can be used to debug the state of the alarm system.
+        val alarmManager =
+            appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        if (Build.VERSION.SDK_INT >= 19) {
+            // A delivery window of 1 minute ensures that the alarm arrives when the user expects
+            val windowLengthInMillis = 1*60*1000L
+            alarmManager.setWindow(
+                AlarmManager.RTC_WAKEUP,
+                alarmTime.timeInMillis,
+                windowLengthInMillis,
+                pendingIntent)
+        } else {
+            alarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                alarmTime.timeInMillis,
+                pendingIntent)
+        }
 
         val toastMsg = String.format("#Set alarm for %s, %02d:%02d",
             (if (nowIsAfterTodaysMedicine) {"tomorrow"} else {"today"}),
@@ -146,9 +163,9 @@ object Notifications: SharedPreferencesListener {
         Toast.makeText(appContext, "#Alarm removed", Toast.LENGTH_SHORT).show()
     }
 
-    fun setAlarm() {
+    fun setAlarm(onlyTomorrow: Boolean) {
         if (DataModel.reminderIsEnabled()) {
-            addAlarm()
+            addAlarm(onlyTomorrow)
         } else {
             removeAlarm()
         }
