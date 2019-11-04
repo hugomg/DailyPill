@@ -40,8 +40,8 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
         DataModel.addListener(this)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         DataModel.removeListener(this)
     }
 
