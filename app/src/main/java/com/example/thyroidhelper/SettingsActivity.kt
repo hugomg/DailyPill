@@ -49,12 +49,11 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    class MorningReminderTimeSummaryProvider(ctx: Context): Preference.SummaryProvider<TimePreference> {
-        val df = DateFormat.getTimeFormat(ctx)
+    class MorningReminderTimeSummaryProvider(private val ctx: Context): Preference.SummaryProvider<TimePreference> {
         override fun provideSummary(preference: TimePreference): String {
             val now = Calendar.getInstance()
             val cal = DataModel.morningReminderTimeForTheSameDayAs(now)
-            return df.format(cal.time)
+            return DateFormat.getTimeFormat(ctx).format(cal.time)
         }
     }
 }
