@@ -10,10 +10,11 @@ typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChange
 
 object DataModel {
 
-    const val IS_FIRST_DAY             = "is_first_day"
-    const val DRUG_TAKEN_TIMESTAMP     = "drug_taken_timestamp"
-    const val MORNING_REMINDER_ENABLED = "morning_reminder_enabled"
-    const val MORNING_REMINDER_TIME    = "morning_reminder_time"
+    const val IS_FIRST_DAY                = "is_first_day"
+    const val DRUG_TAKEN_TIMESTAMP        = "drug_taken_timestamp"
+    const val MORNING_REMINDER_ENABLED    = "morning_reminder_enabled"
+    const val MORNING_REMINDER_TIME       = "morning_reminder_time"
+    const val MORNING_REMINDER_LOCKSCREEN = "morning_reminder_lockscreen"
 
     private lateinit var sharedPrefs: SharedPreferences
 
@@ -108,6 +109,14 @@ object DataModel {
         reminderCal.set(Calendar.SECOND, 0)
         reminderCal.set(Calendar.MILLISECOND, 0)
         return reminderCal
+    }
+
+    //
+    // IS_FIRST_DAY
+    //
+
+    fun displayReminderWhenLocked(): Boolean {
+        return sharedPrefs.getBoolean(MORNING_REMINDER_LOCKSCREEN, true)
     }
 
     //

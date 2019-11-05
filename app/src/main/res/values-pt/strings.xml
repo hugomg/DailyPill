@@ -30,4 +30,6 @@
     <string name="morning_reminder_enabled_summary">Toda manhã</string>
     <string name="morning_reminder_disabled_summary">Desativado</string>
     <string name="morning_reminder_time">Hora do lembrete</string>
+    <string name="morning_reminder_lockscreen">Ignorar bloqueio de tela</string>
+    <string name="morning_reminder_lockscreen_summary">Permite responder ao lembrete sem desbloquear o telefone</string>
 </resources>

@@ -69,7 +69,7 @@ object Notifications: SharedPreferencesListener {
                 .setTimeoutAfter(14*60*1000) // 14h later
                 .setWhen(DataModel.morningReminderTimeForTheSameDayAs(now).timeInMillis)
                 .setOnlyAlertOnce(true)
-        if (requestFullScreen) {
+        if (requestFullScreen && DataModel.displayReminderWhenLocked()) {
             builder.setFullScreenIntent(pendingIntent, true)
         }
 

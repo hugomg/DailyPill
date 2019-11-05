@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources translatable="false">
-    <!-- Default values for app settings -->
-    <bool name="default_morning_reminder_enabled">false</bool>
-    <string name="default_morning_reminder_time">04:00</string>
-</resources>
