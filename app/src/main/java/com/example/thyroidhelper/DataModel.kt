@@ -80,25 +80,13 @@ object DataModel {
         return sharedPrefs.getBoolean(MORNING_REMINDER_ENABLED, false)
     }
 
-    fun setReminderIsEnabled(v: Boolean) {
-        sharedPrefs.edit()
-            .putBoolean(MORNING_REMINDER_ENABLED, v)
-            .apply()
-    }
-
     //
     // MORNING_REMINDER_TIME
     //
 
-    fun getMorningReminderTime(): Pair<Int,Int> {
+    private fun getMorningReminderTime(): Pair<Int,Int> {
         val totalMinutes = sharedPrefs.getString(MORNING_REMINDER_TIME, null)!!
         return parseTime(totalMinutes)
-    }
-
-    fun setMorningReminderTime(hours: Int, minutes: Int) {
-        sharedPrefs.edit()
-            .putString(MORNING_REMINDER_TIME, serializeTime(hours, minutes))
-            .apply()
     }
 
     fun morningReminderTimeForTheSameDayAs(now: Calendar): Calendar {
