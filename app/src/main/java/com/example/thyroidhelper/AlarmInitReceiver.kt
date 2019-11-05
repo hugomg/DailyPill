@@ -17,9 +17,14 @@ class AlarmInitReceiver : BroadcastReceiver() {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCALE_CHANGED,
             Intent.ACTION_MY_PACKAGE_REPLACED,
             Intent.ACTION_TIME_CHANGED, Intent.ACTION_TIMEZONE_CHANGED -> {
-                val now = Calendar.getInstance()
-                Notifications.possiblyAddMissedNotification(now)
-                Notifications.addAlarm(now, false)
+                if (DataModel.reminderIsEnabled()) {
+                    val now = Calendar.getInstance()
+                    Notifications.possiblyAddMissedNotification(now)
+                    Notifications.addAlarm(now, false)
+                } else {
+                    Notifications.possiblyCancelTheNotification()
+                    Notifications.removeAlarm()
+                }
             }
             else-> {
                 throw IllegalArgumentException("Unexpected action " + intent.action)
