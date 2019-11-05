@@ -31,5 +31,5 @@
     <string name="morning_reminder_disabled_summary">Disabled</string>
     <string name="morning_reminder_time">Reminder time</string>
     <string name="morning_reminder_lockscreen">Bypass lock screen</string>
-    <string name="morning_reminder_lockscreen_summary">Allows responding to reminder without unlocking the phone</string>
+    <string name="morning_reminder_lockscreen_summary">Allows responding to the reminder without unlocking the phone</string>
 </resources>
