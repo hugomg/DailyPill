@@ -26,8 +26,8 @@
     <string name="settings_title">Configurações</string>
 
     <!-- Preference Titles -->
-    <string name="morning_reminder">Lembrete ao acordar</string>
-    <string name="morning_reminder_time">Hora</string>
-    <string name="morning_reminder_enabled_summary">Diariamente às %s</string>
+    <string name="morning_reminder">Lembretes do remédio</string>
+    <string name="morning_reminder_enabled_summary">Toda manhã</string>
     <string name="morning_reminder_disabled_summary">Desativado</string>
+    <string name="morning_reminder_time">Hora do lembrete</string>
 </resources>

@@ -4,7 +4,9 @@
         <SwitchPreference
             app:key="morning_reminder_enabled"
             app:title="@string/morning_reminder"
-            app:defaultValue="@bool/default_morning_reminder_enabled"/>
+            app:defaultValue="@bool/default_morning_reminder_enabled"
+            app:summaryOn="@string/morning_reminder_enabled_summary"
+            app:summaryOff="@string/morning_reminder_disabled_summary"/>
         <com.example.thyroidhelper.TimePreference
             app:key="morning_reminder_time"
             app:dependency="morning_reminder_enabled"

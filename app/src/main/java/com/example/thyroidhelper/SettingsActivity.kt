@@ -1,5 +1,6 @@
 package com.example.thyroidhelper
 
+import android.content.Context
 import android.os.Bundle
 import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
@@ -29,19 +30,8 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-            val enabledSummary = activity!!.getString(R.string.morning_reminder_enabled_summary)
-            val disabledSummaty = activity!!.getString(R.string.morning_reminder_disabled_summary)
-
             val morningReminderTime :TimePreference = findPreference("morning_reminder_time")!!
-            morningReminderTime.summaryProvider = Preference.SummaryProvider { v: Preference ->
-                if (DataModel.reminderIsEnabled()) {
-                    val cal = DataModel.morningReminderTimeForTheSameDayAs(Calendar.getInstance())
-                    val timeStr = DateFormat.getTimeFormat(activity).format(cal.time)
-                    String.format(enabledSummary, timeStr)
-                } else {
-                    disabledSummaty
-                }
-            }
+            morningReminderTime.summaryProvider = MorningReminderTimeSummaryProvider(activity!!)
         }
 
         // The preference library has a boneheaded and inextensible design so we need to override
@@ -59,4 +49,12 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    class MorningReminderTimeSummaryProvider(ctx: Context): Preference.SummaryProvider<TimePreference> {
+        val df = DateFormat.getTimeFormat(ctx)
+        override fun provideSummary(preference: TimePreference): String {
+            val now = Calendar.getInstance()
+            val cal = DataModel.morningReminderTimeForTheSameDayAs(now)
+            return df.format(cal.time)
+        }
+    }
 }
