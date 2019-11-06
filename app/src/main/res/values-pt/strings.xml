@@ -1,16 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appTakenButton "Sim, tomei">
+    ]>
 <resources>
     <string name="app_name">Remédio Matinal</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Você já tomou o remédio de hoje?</string>
     <string name="drug_taken_message">Remédio tomado antes das %s</string>
-    <string name="action_take_drug">Sim, tomei</string>
+    <string name="action_take_drug">&appTakenButton;</string>
     <string name="action_reset">Desfazer</string>
 
     <!-- Reset confirmation dialog -->
     <!-- note: the button name should match "action_take_drug" -->
     <string name="reset_confirmation_title">Esquecer último horário?</string>
-    <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>Tomei Agora</i></string>
+    <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>&appTakenButton;</i></string>
     <string name="reset_confirmation_ok">Esquecer</string>
     <string name="reset_confirmation_cancel">Cancelar</string>
 

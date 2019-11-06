@@ -1,16 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appTakenButton "Yes, I have">
+    ]>
 <resources>
     <string name="app_name">Morning Pill</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Have you taken today\'s medicine?</string>
     <string name="drug_taken_message">Medicine taken before %s</string>
-    <string name="action_take_drug">Yes, I have</string>
+    <string name="action_take_drug">&appTakenButton;</string>
     <string name="action_reset">Reset</string>
 
     <!-- Reset confirmation dialog -->
-    <!-- note: the button name should match "action_take_drug" -->
     <string name="reset_confirmation_title">Forget last time?</string>
-    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>Yes, I Just Have</i> button</string>
+    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>&appTakenButton;</i> button</string>
     <string name="reset_confirmation_ok">Forget</string>
     <string name="reset_confirmation_cancel">Cancel</string>
 
