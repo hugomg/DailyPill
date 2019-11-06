@@ -2,9 +2,9 @@
     <string name="app_name">Remédio Matinal</string>
 
     <!-- MainActivity -->
-    <string name="drug_not_taken_message">Você não tomou o remédio de hoje</string>
-    <string name="drug_taken_message">Remédio tomado %s</string>
-    <string name="action_take_drug">Tomei agora</string>
+    <string name="drug_not_taken_message">Você já tomou o remédio de hoje?</string>
+    <string name="drug_taken_message">Remédio tomado antes das %s</string>
+    <string name="action_take_drug">Sim, tomei</string>
     <string name="action_reset">Desfazer</string>
 
     <!-- Reset confirmation dialog -->

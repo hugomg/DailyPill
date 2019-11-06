@@ -18,7 +18,8 @@
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="wrap_content"
+            android:minHeight="175dp"
             android:text="@string/action_take_drug"
             android:textSize="24sp"/>
 </LinearLayout>
