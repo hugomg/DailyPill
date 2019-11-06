@@ -7,6 +7,7 @@ import java.util.*
 
 typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChangeListener
 
+@Suppress("MemberVisibilityCanBePrivate")
 object DataModel {
 
     const val DRUG_TAKEN_TIMESTAMP = "drug_taken_timestamp"

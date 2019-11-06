@@ -38,8 +38,8 @@ class SettingsActivity : AppCompatActivity() {
         // this function and copy paste some code from the original implementations.
         override fun onDisplayPreferenceDialog(preference: Preference?) {
             if (preference is TimePreference) {
-                val fragment = TimePreferenceDialogFragmentCompat()
                 val bundle = Bundle(1); bundle.putString("key", preference.getKey())
+                val fragment = TimePreferenceDialogFragmentCompat()
                 fragment.setArguments(bundle)
                 fragment.setTargetFragment(this, 0)
                 fragment.show(fragmentManager!!, null)

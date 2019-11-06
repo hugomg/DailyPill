@@ -5,7 +5,6 @@ import android.content.res.TypedArray
 import android.os.Build
 import android.text.format.DateFormat
 import android.util.AttributeSet
-import android.util.Log
 import androidx.preference.DialogPreference
 import java.lang.IllegalArgumentException
 import java.lang.NumberFormatException
@@ -75,7 +74,6 @@ class TimePreference : DialogPreference {
     }
 
     override fun onSetInitialValue(defaultValue: Any?) {
-        Log.d("DEFAULT", "settingdefaults " + defaultValue.toString())
         val defaultString = (defaultValue ?: "00:00") as String
         val persisTedString = getPersistedString(defaultString)
         setTime(parseTime(persisTedString))
