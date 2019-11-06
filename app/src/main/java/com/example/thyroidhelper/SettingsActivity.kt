@@ -30,8 +30,8 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-            val morningReminderTime :TimePreference = findPreference("morning_reminder_time")!!
-            morningReminderTime.summaryProvider = MorningReminderTimeSummaryProvider(activity!!)
+            val reminderTime :TimePreference = findPreference("daily_reminder_time")!!
+            reminderTime.summaryProvider = ReminderTimeSummaryProvider(activity!!)
         }
 
         // The preference library has a boneheaded and inextensible design so we need to override
@@ -49,10 +49,10 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    class MorningReminderTimeSummaryProvider(private val ctx: Context): Preference.SummaryProvider<TimePreference> {
+    class ReminderTimeSummaryProvider(private val ctx: Context): Preference.SummaryProvider<TimePreference> {
         override fun provideSummary(preference: TimePreference): String {
             val now = Calendar.getInstance()
-            val cal = DataModel.morningReminderTimeForTheSameDayAs(now)
+            val cal = DataModel.dailyReminderTimeForTheSameDayAs(now)
             return DateFormat.getTimeFormat(ctx).format(cal.time)
         }
     }

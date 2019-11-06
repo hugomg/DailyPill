@@ -13,8 +13,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import java.util.*
 
-private const val MORNING_REMINDER_CHANNEL_ID = "channel_01"
-private const val MORNING_NOTIFICATION_ID = 1
+private const val DAILY_REMINDER_CHANNEL_ID = "channel_01"
+private const val DAILY_NOTIFICATION_ID = 1
 
 object Notifications: SharedPreferencesListener {
 
@@ -36,15 +36,15 @@ object Notifications: SharedPreferencesListener {
             appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val channel01 = NotificationChannel(
-            MORNING_REMINDER_CHANNEL_ID,
-            appContext.getString(R.string.morning_reminder),
+            DAILY_REMINDER_CHANNEL_ID,
+            appContext.getString(R.string.daily_reminder),
             NotificationManager.IMPORTANCE_HIGH)
         channel01.description = appContext.getString(R.string.notification_channel_description_1)
 
         notificationManager.createNotificationChannel(channel01)
     }
 
-    fun sendMorningReminderNotification(requestFullScreen: Boolean) {
+    fun sendReminderNotification(requestFullScreen: Boolean) {
         val now = Calendar.getInstance()
         if (DataModel.hasTakenDrugInTheSameDayAs(now)) { return }
 
@@ -59,33 +59,33 @@ object Notifications: SharedPreferencesListener {
             PendingIntent.getActivity(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder =
-            NotificationCompat.Builder(appContext, MORNING_REMINDER_CHANNEL_ID)
+            NotificationCompat.Builder(appContext, DAILY_REMINDER_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_pill)
-                .setContentTitle(appContext.getString(R.string.notification_morning_title))
-                .setContentText(appContext.getString(R.string.notification_morning_description))
+                .setContentTitle(appContext.getString(R.string.notification_title))
+                .setContentText(appContext.getString(R.string.notification_description))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(pendingIntent)
                 .setTimeoutAfter(14*60*1000) // 14h later
-                .setWhen(DataModel.morningReminderTimeForTheSameDayAs(now).timeInMillis)
+                .setWhen(DataModel.dailyReminderTimeForTheSameDayAs(now).timeInMillis)
                 .setOnlyAlertOnce(true)
         if (requestFullScreen && DataModel.displayReminderWhenLocked()) {
             builder.setFullScreenIntent(pendingIntent, true)
         }
 
         val manager = NotificationManagerCompat.from(appContext)
-        manager.notify(MORNING_NOTIFICATION_ID, builder.build())
+        manager.notify(DAILY_NOTIFICATION_ID, builder.build())
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)
-            || key.equals(DataModel.MORNING_REMINDER_ENABLED)
-            || key.equals(DataModel.MORNING_REMINDER_TIME)) {
+            || key.equals(DataModel.DAILY_REMINDER_ENABLED)
+            || key.equals(DataModel.DAILY_REMINDER_TIME)) {
             possiblyCancelTheNotification()
         }
 
-        if (key.equals(DataModel.MORNING_REMINDER_ENABLED)
-            ||key.equals(DataModel.MORNING_REMINDER_TIME)) {
+        if (key.equals(DataModel.DAILY_REMINDER_ENABLED)
+            ||key.equals(DataModel.DAILY_REMINDER_TIME)) {
 
             if (DataModel.reminderIsEnabled()) {
                 addAlarm(Calendar.getInstance(), false)
@@ -99,20 +99,20 @@ object Notifications: SharedPreferencesListener {
         val now = Calendar.getInstance()
         val reminderEnabled= DataModel.reminderIsEnabled()
         val hasMedicated= DataModel.hasTakenDrugInTheSameDayAs(now)
-        val reminderTime= DataModel.morningReminderTimeForTheSameDayAs(now)
+        val reminderTime= DataModel.dailyReminderTimeForTheSameDayAs(now)
         if (!reminderEnabled || hasMedicated || now.before(reminderTime)) {
-            NotificationManagerCompat.from(appContext).cancel(MORNING_NOTIFICATION_ID)
+            NotificationManagerCompat.from(appContext).cancel(DAILY_NOTIFICATION_ID)
         }
     }
 
     // Do we have missed notifications? If we just installed the app, assume that the user has
     // already taken their medicine earlier today.
     fun possiblyAddMissedNotification(now: Calendar) {
-        val timeToday = DataModel.morningReminderTimeForTheSameDayAs(now)
+        val timeToday = DataModel.dailyReminderTimeForTheSameDayAs(now)
         val hasTakenMedicine =
             DataModel.isFirstDay() || DataModel.hasTakenDrugInTheSameDayAs(now)
         if (now.after(timeToday) && !hasTakenMedicine) {
-            sendMorningReminderNotification(false)
+            sendReminderNotification(false)
         }
     }
 
@@ -126,7 +126,7 @@ object Notifications: SharedPreferencesListener {
     }
 
     fun addAlarm(now: Calendar, onlyTomorrow: Boolean) {
-        val timeToday = DataModel.morningReminderTimeForTheSameDayAs(now)
+        val timeToday = DataModel.dailyReminderTimeForTheSameDayAs(now)
 
         val timeTomorrow = timeToday.clone() as Calendar
         timeTomorrow.add(Calendar.DATE, 1)

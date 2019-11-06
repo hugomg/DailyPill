@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     }
 
     private fun doAddNotification() {
-        Notifications.sendMorningReminderNotification(true)
+        Notifications.sendReminderNotification(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

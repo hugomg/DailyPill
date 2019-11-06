@@ -7,7 +7,7 @@ import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        Notifications.sendMorningReminderNotification(true)
+        Notifications.sendReminderNotification(true)
         Notifications.addAlarm(Calendar.getInstance(), true)
     }
 }

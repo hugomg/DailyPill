@@ -3,7 +3,7 @@
     <!ENTITY appTakenButton "Yes, I have">
     ]>
 <resources>
-    <string name="app_name">Morning Pill</string>
+    <string name="app_name">Daily Pill</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Have you taken today\'s medicine?</string>
@@ -23,18 +23,18 @@
     <string name="reminder_title">Took your pill?</string>
 
     <!-- Notifications -->
-    <string name="notification_channel_description_1">This reminder is sent in the middle of the night, while you are sleeping. It opens the Daily Reminder screen so it is the first thing that you will see when you pick up the device for the first time in the morning.</string>
-    <string name="notification_morning_title">It\'s time to take your medicine</string>
-    <string name="notification_morning_description">Tap here when you have taken it</string>
+    <string name="notification_channel_description_1">By default, this reminder is sent in the middle of the night, while you are sleeping. It opens the reminder dialog so it is the first thing that you will see when you pick up the device in the morning.</string>
+    <string name="notification_title">It\'s time to take your medicine</string>
+    <string name="notification_description">Tap here when you have taken it</string>
 
     <!-- Preferences -->
     <string name="settings_title">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="morning_reminder">Medication reminders</string>
-    <string name="morning_reminder_enabled_summary">Daily</string>
-    <string name="morning_reminder_disabled_summary">Disabled</string>
-    <string name="morning_reminder_time">Reminder time</string>
-    <string name="morning_reminder_lockscreen">Bypass lock screen</string>
-    <string name="morning_reminder_lockscreen_summary">Allows responding to the reminder without unlocking the phone</string>
+    <string name="daily_reminder">Medication reminders</string>
+    <string name="daily_reminder_enabled_summary">Daily</string>
+    <string name="daily_reminder_disabled_summary">Disabled</string>
+    <string name="daily_reminder_time">Reminder time</string>
+    <string name="daily_reminder_lockscreen">Bypass lock screen</string>
+    <string name="daily_reminder_lockscreen_summary">Allows responding to the reminder without unlocking the phone</string>
 </resources>

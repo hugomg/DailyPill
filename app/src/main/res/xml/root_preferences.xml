@@ -2,21 +2,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory>
         <SwitchPreference
-            app:key="morning_reminder_enabled"
-            app:title="@string/morning_reminder"
+            app:key="daily_reminder_enabled"
+            app:title="@string/daily_reminder"
             app:defaultValue="false"
-            app:summaryOn="@string/morning_reminder_enabled_summary"
-            app:summaryOff="@string/morning_reminder_disabled_summary"/>
+            app:summaryOn="@string/daily_reminder_enabled_summary"
+            app:summaryOff="@string/daily_reminder_disabled_summary"/>
         <com.example.thyroidhelper.TimePreference
-            app:key="morning_reminder_time"
-            app:title="@string/morning_reminder_time"
+            app:key="daily_reminder_time"
+            app:title="@string/daily_reminder_time"
             app:defaultValue="04:00"
-            app:dependency="morning_reminder_enabled"/>
+            app:dependency="daily_reminder_enabled"/>
         <SwitchPreference
-            app:key="morning_reminder_lockscreen"
-            app:title="@string/morning_reminder_lockscreen"
+            app:key="daily_reminder_lockscreen"
+            app:title="@string/daily_reminder_lockscreen"
             app:defaultValue="true"
-            app:summary="@string/morning_reminder_lockscreen_summary"
-            app:dependency="morning_reminder_enabled"/>
+            app:summary="@string/daily_reminder_lockscreen_summary"
+            app:dependency="daily_reminder_enabled"/>
     </PreferenceCategory>
 </PreferenceScreen>

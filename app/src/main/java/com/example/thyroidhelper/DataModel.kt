@@ -2,7 +2,6 @@ package com.example.thyroidhelper
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.preference.PreferenceManager
 import java.util.*
 
@@ -10,11 +9,11 @@ typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChange
 
 object DataModel {
 
-    const val IS_FIRST_DAY                = "is_first_day"
-    const val DRUG_TAKEN_TIMESTAMP        = "drug_taken_timestamp"
-    const val MORNING_REMINDER_ENABLED    = "morning_reminder_enabled"
-    const val MORNING_REMINDER_TIME       = "morning_reminder_time"
-    const val MORNING_REMINDER_LOCKSCREEN = "morning_reminder_lockscreen"
+    const val IS_FIRST_DAY              = "is_first_day"
+    const val DRUG_TAKEN_TIMESTAMP      = "drug_taken_timestamp"
+    const val DAILY_REMINDER_ENABLED    = "daily_reminder_enabled"
+    const val DAILY_REMINDER_TIME       = "daily_reminder_time"
+    const val DAILY_REMINDER_LOCKSCREEN = "daily_reminder_lockscreen"
 
     private lateinit var sharedPrefs: SharedPreferences
 
@@ -24,9 +23,6 @@ object DataModel {
     fun init(context: Context) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         PreferenceManager.setDefaultValues(context, R.xml.root_preferences, false)
-        Log.d("DEFAULT", "setting defaults")
-        Log.d("DEFAULT", sharedPrefs.getBoolean(MORNING_REMINDER_ENABLED, true).toString())
-        Log.d("DEFAULT", sharedPrefs.getString(MORNING_REMINDER_TIME, "XXX"))
     }
 
     //
@@ -73,24 +69,24 @@ object DataModel {
     }
 
     //
-    // MORNING_REMINDER_ENABLED
+    // DAILY_REMINDER_ENABLED
     //
 
     fun reminderIsEnabled(): Boolean {
-        return sharedPrefs.getBoolean(MORNING_REMINDER_ENABLED, false)
+        return sharedPrefs.getBoolean(DAILY_REMINDER_ENABLED, false)
     }
 
     //
-    // MORNING_REMINDER_TIME
+    // DAILY_REMINDER_TIME
     //
 
-    private fun getMorningReminderTime(): Pair<Int,Int> {
-        val totalMinutes = sharedPrefs.getString(MORNING_REMINDER_TIME, null)!!
+    private fun getDailyReminderTime(): Pair<Int,Int> {
+        val totalMinutes = sharedPrefs.getString(DAILY_REMINDER_TIME, null)!!
         return parseTime(totalMinutes)
     }
 
-    fun morningReminderTimeForTheSameDayAs(now: Calendar): Calendar {
-        val (hour, minute) = getMorningReminderTime()
+    fun dailyReminderTimeForTheSameDayAs(now: Calendar): Calendar {
+        val (hour, minute) = getDailyReminderTime()
         val reminderCal = now.clone() as Calendar
         reminderCal.set(Calendar.HOUR_OF_DAY, hour)
         reminderCal.set(Calendar.MINUTE,      minute)
@@ -100,11 +96,11 @@ object DataModel {
     }
 
     //
-    // IS_FIRST_DAY
+    // DAILY_REMINDER_LOCKSCREEN
     //
 
     fun displayReminderWhenLocked(): Boolean {
-        return sharedPrefs.getBoolean(MORNING_REMINDER_LOCKSCREEN, true)
+        return sharedPrefs.getBoolean(DAILY_REMINDER_LOCKSCREEN, true)
     }
 
     //
