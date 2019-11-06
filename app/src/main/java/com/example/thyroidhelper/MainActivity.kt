@@ -74,18 +74,10 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         dialog.show()
     }
 
-    private fun doAddNotification() {
-        Notifications.sendReminderNotification(true)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_reset -> {
                 doReset()
-                return true
-            }
-            R.id.action_register_notification -> {
-                doAddNotification()
                 return true
             }
             R.id.action_settings -> {
