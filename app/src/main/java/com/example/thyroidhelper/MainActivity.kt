@@ -129,8 +129,8 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             drugTakenMessage =  getString(R.string.drug_taken_message)
-            reminderEnabledMessage = getText(R.string.daily_reminders_are_enabled)
-            reminderDisabledMessage = getText(R.string.daily_reminders_are_disabled)
+            reminderEnabledMessage = getText(R.string.reminders_are_enabled)
+            reminderDisabledMessage = getText(R.string.reminders_are_disabled)
         }
 
         override fun onCreateView(

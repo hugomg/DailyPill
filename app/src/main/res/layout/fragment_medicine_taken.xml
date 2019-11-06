@@ -19,6 +19,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="16sp"
-            android:text="@string/daily_reminders_are_disabled"/>
+            android:textSize="16sp"/>
 </LinearLayout>

@@ -10,8 +10,8 @@
     <string name="drug_taken_message">Medicine taken before %s</string>
     <string name="action_take_drug">&appTakenButton;</string>
     <string name="action_reset">Reset</string>
-    <string name="daily_reminders_are_enabled">Daily reminders are enabled.</string>
-    <string name="daily_reminders_are_disabled">Daily reminders are disabled. <a href="">Enable?</a></string>
+    <string name="reminders_are_enabled">Daily reminders are enabled.</string>
+    <string name="reminders_are_disabled">Daily reminders are disabled. <a href="">Enable?</a></string>
 
     <!-- Reset confirmation dialog -->
     <string name="reset_confirmation_title">Forget last time?</string>
@@ -31,10 +31,10 @@
     <string name="settings_title">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="daily_reminder">Medication reminders</string>
-    <string name="daily_reminder_enabled_summary">Daily</string>
-    <string name="daily_reminder_disabled_summary">Disabled</string>
-    <string name="daily_reminder_time">Reminder time</string>
-    <string name="daily_reminder_lock_screen">Bypass lock screen</string>
-    <string name="daily_reminder_lock_screen_summary">Allows responding to the reminder without unlocking the phone</string>
+    <string name="reminder">Medication reminders</string>
+    <string name="reminder_enabled_summary">Daily</string>
+    <string name="reminder_disabled_summary">Disabled</string>
+    <string name="reminder_time">Reminder time</string>
+    <string name="reminder_lock_screen">Bypass lock screen</string>
+    <string name="reminder_lock_screen_summary">Allows responding to the reminder without unlocking the phone</string>
 </resources>

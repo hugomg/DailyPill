@@ -13,8 +13,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import java.util.*
 
-private const val DAILY_REMINDER_CHANNEL_ID = "channel_01"
-private const val DAILY_NOTIFICATION_ID = 1
+private const val REMINDER_CHANNEL_ID = "channel_01"
+private const val NOTIFICATION_ID = 1
 
 object Notifications: SharedPreferencesListener {
 
@@ -36,8 +36,8 @@ object Notifications: SharedPreferencesListener {
             appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val channel01 = NotificationChannel(
-            DAILY_REMINDER_CHANNEL_ID,
-            appContext.getString(R.string.daily_reminder),
+            REMINDER_CHANNEL_ID,
+            appContext.getString(R.string.reminder),
             NotificationManager.IMPORTANCE_HIGH)
         channel01.description = appContext.getString(R.string.notification_channel_description_1)
 
@@ -59,7 +59,7 @@ object Notifications: SharedPreferencesListener {
             PendingIntent.getActivity(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder =
-            NotificationCompat.Builder(appContext, DAILY_REMINDER_CHANNEL_ID)
+            NotificationCompat.Builder(appContext, REMINDER_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_pill)
                 .setContentTitle(appContext.getString(R.string.notification_title))
                 .setContentText(appContext.getString(R.string.notification_description))
@@ -74,18 +74,18 @@ object Notifications: SharedPreferencesListener {
         }
 
         val manager = NotificationManagerCompat.from(appContext)
-        manager.notify(DAILY_NOTIFICATION_ID, builder.build())
+        manager.notify(NOTIFICATION_ID, builder.build())
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)
-            || key.equals(DataModel.DAILY_REMINDER_ENABLED)
-            || key.equals(DataModel.DAILY_REMINDER_TIME)) {
+            || key.equals(DataModel.REMINDER_ENABLED)
+            || key.equals(DataModel.REMINDER_TIME)) {
             possiblyCancelTheNotification()
         }
 
-        if (key.equals(DataModel.DAILY_REMINDER_ENABLED)
-            ||key.equals(DataModel.DAILY_REMINDER_TIME)) {
+        if (key.equals(DataModel.REMINDER_ENABLED)
+            ||key.equals(DataModel.REMINDER_TIME)) {
 
             if (DataModel.reminderIsEnabled()) {
                 addAlarm(Calendar.getInstance(), false)
@@ -101,7 +101,7 @@ object Notifications: SharedPreferencesListener {
         val hasMedicated= DataModel.hasTakenDrugInTheSameDayAs(now)
         val reminderTime= DataModel.dailyReminderTimeForTheSameDayAs(now)
         if (!reminderEnabled || hasMedicated || now.before(reminderTime)) {
-            NotificationManagerCompat.from(appContext).cancel(DAILY_NOTIFICATION_ID)
+            NotificationManagerCompat.from(appContext).cancel(NOTIFICATION_ID)
         }
     }
 

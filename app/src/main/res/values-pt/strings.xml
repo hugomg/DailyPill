@@ -10,8 +10,8 @@
     <string name="drug_taken_message">Remédio tomado antes das %s</string>
     <string name="action_take_drug">&appTakenButton;</string>
     <string name="action_reset">Desfazer</string>
-    <string name="daily_reminders_are_enabled">Lembretes estão ativados.</string>
-    <string name="daily_reminders_are_disabled">Lembretes estão desativados. <a href="">Ativar?</a></string>
+    <string name="reminders_are_enabled">Lembretes estão ativados.</string>
+    <string name="reminders_are_disabled">Lembretes estão desativados. <a href="">Ativar?</a></string>
 
     <!-- Reset confirmation dialog -->
     <!-- note: the button name should match "action_take_drug" -->
@@ -32,10 +32,10 @@
     <string name="settings_title">Configurações</string>
 
     <!-- Preference Titles -->
-    <string name="daily_reminder">Lembretes do remédio</string>
-    <string name="daily_reminder_enabled_summary">Diariamente</string>
-    <string name="daily_reminder_disabled_summary">Desativados</string>
-    <string name="daily_reminder_time">Hora do lembrete</string>
-    <string name="daily_reminder_lock_screen">Ignorar bloqueio de tela</string>
-    <string name="daily_reminder_lock_screen_summary">Permite responder ao lembrete sem desbloquear o telefone</string>
+    <string name="reminder">Lembretes do remédio</string>
+    <string name="reminder_enabled_summary">Diariamente</string>
+    <string name="reminder_disabled_summary">Desativados</string>
+    <string name="reminder_time">Hora do lembrete</string>
+    <string name="reminder_lock_screen">Ignorar bloqueio de tela</string>
+    <string name="reminder_lock_screen_summary">Permite responder ao lembrete sem desbloquear o telefone</string>
 </resources>

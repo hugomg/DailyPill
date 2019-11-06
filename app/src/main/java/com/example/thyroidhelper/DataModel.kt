@@ -9,10 +9,10 @@ typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChange
 
 object DataModel {
 
-    const val DRUG_TAKEN_TIMESTAMP       = "drug_taken_timestamp"
-    const val DAILY_REMINDER_ENABLED     = "daily_reminder_enabled"
-    const val DAILY_REMINDER_TIME        = "daily_reminder_time"
-    const val DAILY_REMINDER_LOCK_SCREEN = "daily_reminder_lock_screen"
+    const val DRUG_TAKEN_TIMESTAMP = "drug_taken_timestamp"
+    const val REMINDER_ENABLED     = "reminder_enabled"
+    const val REMINDER_TIME        = "reminder_time"
+    const val REMINDER_LOCK_SCREEN = "reminder_lock_screen"
 
     private lateinit var sharedPrefs: SharedPreferences
 
@@ -59,19 +59,19 @@ object DataModel {
     }
 
     //
-    // DAILY_REMINDER_ENABLED
+    // REMINDER_ENABLED
     //
 
     fun reminderIsEnabled(): Boolean {
-        return sharedPrefs.getBoolean(DAILY_REMINDER_ENABLED, false)
+        return sharedPrefs.getBoolean(REMINDER_ENABLED, false)
     }
 
     //
-    // DAILY_REMINDER_TIME
+    // REMINDER_TIME
     //
 
     private fun getDailyReminderTime(): Pair<Int,Int> {
-        val totalMinutes = sharedPrefs.getString(DAILY_REMINDER_TIME, null)!!
+        val totalMinutes = sharedPrefs.getString(REMINDER_TIME, null)!!
         return parseTime(totalMinutes)
     }
 
@@ -86,11 +86,11 @@ object DataModel {
     }
 
     //
-    // DAILY_REMINDER_LOCK_SCREEN
+    // REMINDER_LOCK_SCREEN
     //
 
     fun displayReminderWhenLocked(): Boolean {
-        return sharedPrefs.getBoolean(DAILY_REMINDER_LOCK_SCREEN, true)
+        return sharedPrefs.getBoolean(REMINDER_LOCK_SCREEN, true)
     }
 
     //

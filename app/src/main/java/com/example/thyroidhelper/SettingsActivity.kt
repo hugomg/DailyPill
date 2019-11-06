@@ -30,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-            val reminderTime :TimePreference = findPreference("daily_reminder_time")!!
+            val reminderTime :TimePreference = findPreference("reminder_time")!!
             reminderTime.summaryProvider = ReminderTimeSummaryProvider(activity!!)
         }
 
