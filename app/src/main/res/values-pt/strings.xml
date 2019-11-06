@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources [
-    <!ENTITY appTakenButton "Sim, tomei">
+    <!ENTITY appTakenButton "Já tomei">
     ]>
 <resources>
     <string name="app_name">Remédio Diário</string>
