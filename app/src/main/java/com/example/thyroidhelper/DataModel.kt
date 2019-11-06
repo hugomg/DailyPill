@@ -9,7 +9,6 @@ typealias SharedPreferencesListener = SharedPreferences.OnSharedPreferenceChange
 
 object DataModel {
 
-    const val IS_FIRST_DAY              = "is_first_day"
     const val DRUG_TAKEN_TIMESTAMP      = "drug_taken_timestamp"
     const val DAILY_REMINDER_ENABLED    = "daily_reminder_enabled"
     const val DAILY_REMINDER_TIME       = "daily_reminder_time"
@@ -26,14 +25,6 @@ object DataModel {
     }
 
     //
-    // IS_FIRST_DAY
-    //
-
-    fun isFirstDay(): Boolean {
-        return sharedPrefs.getBoolean(IS_FIRST_DAY, true)
-    }
-
-    //
     // DRUG_TAKEN_TIMESTAMP
     //
 
@@ -45,7 +36,6 @@ object DataModel {
         val timestamp = Calendar.getInstance().timeInMillis
         sharedPrefs.edit()
             .putLong(DRUG_TAKEN_TIMESTAMP, timestamp)
-            .putBoolean(IS_FIRST_DAY, false)
             .apply()
     }
 

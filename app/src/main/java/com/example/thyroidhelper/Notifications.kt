@@ -105,13 +105,10 @@ object Notifications: SharedPreferencesListener {
         }
     }
 
-    // Do we have missed notifications? If we just installed the app, assume that the user has
-    // already taken their medicine earlier today.
+    // Do we have missed notifications?
     fun possiblyAddMissedNotification(now: Calendar) {
         val timeToday = DataModel.dailyReminderTimeForTheSameDayAs(now)
-        val hasTakenMedicine =
-            DataModel.isFirstDay() || DataModel.hasTakenDrugInTheSameDayAs(now)
-        if (now.after(timeToday) && !hasTakenMedicine) {
+        if (now.after(timeToday) && !DataModel.hasTakenDrugInTheSameDayAs(now)) {
             sendReminderNotification(false)
         }
     }
