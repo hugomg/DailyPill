@@ -29,8 +29,7 @@
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings_title"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="@string/settings_title" />
 
         <receiver
             android:name=".AlarmInitReceiver"
