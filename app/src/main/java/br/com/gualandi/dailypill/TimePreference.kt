@@ -1,4 +1,4 @@
-package com.example.thyroidhelper
+package br.com.gualandi.dailypill
 
 import android.content.Context
 import android.content.res.TypedArray

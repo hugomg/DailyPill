@@ -7,7 +7,7 @@
             app:defaultValue="false"
             app:summaryOn="@string/reminder_enabled_summary"
             app:summaryOff="@string/reminder_disabled_summary"/>
-        <com.example.thyroidhelper.TimePreference
+        <br.com.gualandi.dailypill.TimePreference
             app:key="reminder_time"
             app:title="@string/reminder_time"
             app:defaultValue="04:00"
