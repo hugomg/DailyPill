@@ -146,12 +146,11 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
             drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
 
-            reminderStatus.text =
-                if (DataModel.reminderIsEnabled()) {
-                    reminderEnabledMessage
-                } else {
-                    reminderDisabledMessage
-                }
+            if (DataModel.reminderIsEnabled()) {
+                reminderStatus.text = reminderEnabledMessage
+            } else {
+                reminderStatus.text = reminderDisabledMessage
+            }
         }
 
         private fun clickReminderStatus(v: View) {
