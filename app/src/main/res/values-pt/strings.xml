@@ -10,6 +10,8 @@
     <string name="drug_taken_message">Remédio tomado antes das %s</string>
     <string name="action_take_drug">&appTakenButton;</string>
     <string name="action_reset">Desfazer</string>
+    <string name="daily_reminders_are_enabled">Lembretes estão ativados.</string>
+    <string name="daily_reminders_are_disabled">Lembretes estão desativados. <a href="">Ativar?</a></string>
 
     <!-- Reset confirmation dialog -->
     <!-- note: the button name should match "action_take_drug" -->

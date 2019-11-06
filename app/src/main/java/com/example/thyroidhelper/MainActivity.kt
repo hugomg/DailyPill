@@ -120,11 +120,17 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     class MedicineTakenFragment : Fragment() {
 
         private lateinit var drugTakenMessage: String
+        private lateinit var reminderEnabledMessage: CharSequence
+        private lateinit var reminderDisabledMessage: CharSequence
+
         private lateinit var drugTakenMessageView: TextView
+        private lateinit var reminderStatus: TextView
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             drugTakenMessage =  getString(R.string.drug_taken_message)
+            reminderEnabledMessage = getText(R.string.daily_reminders_are_enabled)
+            reminderDisabledMessage = getText(R.string.daily_reminders_are_disabled)
         }
 
         override fun onCreateView(
@@ -133,16 +139,32 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         ): View? {
             val root = inflater.inflate(R.layout.fragment_medicine_taken, container, false)
             drugTakenMessageView = root.findViewById(R.id.drug_taken_message)
+            reminderStatus = root.findViewById(R.id.reminder_status)
+
+            reminderStatus.setOnClickListener(this::clickReminderStatus)
             return root
         }
 
         override fun onResume() {
             super.onResume()
+
+            // Use non-breaking space to avoid a line-break between 6:00 and AM
             val timestamp = DataModel.getDrugTakenTimestamp()
             val timeStr = DateFormat.getTimeFormat(activity).format(timestamp)
-            // Use non-breaking space to avoid a line-break between 6:00 and AM
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
             drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
+
+            reminderStatus.text =
+                if (DataModel.reminderIsEnabled()) {
+                    reminderEnabledMessage
+                } else {
+                    reminderDisabledMessage
+                }
+        }
+
+        private fun clickReminderStatus(v: View) {
+            val intent = Intent(activity!!, SettingsActivity::class.java)
+            startActivity(intent)
         }
     }
 }

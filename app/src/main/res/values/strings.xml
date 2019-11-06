@@ -10,6 +10,8 @@
     <string name="drug_taken_message">Medicine taken before %s</string>
     <string name="action_take_drug">&appTakenButton;</string>
     <string name="action_reset">Reset</string>
+    <string name="daily_reminders_are_enabled">Daily reminders are enabled.</string>
+    <string name="daily_reminders_are_disabled">Daily reminders are disabled. <a href="">Enable?</a></string>
 
     <!-- Reset confirmation dialog -->
     <string name="reset_confirmation_title">Forget last time?</string>
