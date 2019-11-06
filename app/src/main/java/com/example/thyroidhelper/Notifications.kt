@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import java.util.*
@@ -157,18 +156,17 @@ object Notifications: SharedPreferencesListener {
                 pendingIntent)
         }
 
-        val toastMsg = String.format("#Set alarm for %s, %02d:%02d",
-            (if (nowIsAfterTodaysMedicine) {"tomorrow"} else {"today"}),
-            alarmTime.get(Calendar.HOUR_OF_DAY),
-            alarmTime.get(Calendar.MINUTE))
-        val toast = Toast.makeText(appContext, toastMsg, Toast.LENGTH_SHORT)
-        toast.show()
+        // val toastMsg = String.format("#Set alarm for %s, %02d:%02d",
+        //     (if (nowIsAfterTodaysMedicine) {"tomorrow"} else {"today"}),
+        //     alarmTime.get(Calendar.HOUR_OF_DAY),
+        //     alarmTime.get(Calendar.MINUTE))
+        // val toast = Toast.makeText(appContext, toastMsg, Toast.LENGTH_SHORT)
+        // toast.show()
     }
 
     fun removeAlarm() {
         val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(alarmPendingIntent())
-
-        Toast.makeText(appContext, "#Alarm removed", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(appContext, "#Alarm removed", Toast.LENGTH_SHORT).show()
     }
 }
