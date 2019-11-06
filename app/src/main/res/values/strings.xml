@@ -20,7 +20,7 @@
     <string name="reset_confirmation_cancel">Cancel</string>
 
     <!-- ReminderActivity-->
-    <string name="reminder_title">Took your pill?</string>
+    <string name="reminder_title">Took your medicine?</string>
 
     <!-- Notifications -->
     <string name="notification_channel_description_1">By default, this reminder is sent in the middle of the night, while you are sleeping. It opens the reminder dialog so it is the first thing that you will see when you pick up the device in the morning.</string>
