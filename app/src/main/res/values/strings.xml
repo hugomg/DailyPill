@@ -35,6 +35,6 @@
     <string name="daily_reminder_enabled_summary">Daily</string>
     <string name="daily_reminder_disabled_summary">Disabled</string>
     <string name="daily_reminder_time">Reminder time</string>
-    <string name="daily_reminder_lockscreen">Bypass lock screen</string>
-    <string name="daily_reminder_lockscreen_summary">Allows responding to the reminder without unlocking the phone</string>
+    <string name="daily_reminder_lock_screen">Bypass lock screen</string>
+    <string name="daily_reminder_lock_screen_summary">Allows responding to the reminder without unlocking the phone</string>
 </resources>

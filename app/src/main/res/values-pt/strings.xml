@@ -36,6 +36,6 @@
     <string name="daily_reminder_enabled_summary">Diariamente</string>
     <string name="daily_reminder_disabled_summary">Desativados</string>
     <string name="daily_reminder_time">Hora do lembrete</string>
-    <string name="daily_reminder_lockscreen">Ignorar bloqueio de tela</string>
-    <string name="daily_reminder_lockscreen_summary">Permite responder ao lembrete sem desbloquear o telefone</string>
+    <string name="daily_reminder_lock_screen">Ignorar bloqueio de tela</string>
+    <string name="daily_reminder_lock_screen_summary">Permite responder ao lembrete sem desbloquear o telefone</string>
 </resources>

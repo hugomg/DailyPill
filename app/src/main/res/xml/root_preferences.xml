@@ -13,10 +13,10 @@
             app:defaultValue="04:00"
             app:dependency="daily_reminder_enabled"/>
         <SwitchPreference
-            app:key="daily_reminder_lockscreen"
-            app:title="@string/daily_reminder_lockscreen"
+            app:key="daily_reminder_lock_screen"
+            app:title="@string/daily_reminder_lock_screen"
             app:defaultValue="true"
-            app:summary="@string/daily_reminder_lockscreen_summary"
+            app:summary="@string/daily_reminder_lock_screen_summary"
             app:dependency="daily_reminder_enabled"/>
     </PreferenceCategory>
 </PreferenceScreen>
