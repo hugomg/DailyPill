@@ -95,25 +95,19 @@ object Notifications: SharedPreferencesListener {
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        Thread(Runnable {
-            if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)
-                || key.equals(DataModel.REMINDER_ENABLED)
-                || key.equals(DataModel.REMINDER_TIME)
-            ) {
+        if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)
+            || key.equals(DataModel.REMINDER_ENABLED)
+            || key.equals(DataModel.REMINDER_TIME)
+        ) {
+            Thread(Runnable {
                 possiblyCancelTheNotification()
-            }
-
-            if (key.equals(DataModel.REMINDER_ENABLED)
-                || key.equals(DataModel.REMINDER_TIME)
-            ) {
-
                 if (DataModel.reminderIsEnabled()) {
                     addAlarm(Calendar.getInstance(), false)
                 } else {
                     removeAlarm()
                 }
-            }
-        }).start()
+            }).run()
+        }
     }
 
     fun possiblyCancelTheNotification() {
