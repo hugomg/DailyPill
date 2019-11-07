@@ -24,6 +24,7 @@ import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
+import android.os.StrictMode
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.view.*
@@ -38,6 +39,10 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        //if (BuildConfig.DEBUG) {
+        //    StrictMode.enableDefaults()
+        //}
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
