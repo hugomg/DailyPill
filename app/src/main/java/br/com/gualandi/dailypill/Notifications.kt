@@ -99,14 +99,13 @@ object Notifications: SharedPreferencesListener {
             || key.equals(DataModel.REMINDER_ENABLED)
             || key.equals(DataModel.REMINDER_TIME)
         ) {
-            Thread(Runnable {
-                possiblyCancelTheNotification()
-                if (DataModel.reminderIsEnabled()) {
-                    addAlarm(Calendar.getInstance(), false)
-                } else {
-                    removeAlarm()
-                }
-            }).run()
+            possiblyCancelTheNotification()
+
+            if (DataModel.reminderIsEnabled()) {
+                addAlarm(Calendar.getInstance(), false)
+            } else {
+                removeAlarm()
+            }
         }
     }
 
