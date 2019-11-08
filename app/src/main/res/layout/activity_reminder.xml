@@ -25,10 +25,22 @@
     android:orientation="vertical"
     tools:context=".ReminderActivity">
     <Button
-        android:id="@+id/button"
-        android:layout_height="175dp"
+        android:id="@+id/ok_button"
         android:layout_width="match_parent"
-        android:layout_margin="16dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:text="@string/action_take_drug"
         android:textSize="24sp" />
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorAccent"
+        android:text="@string/reminder_snooze"/>
 </LinearLayout>

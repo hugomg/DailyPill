@@ -30,8 +30,6 @@ import android.widget.Button
 
 class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
 
-    private lateinit var button: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder)
@@ -50,8 +48,11 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
         // XML file is not enough.
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        button = findViewById(R.id.button)!!
-        button.setOnClickListener(this::performUpdateTime)
+        val okButton: Button = findViewById(R.id.ok_button)!!
+        okButton.setOnClickListener(this::performUpdateTime)
+
+        val cancelButton: Button = findViewById(R.id.cancel_button)!!
+        cancelButton.setOnClickListener(this::dismiss)
     }
 
     override fun onResume() {
@@ -72,7 +73,6 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
     }
 
     private fun checkIfFinished() {
-        Log.d("Test", "ONCLICK IS RUNNING")
         if (DataModel.hasTakenDrugToday()) {
             finish()
         }
@@ -81,5 +81,10 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
     @Suppress("UNUSED_PARAMETER")
     private fun performUpdateTime(btn: View) {
         DataModel.takeDrugNow()
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    private fun dismiss(btn: View) {
+        finish()
     }
 }

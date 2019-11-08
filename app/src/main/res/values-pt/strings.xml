@@ -48,6 +48,7 @@
 
     <!-- Preferences -->
     <string name="settings_title">Configurações</string>
+    <string name="reminder_snooze">Agora não</string>
 
     <!-- Preference Titles -->
     <string name="reminder">Lembretes do remédio</string>
