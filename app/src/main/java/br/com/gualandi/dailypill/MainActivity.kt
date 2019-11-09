@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         override fun onResume() {
             super.onResume()
 
-            // Use non-breaking space to avoid a line-break between 6:00 and AM
+            // The non-breaking space avoids a line-break between 6:00 and AM
             val timestamp = DataModel.getDrugTakenTimestamp()
             val timeStr = DateFormat.getTimeFormat(activity).format(timestamp)
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
