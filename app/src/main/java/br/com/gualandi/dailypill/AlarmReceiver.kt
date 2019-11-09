@@ -25,7 +25,10 @@ import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        Notifications.sendReminderNotification(true)
-        Notifications.addAlarm(Calendar.getInstance(), true)
+        val now = Calendar.getInstance()
+        Notifications.addAlarm(now, true)
+        if (!DataModel.hasTakenDrugInTheSameDayAs(now)) {
+            Notifications.sendReminderNotification(now, true)
+        }
     }
 }

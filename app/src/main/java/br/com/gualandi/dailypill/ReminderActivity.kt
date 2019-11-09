@@ -28,7 +28,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 
-class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
+class ReminderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,42 +49,24 @@ class ReminderActivity : AppCompatActivity(), SharedPreferencesListener {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         val okButton: Button = findViewById(R.id.ok_button)!!
-        okButton.setOnClickListener(this::performUpdateTime)
+        okButton.setOnClickListener(this::clickOK)
 
         val cancelButton: Button = findViewById(R.id.cancel_button)!!
         cancelButton.setOnClickListener(this::dismiss)
     }
 
-    override fun onResume() {
-        super.onResume()
-        checkIfFinished()
-        DataModel.addListener(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        DataModel.removeListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)) {
-            checkIfFinished()
-        }
-    }
-
-    private fun checkIfFinished() {
-        if (DataModel.hasTakenDrugToday()) {
-            finish()
-        }
-    }
-
     @Suppress("UNUSED_PARAMETER")
-    private fun performUpdateTime(btn: View) {
-        DataModel.takeDrugNow()
+    private fun clickOK(btn: View) {
+        if (!DataModel.hasTakenDrugToday()) {
+            DataModel.takeDrugNow()
+        }
+        Notifications.possiblyCancelTheNotification()
+        finish()
     }
 
     @Suppress("UNUSED_PARAMETER")
     private fun dismiss(btn: View) {
+        Notifications.possiblyCancelTheNotification()
         finish()
     }
 }

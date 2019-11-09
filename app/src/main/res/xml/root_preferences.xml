@@ -36,5 +36,9 @@
             app:defaultValue="true"
             app:summary="@string/reminder_lock_screen_summary"
             app:dependency="reminder_enabled"/>
+        <Preference
+            app:key="test_reminder"
+            app:widgetLayout="@layout/test_notification_button"
+            app:dependency="reminder_enabled" />
     </PreferenceCategory>
 </PreferenceScreen>

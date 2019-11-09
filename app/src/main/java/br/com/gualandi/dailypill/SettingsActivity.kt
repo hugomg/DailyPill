@@ -48,8 +48,11 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-            val reminderTime :TimePreference = findPreference("reminder_time")!!
+            val reminderTime : TimePreference = findPreference("reminder_time")!!
             reminderTime.summaryProvider = ReminderTimeSummaryProvider(activity!!)
+
+            val testButton : Preference = findPreference("test_reminder")!!
+            testButton.setOnPreferenceClickListener({ clickTestButton(); true  })
         }
 
         // The preference library has a boneheaded and inextensible design so we need to override
@@ -64,6 +67,11 @@ class SettingsActivity : AppCompatActivity() {
             } else {
                 super.onDisplayPreferenceDialog(preference)
             }
+        }
+
+        private fun clickTestButton() {
+            val now = Calendar.getInstance()
+            Notifications.sendReminderNotification(now, true)
         }
     }
 

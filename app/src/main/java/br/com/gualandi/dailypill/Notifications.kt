@@ -61,9 +61,7 @@ object Notifications: SharedPreferencesListener {
         notificationManager.createNotificationChannel(channel01)
     }
 
-    fun sendReminderNotification(requestFullScreen: Boolean) {
-        val now = Calendar.getInstance()
-        if (DataModel.hasTakenDrugInTheSameDayAs(now)) { return }
+    fun sendReminderNotification(now: Calendar, shouldInterrupt: Boolean) {
 
         createNotificationChannels()
 
@@ -85,8 +83,10 @@ object Notifications: SharedPreferencesListener {
                 .setContentIntent(pendingIntent)
                 .setTimeoutAfter(14*60*1000) // 14h later
                 .setWhen(DataModel.dailyReminderTimeForTheSameDayAs(now).timeInMillis)
-                .setOnlyAlertOnce(true)
-        if (requestFullScreen && DataModel.displayReminderWhenLocked()) {
+        if (!shouldInterrupt) {
+            builder.setOnlyAlertOnce(true)
+        }
+        if (shouldInterrupt && DataModel.displayReminderWhenLocked()) {
             builder.setFullScreenIntent(pendingIntent, true)
         }
 
@@ -123,7 +123,7 @@ object Notifications: SharedPreferencesListener {
     fun possiblyAddMissedNotification(now: Calendar) {
         val timeToday = DataModel.dailyReminderTimeForTheSameDayAs(now)
         if (now.after(timeToday) && !DataModel.hasTakenDrugInTheSameDayAs(now)) {
-            sendReminderNotification(false)
+            sendReminderNotification(now, false)
         }
     }
 

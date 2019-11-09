@@ -56,4 +56,5 @@
     <string name="reminder_time">Reminder time</string>
     <string name="reminder_lock_screen">Bypass lock screen</string>
     <string name="reminder_lock_screen_summary">Allows responding to the reminder without unlocking the phone</string>
+    <string name="reminder_test">Test notification</string>
 </resources>
