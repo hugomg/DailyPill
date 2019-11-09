@@ -107,6 +107,9 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
+            R.id.crash -> {
+                throw RuntimeException("You clicked the crash button")
+            }
         }
         // Fallback
         return super.onOptionsItemSelected(item)
