@@ -64,7 +64,6 @@ class ReminderActivity : AppCompatActivity() {
     }
 
     private fun dismiss() {
-        Notifications.possiblyCancelTheNotification()
         finish()
     }
 }
