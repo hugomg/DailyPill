@@ -49,14 +49,13 @@ class ReminderActivity : AppCompatActivity() {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         val okButton: Button = findViewById(R.id.ok_button)!!
-        okButton.setOnClickListener(this::clickOK)
+        okButton.setOnClickListener { clickOK() }
 
         val cancelButton: Button = findViewById(R.id.cancel_button)!!
-        cancelButton.setOnClickListener(this::dismiss)
+        cancelButton.setOnClickListener { dismiss() }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    private fun clickOK(btn: View) {
+    private fun clickOK() {
         if (!DataModel.hasTakenDrugToday()) {
             DataModel.takeDrugNow()
         }
@@ -64,8 +63,7 @@ class ReminderActivity : AppCompatActivity() {
         finish()
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    private fun dismiss(btn: View) {
+    private fun dismiss() {
         Notifications.possiblyCancelTheNotification()
         finish()
     }

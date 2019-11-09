@@ -122,12 +122,11 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         ): View? {
             val root = inflater.inflate(R.layout.fragment_medicine_not_taken, container, false)
             button = root.findViewById(R.id.button)
-            button.setOnClickListener(this::performUpdateTime)
+            button.setOnClickListener { clickButton() }
             return root
         }
 
-        @Suppress("UNUSED_PARAMETER")
-        private fun performUpdateTime(btn: View) {
+        private fun clickButton() {
             DataModel.takeDrugNow()
         }
     }
