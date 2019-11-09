@@ -19,11 +19,13 @@
 package br.com.gualandi.dailypill
 
 import android.app.Application
+import com.singhajit.sherlock.core.Sherlock
 
 @Suppress("unused")
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        Sherlock.init(this);
         DataModel.init(this)
         Notifications.init(this)
     }
