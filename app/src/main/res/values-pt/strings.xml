@@ -45,7 +45,7 @@
     <!-- Notifications -->
     <string name="notification_channel_description_1">Na configuração padrão, este lembrete é enviado no meio da noite, enquanto você ainda está dormindo. Ele abre a janela do lembrete de forma que ela seja a primeira coisa que você vê quando você pegar o telefone pela manhã.</string>
     <string name="notification_title">Está na hora de tomar o remédio</string>
-    <string name="notification_description">Toque aqui quando você tiver tomado ele</string>
+    <string name="notification_description">Toque aqui quando o tiver tomado</string>
 
     <!-- Preferences -->
     <string name="settings_title">Configurações</string>
