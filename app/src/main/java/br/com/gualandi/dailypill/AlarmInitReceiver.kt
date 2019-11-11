@@ -27,6 +27,9 @@ import java.util.*
 /**
  *  It is necessary to update the system alarms whenever the device reboots, or the system clock
  *  changes. I copied the list of intent-filters for this from the DeskClock app.
+ *
+ *  IMPORTANT NOTE: The MY_PACKAGE_REPLACED intent does not fire if you install the app through
+ *  Android Studio's "run app" button.
  */
 class AlarmInitReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
