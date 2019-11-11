@@ -18,8 +18,8 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#ab47bc</color>
-    <color name="colorPrimaryDark">#790e8b</color>
-    <color name="colorPrimaryLight">#df78ef</color>
+    <color name="colorPrimary">#00acc1</color>
+    <color name="colorPrimaryDark">#007c91</color>
+    <color name="colorPrimaryLight">#5ddef4</color>
     <color name="colorAccent">@color/colorPrimaryDark</color>
 </resources>
