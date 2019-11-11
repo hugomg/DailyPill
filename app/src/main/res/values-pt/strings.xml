@@ -40,7 +40,7 @@
 
     <!-- ReminderActivity-->
     <string name="reminder_title">Tomou o remédio?</string>
-    <string name="reminder_snooze">Agora não</string>
+    <string name="reminder_snooze">Ainda não</string>
 
     <!-- Notifications -->
     <string name="notification_channel_description_1">Na configuração padrão, este lembrete é enviado no meio da noite, enquanto você ainda está dormindo. Ele abre a janela do lembrete de forma que ela seja a primeira coisa que você vê quando você pegar o telefone pela manhã.</string>
@@ -57,5 +57,5 @@
     <string name="reminder_time">Hora do lembrete</string>
     <string name="reminder_lock_screen">Ignorar bloqueio de tela</string>
     <string name="reminder_lock_screen_summary">Permite responder ao lembrete sem desbloquear o telefone</string>
-    <string name="reminder_test">Testar notificação</string>
+    <string name="reminder_test">Testar lembrete</string>
 </resources>

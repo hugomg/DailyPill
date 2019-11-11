@@ -39,7 +39,7 @@
 
     <!-- ReminderActivity-->
     <string name="reminder_title">Took your medicine?</string>
-    <string name="reminder_snooze">Not now</string>
+    <string name="reminder_snooze">Not yet</string>
 
     <!-- Notifications -->
     <string name="notification_channel_description_1">By default, this reminder is sent in the middle of the night, while you are sleeping. It opens the reminder dialog so it is the first thing that you will see when you pick up the device in the morning.</string>
@@ -56,5 +56,5 @@
     <string name="reminder_time">Reminder time</string>
     <string name="reminder_lock_screen">Bypass lock screen</string>
     <string name="reminder_lock_screen_summary">Allows responding to the reminder without unlocking the phone</string>
-    <string name="reminder_test">Test notification</string>
+    <string name="reminder_test">Test reminder</string>
 </resources>
