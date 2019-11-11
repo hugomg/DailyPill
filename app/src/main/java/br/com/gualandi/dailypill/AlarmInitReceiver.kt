@@ -44,9 +44,6 @@ class AlarmInitReceiver : BroadcastReceiver() {
                     Notifications.removeAlarm()
                 }
             }
-            else-> {
-                throw IllegalArgumentException("Unexpected action " + intent.action)
-            }
         }
     }
 }
