@@ -172,7 +172,6 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
 
     override fun onDialogClosed(positiveResult: Boolean) {
         if (!positiveResult) { return }
-        val pref = preference as TimePreference
 
         var newTime: Pair<Int,Int>?
 
@@ -195,6 +194,7 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
         }
 
         if (newTime != null) {
+            val pref = preference as TimePreference
             if (pref.callChangeListener(newTime)) {
                 pref.setTime(newTime)
             }
