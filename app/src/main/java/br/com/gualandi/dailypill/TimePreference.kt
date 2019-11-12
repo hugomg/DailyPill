@@ -18,6 +18,7 @@
 
 package br.com.gualandi.dailypill
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.os.Build
@@ -146,6 +147,7 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun createWorkaroundTimePicker(context: Context): View {
         val layoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

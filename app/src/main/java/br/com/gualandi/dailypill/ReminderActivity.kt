@@ -18,6 +18,7 @@
 
 package br.com.gualandi.dailypill
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,6 +27,7 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 
 class ReminderActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class ReminderActivity : AppCompatActivity() {
         // Don't call setContentView. We apparently don't need it
         // setContentView(/*...*/)
 
+        @SuppressLint("InflateParams")
         val dialogContents = layoutInflater.inflate(R.layout.reminder_dialog, null)
 
         val dialog = AlertDialog.Builder(this)
