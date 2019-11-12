@@ -137,7 +137,7 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
             // There is a bug in some Samsung S5 devices, where the app crashes when we try to
             // instantiate the TimePicker. We hit an NPE deep inside android.widget.TimePicker,
             // when "onRtlPropertiesChanged" is called on a null value. To make the app work on my
-            // mom's phone, the workaround is to use a plain text entry for the time.
+            // mom's phone, the workaround is to use a plain text entry instead.
             myContext = context
             hasTimePicker = false
             val view = createWorkaroundTimePicker(context)
