@@ -132,7 +132,6 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
             myContext = null // (not used)
             hasTimePicker = true
             timePicker = TimePicker(context)
-            throw java.lang.NullPointerException("boom")
             return timePicker
         } catch (e : NullPointerException){
             // There is a bug in some Samsung S5 devices, where the app crashes when we try to
