@@ -119,7 +119,7 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
 
     private lateinit var timePicker: TimePicker
 
-    override fun onCreateDialogView(context: Context?): View {
+    override fun onCreateDialogView(context: Context): View {
         timePicker = TimePicker(context)
         return timePicker
     }
