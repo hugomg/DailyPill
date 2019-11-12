@@ -52,8 +52,11 @@
     <string name="reminder_enabled_summary">Diariamente</string>
     <string name="reminder_disabled_summary">Desativados</string>
     <string name="reminder_time">Hora do lembrete</string>
-    <string name="reminder_time_format">A hora deve estar em formato HH:MM de 24 horas</string>
     <string name="reminder_lock_screen">Ignorar bloqueio de tela</string>
     <string name="reminder_lock_screen_summary">Permite responder ao lembrete sem desbloquear o telefone</string>
     <string name="reminder_test">Testar lembrete</string>
+
+    <string name="reminder_time_edittext_hint">HH:MM</string>
+    <string name="reminder_time_edittext_format">A hora deve estar em formato HH:MM de 24 horas</string>
+
 </resources>

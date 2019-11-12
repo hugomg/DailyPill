@@ -133,6 +133,7 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
             myContext = null // (not used)
             hasTimePicker = true
             timePicker = TimePicker(context)
+            throw java.lang.NullPointerException("boom")
             return timePicker
         } catch (e : NullPointerException){
             // There is a bug in some Samsung S5 devices, where the app crashes when we try to
@@ -188,7 +189,7 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
                 newTime = null
                 Toast.makeText(
                     context!!,
-                    context!!.getString(R.string.reminder_time_format),
+                    context!!.getString(R.string.reminder_time_edittext_format),
                     Toast.LENGTH_SHORT).show()
             }
         }
