@@ -28,9 +28,9 @@ import androidx.appcompat.app.AlertDialog
 
 class ReminderActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (DataModel.displayReminderWhenLocked()) {
             if (Build.VERSION.SDK_INT >= 27) {
                 setShowWhenLocked(true)
