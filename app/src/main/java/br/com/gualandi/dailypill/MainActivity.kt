@@ -58,14 +58,14 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         updateUI(false)
         DataModel.addListener(this)
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         DataModel.removeListener(this)
     }
 
