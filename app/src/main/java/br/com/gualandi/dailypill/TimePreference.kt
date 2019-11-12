@@ -29,10 +29,8 @@ import java.lang.IllegalArgumentException
 import java.lang.NumberFormatException
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.core.view.marginStart
 import androidx.preference.PreferenceDialogFragmentCompat
 
 //
