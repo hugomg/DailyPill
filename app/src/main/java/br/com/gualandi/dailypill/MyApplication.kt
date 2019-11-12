@@ -25,7 +25,7 @@ import com.singhajit.sherlock.core.Sherlock
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        Sherlock.init(this);
+        Sherlock.init(this)
         DataModel.init(this)
         Notifications.init(this)
     }

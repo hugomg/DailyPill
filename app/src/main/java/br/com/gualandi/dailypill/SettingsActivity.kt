@@ -53,7 +53,7 @@ class SettingsActivity : AppCompatActivity() {
             reminderTime.summaryProvider = ReminderTimeSummaryProvider(activity!!)
 
             val testButton : Preference = findPreference("test_reminder")!!
-            testButton.setOnPreferenceClickListener({ clickTestButton(); true  })
+            testButton.setOnPreferenceClickListener { clickTestButton(); true  }
         }
 
         // The preference library has a boneheaded and inextensible design so we need to override
