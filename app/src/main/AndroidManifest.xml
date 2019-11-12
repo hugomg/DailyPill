@@ -45,7 +45,7 @@
             android:name=".ReminderActivity"
             android:excludeFromRecents="true"
             android:taskAffinity=""
-            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+            android:theme="@style/AppTheme.Dialog" />
 
         <activity
             android:name=".SettingsActivity"

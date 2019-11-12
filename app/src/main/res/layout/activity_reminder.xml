@@ -41,6 +41,6 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:background="@android:color/transparent"
-        android:textColor="@color/colorAccent"
+        android:textColor="?attr/colorAccent"
         android:text="@string/reminder_snooze"/>
 </LinearLayout>
