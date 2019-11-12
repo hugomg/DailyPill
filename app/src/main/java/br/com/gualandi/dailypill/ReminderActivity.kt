@@ -18,23 +18,17 @@
 
 package br.com.gualandi.dailypill
 
-import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 
 class ReminderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reminder)
-        setTitle(R.string.reminder_title)
-
         if (DataModel.displayReminderWhenLocked()) {
             if (Build.VERSION.SDK_INT >= 27) {
                 setShowWhenLocked(true)
@@ -43,27 +37,31 @@ class ReminderActivity : AppCompatActivity() {
             }
         }
 
-        // Force the button to use the whole available width. By default the width is set to
-        // WRAP_CONTENT, and apparently only changing it here works. Setting the layout size on the
-        // XML file is not enough.
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        // This activity's title briefly flashes on the screen after we dismiss the dialog.
+        // So we set it to the empty string as a workaround.
+        setTitle("")
 
-        val okButton: Button = findViewById(R.id.ok_button)!!
-        okButton.setOnClickListener { clickOK() }
+        // Don't call setContentView. We apparently don't need it
+        // setContentView(/*...*/)
 
-        val cancelButton: Button = findViewById(R.id.cancel_button)!!
-        cancelButton.setOnClickListener { dismiss() }
+        val dialogContents = layoutInflater.inflate(R.layout.reminder_dialog, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(getString(R.string.reminder_title))
+            .setView(dialogContents)
+            .setNegativeButton(getString(R.string.reminder_snooze), null)
+            .setOnCancelListener { finish() }
+            .setOnDismissListener { finish() }
+            .show()
+
+        val okButton: Button = dialogContents.findViewById(R.id.button)
+        okButton.setOnClickListener { clickOk(); dialog.dismiss() }
     }
 
-    private fun clickOK() {
+    private fun clickOk() {
         if (!DataModel.hasTakenDrugToday()) {
             DataModel.takeDrugNow()
         }
         Notifications.possiblyCancelTheNotification()
-        finish()
-    }
-
-    private fun dismiss() {
-        finish()
     }
 }
