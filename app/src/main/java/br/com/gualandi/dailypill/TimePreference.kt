@@ -23,11 +23,16 @@ import android.content.res.TypedArray
 import android.os.Build
 import android.text.format.DateFormat
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import androidx.preference.DialogPreference
 import java.lang.IllegalArgumentException
 import java.lang.NumberFormatException
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
+import androidx.core.view.marginStart
 import androidx.preference.PreferenceDialogFragmentCompat
 
 //
@@ -117,43 +122,81 @@ class TimePreference : DialogPreference {
 
 class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
 
+    private var myContext: Context? = null
+
+    private var hasTimePicker = false
     private lateinit var timePicker: TimePicker
+    private lateinit var editText: EditText
 
     override fun onCreateDialogView(context: Context): View {
-        timePicker = TimePicker(context)
-        return timePicker
+        try {
+            myContext = null // (not used)
+            hasTimePicker = true
+            timePicker = TimePicker(context)
+            return timePicker
+        } catch (e : NullPointerException){
+            // There is a bug in some Samsung S5 devices, where the app crashes when we try to
+            // instantiate the TimePicker. We hit an NPE deep inside android.widget.TimePicker,
+            // when "onRtlPropertiesChanged" is called on a null value. To make the app work on my
+            // mom's phone, the workaround is to use a plain text entry for the time.
+            myContext = context
+            hasTimePicker = false
+            val view = createWorkaroundTimePicker(context)
+            editText = view.findViewById(R.id.edit_text)!!
+            return view
+        }
     }
 
-    override fun onBindDialogView(view: View?) {
+    private fun createWorkaroundTimePicker(context: Context): View {
+        val layoutInflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        return layoutInflater.inflate(R.layout.time_picker_workaround, null)
+    }
+
+    override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
-        timePicker.setIs24HourView(DateFormat.is24HourFormat(context))
         val pref = preference as TimePreference
-        if (Build.VERSION.SDK_INT >= 23) {
-            timePicker.hour   = pref.hour
-            timePicker.minute = pref.minute
-        } else @Suppress("DEPRECATION") {
-            timePicker.currentHour   = pref.hour
-            timePicker.currentMinute = pref.minute
+        if (hasTimePicker) {
+            timePicker.setIs24HourView(DateFormat.is24HourFormat(context))
+            if (Build.VERSION.SDK_INT >= 23) {
+                timePicker.hour = pref.hour
+                timePicker.minute = pref.minute
+            } else @Suppress("DEPRECATION") {
+                timePicker.currentHour = pref.hour
+                timePicker.currentMinute = pref.minute
+            }
+        } else {
+            editText.setText(serializeTime(pref.hour, pref.minute))
         }
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
-        if (positiveResult) {
-            val pref = preference as TimePreference
+        if (!positiveResult) { return }
+        val pref = preference as TimePreference
 
-            val newHour: Int
-            val newMinute: Int
+        var newTime: Pair<Int,Int>?
+
+        if (hasTimePicker) {
             if (Build.VERSION.SDK_INT >= 23) {
-                newHour   = timePicker.hour
-                newMinute = timePicker.minute
+                newTime = Pair(timePicker.hour, timePicker.minute)
             } else @Suppress("DEPRECATION") {
-                newHour   = timePicker.currentHour
-                newMinute = timePicker.currentMinute
+                newTime = Pair(timePicker.currentHour, timePicker.currentMinute)
             }
+        } else {
+            try {
+                newTime = parseTime(editText.text.toString())
+            } catch (e: IllegalArgumentException ) {
+                newTime = null
+                Toast.makeText(
+                    context!!,
+                    context!!.getString(R.string.reminder_time_format),
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
 
-            val value = Pair(newHour, newMinute)
-            if (pref.callChangeListener(value)) {
-                pref.setTime(value)
+        if (newTime != null) {
+            if (pref.callChangeListener(newTime)) {
+                pref.setTime(newTime)
             }
         }
     }

@@ -54,6 +54,7 @@
     <string name="reminder_enabled_summary">Daily</string>
     <string name="reminder_disabled_summary">Disabled</string>
     <string name="reminder_time">Reminder time</string>
+    <string name="reminder_time_format">The time must be in 24-hour HH:MM format</string>
     <string name="reminder_lock_screen">Bypass lock screen</string>
     <string name="reminder_lock_screen_summary">Allows responding to the reminder without unlocking the phone</string>
     <string name="reminder_test">Test reminder</string>
