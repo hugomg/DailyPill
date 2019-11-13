@@ -121,15 +121,12 @@ class TimePreference : DialogPreference {
 
 class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
 
-    private var myContext: Context? = null
-
     private var hasTimePicker = false
     private lateinit var timePicker: TimePicker
     private lateinit var editText: EditText
 
     override fun onCreateDialogView(context: Context): View {
         try {
-            myContext = null // (not used)
             hasTimePicker = true
             timePicker = TimePicker(context)
             return timePicker
@@ -138,7 +135,6 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
             // instantiate the TimePicker. We hit an NPE deep inside android.widget.TimePicker,
             // when "onRtlPropertiesChanged" is called on a null value. To make the app work on my
             // mom's phone, the workaround is to use a plain text entry instead.
-            myContext = context
             hasTimePicker = false
             val view = createWorkaroundTimePicker(context)
             editText = view.findViewById(R.id.edit_text)!!
@@ -186,10 +182,14 @@ class TimePreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat() {
                 newTime = parseTime(editText.text.toString())
             } catch (e: IllegalArgumentException ) {
                 newTime = null
-                Toast.makeText(
-                    context!!,
-                    context!!.getString(R.string.reminder_time_edittext_format),
-                    Toast.LENGTH_SHORT).show()
+
+                val activity = getActivity()
+                if (activity != null) {
+                    Toast.makeText(
+                        activity,
+                        activity.getString(R.string.reminder_time_edittext_format),
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
