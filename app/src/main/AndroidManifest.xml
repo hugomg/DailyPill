@@ -30,7 +30,8 @@
 
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings_title" />
+            android:label="@string/settings_title"
+            android:parentActivityName=".MainActivity" />
 
         <receiver
             android:name=".AlarmInitReceiver"

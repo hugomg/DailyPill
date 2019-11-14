@@ -39,11 +39,6 @@ class SettingsActivity : AppCompatActivity() {
             .commit()
     }
 
-    override fun onSupportNavigateUp() : Boolean{
-        onBackPressed()
-        return true
-    }
-
     class SettingsFragment : PreferenceFragmentCompat() {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
