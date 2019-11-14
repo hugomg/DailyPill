@@ -48,7 +48,7 @@
     <string name="settings_title">Configurações</string>
 
     <!-- Preference Titles -->
-    <string name="reminder">Lembretes do remédio</string>
+    <string name="reminder">Lembretes</string>
     <string name="reminder_enabled_summary">Diariamente</string>
     <string name="reminder_disabled_summary">Desativados</string>
     <string name="reminder_time">Hora do lembrete</string>

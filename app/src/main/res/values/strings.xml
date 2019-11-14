@@ -47,7 +47,7 @@
     <string name="settings_title">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="reminder">Medication reminders</string>
+    <string name="reminder">Reminders</string>
     <string name="reminder_enabled_summary">Daily</string>
     <string name="reminder_disabled_summary">Disabled</string>
     <string name="reminder_time">Reminder time</string>
