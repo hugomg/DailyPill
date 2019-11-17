@@ -18,7 +18,9 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#00acc1</color>
-    <color name="colorPrimaryDark">#007c91</color>
+    <color name="colorPrimary">#00acc1</color> <!-- app bar color -->
+    <color name="colorPrimaryDark">#007c91</color> <!-- status bar color -->
+    <color name="colorPrimaryLight">#5ddef4</color> <!-- currently unused -->
+    <color name="colorPrimaryMediumLight">#2ebcd2</color> <!-- icon background -->
     <color name="colorAccent">@color/colorPrimary</color>
 </resources>
