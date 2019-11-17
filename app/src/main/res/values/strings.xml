@@ -22,7 +22,7 @@
     <string name="app_name">&appName;</string>
 
     <!-- MainActivity -->
-    <string name="drug_not_taken_message">Have you taken today\'s medicine?</string>
+    <string name="drug_not_taken_message">Have you taken your medicine today?</string>
     <string name="drug_taken_message">Medicine taken before %s</string>
     <string name="action_take_drug">&appTakenButton;</string>
     <string name="action_reset">Reset</string>
@@ -36,7 +36,7 @@
     <string name="reset_confirmation_cancel">Cancel</string>
 
     <!-- ReminderActivity-->
-    <string name="reminder_title">Took your medicine?</string>
+    <string name="reminder_title">Have you taken your medicine?</string>
     <string name="reminder_snooze">Not yet</string>
 
     <!-- Notifications -->
