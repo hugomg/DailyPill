@@ -33,6 +33,11 @@
             android:label="@string/settings_title"
             android:parentActivityName=".MainActivity" />
 
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/about_title"
+            android:parentActivityName=".MainActivity" />
+
         <receiver
             android:name=".AlarmInitReceiver"
             android:enabled="true">
@@ -46,9 +51,7 @@
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".AlarmReceiver" />
-
     </application>
 
 </manifest>

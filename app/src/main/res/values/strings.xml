@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright © 2019 Hugo Musso Gualandi.
   ~ SPDX-License-Identifier: GPL-3.0-or-later
   ~
@@ -16,9 +15,11 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
-<!DOCTYPE resources [<!ENTITY appTakenButton "Yes, I have">]>
+<!DOCTYPE resources [
+    <!ENTITY appName "Daily Pill">
+    <!ENTITY appTakenButton "Yes, I have"> ]>
 <resources>
-    <string name="app_name">Daily Pill</string>
+    <string name="app_name">&appName;</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Have you taken today\'s medicine?</string>
@@ -57,4 +58,14 @@
 
     <string name="reminder_time_edittext_hint">HH:MM</string>
     <string name="reminder_time_edittext_format">The time must be in 24-hour HH:MM format</string>
+
+    <!-- About -->
+    <string name="about_title">About</string>
+    <string name="about_contents"><!--
+-->Copyright © 2019 Hugo Musso Gualandi.\n\n<!--
+-->If you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br"> send me an email</a>.
+All comments are welcome!\n\n<!--
+-->&appName; is a volunteer project, and is provided on an "as-is" basis.
+The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.
+    </string>
 </resources>

@@ -17,21 +17,27 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<menu
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AboutActivity" >
 
-    <item android:id="@+id/action_reset"
-        android:title="@string/action_reset"
-        android:icon="@drawable/ic_undo_24dp"
-        app:iconTint="?android:textColorPrimary"
-        app:showAsAction="ifRoom"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme.ToolbarOverlay"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <item android:id="@+id/action_settings"
-        android:title="@string/settings_title"
-        app:showAsAction="never"/>
-
-    <item android:id="@+id/action_about"
-        android:title="@string/about_title"
-        app:showAsAction="never"/>
-</menu>
+    <TextView
+        android:id="@+id/contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:text="@string/about_contents"/>
+</LinearLayout>

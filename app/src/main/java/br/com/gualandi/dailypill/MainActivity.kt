@@ -102,6 +102,10 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
+            R.id.action_about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
+            }
         }
         // Fallback
         return super.onOptionsItemSelected(item)

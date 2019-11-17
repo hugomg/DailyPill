@@ -16,9 +16,11 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
-<!DOCTYPE resources [<!ENTITY appTakenButton "Já tomei">]>
+<!DOCTYPE resources [
+    <!ENTITY appName "Remédio Diário">
+    <!ENTITY appTakenButton "Já tomei"> ]>
 <resources>
-    <string name="app_name">Remédio Diário</string>
+    <string name="app_name">&appName;</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Você já tomou o remédio de hoje?</string>
@@ -59,4 +61,13 @@
     <string name="reminder_time_edittext_hint">HH:MM</string>
     <string name="reminder_time_edittext_format">A hora deve estar em formato HH:MM de 24 horas</string>
 
+    <!-- About -->
+    <string name="about_title">Sobre</string>
+    <string name="about_contents"><!--
+-->Copyright © 2019 Hugo Musso Gualandi.\n\n<!--
+-->Se você tiver alguma sugestão, ou encontrar algum problema, por favor <a href="mailto:dailypill@gualandi.com.br"> me mande um e-mail</a>.
+Todos os comentários são bem vindos!\n\n<!--
+-->O &appName; e um projeto desenvolvido de forma voluntária.
+O código fonte está disponível no <a href="https://www.github.com/hugomg/DailyPill">Github</a>.
+    </string>
 </resources>
