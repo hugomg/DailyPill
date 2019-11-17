@@ -132,19 +132,8 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
     class MedicineTakenFragment : Fragment() {
 
-        private lateinit var drugTakenMessage: String
-        private lateinit var reminderEnabledMessage: CharSequence
-        private lateinit var reminderDisabledMessage: CharSequence
-
         private lateinit var drugTakenMessageView: TextView
         private lateinit var reminderStatus: TextView
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            drugTakenMessage =  getString(R.string.drug_taken_message)
-            reminderEnabledMessage = getText(R.string.reminders_are_enabled)
-            reminderDisabledMessage = getText(R.string.reminders_are_disabled)
-        }
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -165,12 +154,14 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
             val timestamp = DataModel.getDrugTakenTimestamp()
             val timeStr = DateFormat.getTimeFormat(activity).format(timestamp)
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
+
+            val drugTakenMessage = getString(R.string.drug_taken_message)
             drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
 
             if (DataModel.reminderIsEnabled()) {
-                reminderStatus.text = reminderEnabledMessage
+                reminderStatus.setText(R.string.reminders_are_enabled)
             } else {
-                reminderStatus.text = reminderDisabledMessage
+                reminderStatus.setText(R.string.reminders_are_disabled)
             }
         }
 
