@@ -24,6 +24,7 @@ import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import android.view.*
@@ -87,21 +88,29 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     }
 
     private fun checkForMissedAlarms() {
-        val now = Calendar.getInstance()
-        val nowTimestamp = now.timeInMillis
+        // 1) Are reminders enabled?
+        if (!DataModel.reminderIsEnabled()) { return }
+
+        // 2) Are we past the expected time for the next reminder?
+        // Leave some wiggle room for AlarmManager delay. Watch out for integer overflow.
+        val nowTimestamp = Calendar.getInstance().timeInMillis
         val nextAlarmTimestamp = DataModel.getNextAlarmTimestamp()
-        val leniency = 60*1000 // 1 minute
-        val remindersHaveFailed =
-            (DataModel.reminderIsEnabled() && (nextAlarmTimestamp < nowTimestamp - leniency))
-        if (remindersHaveFailed) {
-            AlertDialog.Builder(this)
-                .setTitle(R.string.missed_reminder_title)
-                .setIcon(R.drawable.ic_pill)
-                .setMessage(R.string.missed_reminder_message)
-                .setPositiveButton(R.string.missed_reminder_button) { _, _ -> resetAlarms() }
-                .setOnDismissListener { resetAlarms() }
-                .show()
-        }
+        if (nowTimestamp - 1*60*1000L < nextAlarmTimestamp) { return }
+
+        // 3) Have we only recently turned on the phone?
+        // The AlarmInitReceiver might not have run yet. Leave some extra large wiggle room
+        // because we can only measure time since boot, not time since the user unlocked the phone.
+        val timeSinceBoot = SystemClock.elapsedRealtime()
+        if (timeSinceBoot < 5*60*1000L) { return }
+
+        // 4) Oh well, it seems like something broke our AlarmManager alarm ¯\_(ツ)_/¯
+        AlertDialog.Builder(this)
+            .setTitle(R.string.missed_reminder_title)
+            .setIcon(R.drawable.ic_pill)
+            .setMessage(R.string.missed_reminder_message)
+            .setPositiveButton(R.string.missed_reminder_button) { _, _ -> resetAlarms() }
+            .setOnDismissListener { resetAlarms() }
+            .show()
     }
 
     private fun resetAlarms() {
