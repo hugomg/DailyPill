@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="UnusedAttribute">
+        <!-- android:elevation is only for API 21+ but all it does is add
+             shadows so it's OK if older versions don't understand it -->
+        <ignore regexp="elevation"/>
+    </issue>
+</lint>
+
