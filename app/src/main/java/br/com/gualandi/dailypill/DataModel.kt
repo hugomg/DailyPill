@@ -32,6 +32,7 @@ object DataModel {
     const val REMINDER_ENABLED     = "reminder_enabled"
     const val REMINDER_TIME        = "reminder_time"
     const val REMINDER_LOCK_SCREEN = "reminder_lock_screen"
+    const val NEXT_ALARM_TIMESTAMP = "next_alarm_timestamp"
 
     private lateinit var sharedPrefs: SharedPreferences
 
@@ -110,6 +111,20 @@ object DataModel {
 
     fun displayReminderWhenLocked(): Boolean {
         return sharedPrefs.getBoolean(REMINDER_LOCK_SCREEN, true)
+    }
+
+    //
+    // NEXT_ALARM_TIMESTAMP
+    //
+
+    fun getNextAlarmTimestamp(): Long {
+        return sharedPrefs.getLong(NEXT_ALARM_TIMESTAMP, 0)
+    }
+
+    fun setNextAlarmTimestamp(timestamp: Long) {
+        sharedPrefs.edit()
+            .putLong(NEXT_ALARM_TIMESTAMP, timestamp)
+            .apply()
     }
 
     //

@@ -98,12 +98,7 @@ object Notifications: SharedPreferencesListener {
             || key.equals(DataModel.REMINDER_TIME)
         ) {
             possiblyCancelTheNotification()
-
-            if (DataModel.reminderIsEnabled()) {
-                addAlarm(Calendar.getInstance(), false)
-            } else {
-                removeAlarm()
-            }
+            resetAlarm()
         }
     }
 
@@ -136,50 +131,52 @@ object Notifications: SharedPreferencesListener {
 
     fun addAlarm(now: Calendar, onlyTomorrow: Boolean) {
         val timeToday = DataModel.dailyReminderTimeForTheSameDayAs(now)
-
         val timeTomorrow = timeToday.clone() as Calendar
         timeTomorrow.add(Calendar.DATE, 1)
 
         val nowIsAfterTodaysMedicine = now.after(timeToday)
-        val alarmTime =
+        val alarmCal =
             if (onlyTomorrow || nowIsAfterTodaysMedicine) { timeTomorrow } else { timeToday }
+        val alarmTime = alarmCal.timeInMillis
 
         val pendingIntent = alarmPendingIntent()
 
         // Starting with API level 19, alarm delivery on android is inexact, and there is a delivery
         // window that the system takes advantage of to optimize battery usage. Unfortunately, the
         // default delivery window for alarms being set to a day from now can be of 18h or more,
-        // which is prohibitive. This precludes us from using the setRepeating family of functions.
-        // The only option is to use `setWindow`, or one of the variations of `setExact`.
-        // By the way, `adb shell dumpsys alarm` can be used to debug the state of the alarm system.
+        // which is prohibitive for us. This means that we cannot rely on the setRepeating family of
+        // functions. The only option is to use `setWindow`, or one of the variations of `setExact`.
+        // By the way, to debug the state of the alarm system, use `adb shell dumpsys alarm`.
         val alarmManager =
             appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         if (Build.VERSION.SDK_INT >= 19) {
-            // A delivery window of 1 minute ensures that the alarm arrives when the user expects
-            val windowLengthInMillis = 1*60*1000L
-            alarmManager.setWindow(
+            alarmManager.setExact(
                 AlarmManager.RTC_WAKEUP,
-                alarmTime.timeInMillis,
-                windowLengthInMillis,
+                alarmTime,
                 pendingIntent)
         } else {
             alarmManager.set(
                 AlarmManager.RTC_WAKEUP,
-                alarmTime.timeInMillis,
+                alarmTime,
                 pendingIntent)
         }
 
-        // val toastMsg = String.format("#Set alarm for %s, %02d:%02d",
-        //     (if (nowIsAfterTodaysMedicine) {"tomorrow"} else {"today"}),
-        //     alarmTime.get(Calendar.HOUR_OF_DAY),
-        //     alarmTime.get(Calendar.MINUTE))
-        // val toast = Toast.makeText(appContext, toastMsg, Toast.LENGTH_SHORT)
-        // toast.show()
+        // Remember the planned alarm time to be able to warn the user if the alarm does not fire
+        // as scheduled, possibly due to aggressive battery management on certain devices.
+        DataModel.setNextAlarmTimestamp(alarmTime)
     }
 
     fun removeAlarm() {
         val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(alarmPendingIntent())
         // Toast.makeText(appContext, "#Alarm removed", Toast.LENGTH_SHORT).show()
+    }
+
+    fun resetAlarm() {
+        if (DataModel.reminderIsEnabled()) {
+            addAlarm(Calendar.getInstance(), false)
+        } else {
+            removeAlarm()
+        }
     }
 }

@@ -29,15 +29,22 @@ import androidx.fragment.app.FragmentTransaction
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
+import java.util.*
 
 class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
     private var resetMenuItem: MenuItem? = null
 
+    private lateinit var missedReminderBanner: View
+    private lateinit var missedReminderButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        missedReminderBanner  = findViewById(R.id.missed_reminder_banner)
+        missedReminderButton  = findViewById(R.id.missed_reminder_button)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,13 +56,14 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key.equals(DataModel.DRUG_TAKEN_TIMESTAMP)) {
-            updateUI(true)
+            updateBody(true)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        updateUI(false)
+        updateBody(false)
+        updateBanner()
         DataModel.addListener(this)
     }
 
@@ -64,7 +72,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         DataModel.removeListener(this)
     }
 
-    private fun updateUI(useFade: Boolean) {
+    private fun updateBody(useFade: Boolean) {
         val drugTaken = DataModel.hasTakenDrugToday()
         val fragment =
             if (drugTaken) { MedicineTakenFragment()    }
@@ -77,6 +85,21 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             }
             commit()
+        }
+    }
+
+    private fun updateBanner() {
+        val now = Calendar.getInstance()
+        val nowTimestamp = now.timeInMillis
+        val nextAlarmTimestamp = DataModel.getNextAlarmTimestamp()
+        val leniency = 60*1000 // 1 minute
+        val remindersHaveStopped =
+            (DataModel.reminderIsEnabled() && (nextAlarmTimestamp < nowTimestamp - leniency))
+        if (!remindersHaveStopped) {
+            missedReminderBanner.visibility = View.GONE
+        } else {
+            missedReminderBanner.visibility = View.VISIBLE
+            missedReminderButton.setOnClickListener { Notifications.resetAlarm(); updateBanner() }
         }
     }
 

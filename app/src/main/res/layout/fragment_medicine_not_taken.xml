@@ -29,15 +29,15 @@
             android:id="@+id/not_taken_message"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.67"
             android:gravity="center"
             android:text="@string/drug_not_taken_message"
             android:textSize="36sp"/>
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="175dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
             android:text="@string/action_take_drug"
             android:textSize="24sp"/>
 </LinearLayout>
