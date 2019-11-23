@@ -35,16 +35,10 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
 
     private var resetMenuItem: MenuItem? = null
 
-    private lateinit var missedReminderBanner: View
-    private lateinit var missedReminderButton: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-
-        missedReminderBanner  = findViewById(R.id.missed_reminder_banner)
-        missedReminderButton  = findViewById(R.id.missed_reminder_button)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,8 +57,12 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     override fun onStart() {
         super.onStart()
         updateBody(false)
-        updateBanner()
         DataModel.addListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkForMissedAlarms()
     }
 
     override fun onStop() {
@@ -88,22 +86,29 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         }
     }
 
-    private fun updateBanner() {
+    private fun checkForMissedAlarms() {
         val now = Calendar.getInstance()
         val nowTimestamp = now.timeInMillis
         val nextAlarmTimestamp = DataModel.getNextAlarmTimestamp()
         val leniency = 60*1000 // 1 minute
-        val remindersHaveStopped =
+        val remindersHaveFailed =
             (DataModel.reminderIsEnabled() && (nextAlarmTimestamp < nowTimestamp - leniency))
-        if (!remindersHaveStopped) {
-            missedReminderBanner.visibility = View.GONE
-        } else {
-            missedReminderBanner.visibility = View.VISIBLE
-            missedReminderButton.setOnClickListener { Notifications.resetAlarm(); updateBanner() }
+        if (remindersHaveFailed) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.missed_reminder_title)
+                .setIcon(R.drawable.ic_pill)
+                .setMessage(R.string.missed_reminder_message)
+                .setPositiveButton(R.string.missed_reminder_button) { _, _ -> resetAlarms() }
+                .setOnDismissListener { resetAlarms() }
+                .show()
         }
     }
 
-    private fun doReset() {
+    private fun resetAlarms() {
+        Notifications.resetAlarm()
+    }
+
+    private fun resetMedicineTakenTime() {
         val dialog = AlertDialog.Builder(this)
             .setTitle(R.string.reset_confirmation_title)
             .setMessage(R.string.reset_confirmation_message)
@@ -118,7 +123,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_reset -> {
-                doReset()
+                resetMedicineTakenTime()
                 return true
             }
             R.id.action_settings -> {

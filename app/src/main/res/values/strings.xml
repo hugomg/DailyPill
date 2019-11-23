@@ -28,7 +28,9 @@
     <string name="action_reset">Reset</string>
     <string name="reminders_are_disabled">Reminders are disabled.</string>
     <string name="enable_reminders">Enable</string>
-    <string name="missed_reminder">We have detected that reminders have stopped being shown as scheduled. This might have been caused by your device\'s battery saving settings.</string>
+
+    <string name="missed_reminder_title">Missed reminders</string>
+    <string name="missed_reminder_message">It appears that the scheduled reminders are failing to appear.\n\nThis might have been caused by your device\'s battery saving settings.</string>
     <string name="missed_reminder_button">Reset reminders</string>
 
     <!-- Reset confirmation dialog -->

@@ -29,7 +29,9 @@
     <string name="action_reset">Desfazer</string>
     <string name="reminders_are_disabled">Lembretes estão desativados.</string>
     <string name="enable_reminders">Ativar</string>
-    <string name="missed_reminder">Nós detectamos que os lembretes pararam de ser apresentados na hora planejada. Isto pode ter sido causado pelas configurações de economia de bateria do seu aparelho.</string>
+
+    <string name="missed_reminder_title">Lembretes perdidos</string>
+    <string name="missed_reminder_message">Infelizmente, algo fez com que os lembretes parassem de aparecer.\n\nÉ possivel que isto seja devido às configurações de economia de bateria do seu aparelho.</string>
     <string name="missed_reminder_button">Reativar lembretes</string>
 
     <!-- Reset confirmation dialog -->
