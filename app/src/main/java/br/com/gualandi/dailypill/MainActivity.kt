@@ -133,7 +133,8 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
     class MedicineTakenFragment : Fragment() {
 
         private lateinit var drugTakenMessageView: TextView
-        private lateinit var reminderStatus: TextView
+        private lateinit var bannerView: View
+        private lateinit var bannerButton: Button
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -141,9 +142,10 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         ): View? {
             val root = inflater.inflate(R.layout.fragment_medicine_taken, container, false)
             drugTakenMessageView = root.findViewById(R.id.drug_taken_message)
-            reminderStatus = root.findViewById(R.id.reminder_status)
+            bannerView = root.findViewById(R.id.banner)
+            bannerButton = root.findViewById(R.id.banner_button)
 
-            reminderStatus.setOnClickListener(this::clickReminderStatus)
+            bannerButton.setOnClickListener { gotoSettings() }
             return root
         }
 
@@ -158,14 +160,11 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
             val drugTakenMessage = getString(R.string.drug_taken_message)
             drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
 
-            if (DataModel.reminderIsEnabled()) {
-                reminderStatus.setText(R.string.reminders_are_enabled)
-            } else {
-                reminderStatus.setText(R.string.reminders_are_disabled)
-            }
+            bannerView.visibility =
+                if (DataModel.reminderIsEnabled()) { View.GONE } else { View.VISIBLE }
         }
 
-        private fun clickReminderStatus(v: View) {
+        private fun gotoSettings() {
             val intent = Intent(activity!!, SettingsActivity::class.java)
             startActivity(intent)
         }
