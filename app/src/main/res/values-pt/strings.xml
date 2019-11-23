@@ -31,7 +31,7 @@
     <string name="enable_reminders">Ativar</string>
 
     <string name="missed_reminder_title">Lembretes perdidos</string>
-    <string name="missed_reminder_message">Infelizmente, algo fez com que os lembretes parassem de aparecer.\n\nÉ possivel que isto seja devido às configurações de economia de bateria do seu aparelho.</string>
+    <string name="missed_reminder_message">Infelizmente, algo fez com que os lembretes parassem de aparecer.\n\nÉ possível que isto seja devido às configurações de economia de bateria do seu aparelho.</string>
     <string name="missed_reminder_button">Reativar lembretes</string>
 
     <!-- Reset confirmation dialog -->
