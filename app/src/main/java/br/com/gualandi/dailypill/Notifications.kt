@@ -65,6 +65,15 @@ object Notifications: SharedPreferencesListener {
 
         createNotificationChannels()
 
+        val todaysReminderTime = DataModel.dailyReminderTimeForTheSameDayAs(now)
+
+        val endOfDay = todaysReminderTime.clone() as Calendar
+        endOfDay.set(Calendar.HOUR_OF_DAY, 0)
+        endOfDay.set(Calendar.MINUTE, 0)
+        endOfDay.set(Calendar.SECOND, 0)
+        endOfDay.set(Calendar.MILLISECOND, 0)
+        endOfDay.add(Calendar.DATE, 1)
+
         val intent = Intent(appContext, ReminderActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
@@ -79,8 +88,9 @@ object Notifications: SharedPreferencesListener {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setContentIntent(pendingIntent)
-                .setTimeoutAfter(14*60*1000) // 14h later
-                .setWhen(DataModel.dailyReminderTimeForTheSameDayAs(now).timeInMillis)
+                .setWhen(todaysReminderTime.timeInMillis)
+                .setTimeoutAfter(endOfDay.timeInMillis - now.timeInMillis)
+
         if (!shouldInterrupt) {
             builder.setOnlyAlertOnce(true)
         }
