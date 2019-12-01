@@ -32,8 +32,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/AppTheme.ToolbarOverlay"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:theme="@style/Theme.DailyPill.ToolbarOverlay"
+        app:popupTheme="@style/Theme.DailyPill.PopupOverlay" />
 
     <TextView
         android:id="@+id/contents"
