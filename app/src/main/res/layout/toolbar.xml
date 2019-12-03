@@ -20,10 +20,12 @@
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:elevation="4dp"
     android:theme="@style/Theme.DailyPill.ToolbarOverlay"
-    app:popupTheme="@style/Theme.DailyPill.PopupOverlay" />
+    app:popupTheme="@style/Theme.DailyPill.PopupOverlay"
+    tools:ignore="Overdraw" />
