@@ -18,9 +18,9 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#00acc1</color> <!-- app bar color -->
-    <color name="colorPrimaryDark">#007c91</color> <!-- status bar color -->
-    <!-- unused: colorPrimaryLight=#5ddef4 -->
-    <!-- unused: iconBackground=#2ebcd2 -->
+    <!-- Cyan 700 pallete -->
+    <!-- see https://material.io/resources/color -->
+    <color name="colorPrimary">#0097a7</color>
+    <color name="colorPrimaryDark">#006978</color>
     <color name="colorAccent">@color/colorPrimary</color>
 </resources>
