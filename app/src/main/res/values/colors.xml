@@ -18,7 +18,7 @@
   -->
 
 <resources>
-    <!-- Cyan 700 pallete -->
+    <!-- Cyan 700 palette -->
     <!-- see https://material.io/resources/color -->
     <color name="colorPrimary">#0097a7</color>
     <color name="colorPrimaryDark">#006978</color>
