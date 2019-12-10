@@ -22,7 +22,7 @@ The developers of Daily Pill do not have access to any of your information, exce
 
 ## What data other parties might collect, store and process
 
-None
+Daily Pill does not provide your data to a third party.
 
 ## Permissions
 
