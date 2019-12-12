@@ -15,16 +15,13 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
-<!DOCTYPE resources [
-    <!ENTITY appName "Daily Pill">
-    <!ENTITY appTakenButton "Yes, I have"> ]>
 <resources>
-    <string name="app_name">&appName;</string>
+    <string name="app_name">Daily Pill</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Have you taken your medicine today?</string>
     <string name="drug_taken_message">Medicine taken before %s</string>
-    <string name="action_take_drug">&appTakenButton;</string>
+    <string name="action_take_drug">Yes, I have</string>
     <string name="action_reset">Reset</string>
     <string name="reminders_are_disabled">Reminders are disabled.</string>
     <string name="enable_reminders">Enable</string>
@@ -35,7 +32,7 @@
 
     <!-- Reset confirmation dialog -->
     <string name="reset_confirmation_title">Forget last time?</string>
-    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>&appTakenButton;</i> button</string>
+    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>Yes, I have</i> button</string>
     <string name="reset_confirmation_ok">Forget</string>
     <string name="reset_confirmation_cancel">Cancel</string>
 
@@ -69,7 +66,7 @@
 -->Copyright © 2019 Hugo Musso Gualandi.\n\n<!--
 -->If you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br"> send me an email</a>.
 All comments are welcome!\n\n<!--
--->&appName; is a volunteer project, and is provided on an "as-is" basis.
+-->Daily Pill is a volunteer project, and is provided on an "as-is" basis.
 The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.
     </string>
 </resources>

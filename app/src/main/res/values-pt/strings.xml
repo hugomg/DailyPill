@@ -16,16 +16,13 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
-<!DOCTYPE resources [
-    <!ENTITY appName "Remédio Diário">
-    <!ENTITY appTakenButton "Já tomei"> ]>
 <resources>
-    <string name="app_name">&appName;</string>
+    <string name="app_name">Remédio Diário</string>
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Você já tomou o remédio de hoje?</string>
     <string name="drug_taken_message">Remédio tomado antes das %s</string>
-    <string name="action_take_drug">&appTakenButton;</string>
+    <string name="action_take_drug">Já tomei</string>
     <string name="action_reset">Desfazer</string>
     <string name="reminders_are_disabled">Lembretes estão desativados.</string>
     <string name="enable_reminders">Ativar</string>
@@ -37,7 +34,7 @@
     <!-- Reset confirmation dialog -->
     <!-- note: the button name should match "action_take_drug" -->
     <string name="reset_confirmation_title">Esquecer último horário?</string>
-    <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>&appTakenButton;</i></string>
+    <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>Já tomei</i></string>
     <string name="reset_confirmation_ok">Esquecer</string>
     <string name="reset_confirmation_cancel">Cancelar</string>
 
@@ -71,7 +68,7 @@
 -->Copyright © 2019 Hugo Musso Gualandi.\n\n<!--
 -->Se você tiver alguma sugestão, ou encontrar algum problema, por favor <a href="mailto:dailypill@gualandi.com.br"> me mande um e-mail</a>.
 Todos os comentários são bem vindos!\n\n<!--
--->O &appName; e um projeto desenvolvido de forma voluntária.
+-->O Remédio Diário e um projeto desenvolvido de forma voluntária.
 O código fonte está disponível no <a href="https://www.github.com/hugomg/DailyPill">Github</a>.
     </string>
 </resources>
