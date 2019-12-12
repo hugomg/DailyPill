@@ -16,13 +16,17 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
+<!--
+    Translators: if you update an entry that is marked with a "[reused]"
+    comment, make sure to update all other uses of that word in the rest of
+    the file -->
 <resources>
-    <string name="app_name">Remédio Diário</string>
+    <string name="app_name">Remédio Diário</string> <!-- [reused -->
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Você já tomou o remédio de hoje?</string>
     <string name="drug_taken_message">Remédio tomado antes das %s</string>
-    <string name="action_take_drug">Já tomei</string>
+    <string name="action_take_drug">Já tomei</string> <!-- [reused] -->
     <string name="action_reset">Desfazer</string>
     <string name="reminders_are_disabled">Lembretes estão desativados.</string>
     <string name="enable_reminders">Ativar</string>
