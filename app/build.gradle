@@ -16,6 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+plugins {
+    /* This is the latest version of Gradle Play Publisher that is compatible with Gradle 3.5.3 */
+    id 'com.android.application'
+    id 'com.github.triplet.play' version '2.3.0'
+}
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -43,6 +49,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+play {
+    /* Gradle Play Publisher settings */
+    defaultToAppBundles = true
+    serviceAccountCredentials = file("GoogleCloudPrivateKey-6e0622c8892f.json")
 }
 
 dependencies {
