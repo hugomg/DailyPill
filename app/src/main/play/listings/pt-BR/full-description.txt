@@ -1,0 +1,5 @@
+Ideal para quem precisa tomar um remédio pela manhã. O Remédio Diário mostra um lembrete na sua tela de bloqueio, que é visível quando você pegar o seu telefone pela primeira vez na manhã. Você pode responder a este lembrete com o toque de um simples botão, sem destravar a tela.
+
+Se você precisar tomar o seu remédio com o estômago vazio, este app também se lembra do horário em que você tomou o remédio pela última vez.
+
+O Remédio Diário é software livre e de código aberto. Ele não exibe anúncios, nem coleta sua informação pessoal.
