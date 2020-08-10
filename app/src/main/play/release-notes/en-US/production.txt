@@ -1,1 +1,1 @@
-Icon color tweak.
+Daily Pill now backs up your settings in case you have to reinstall it on a different device.

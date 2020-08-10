@@ -1,1 +1,1 @@
-Pequena alteração no ícone.
+O app agora faz um backup das suas configurações, caso você precise reinstalá-lo em um outro aparelho.
