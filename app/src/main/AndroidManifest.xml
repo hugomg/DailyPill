@@ -7,7 +7,7 @@
 
     <application
         android:name=".MyApplication"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -41,8 +41,7 @@
             android:name=".AlarmInitReceiver"
             android:enabled="true">
             <intent-filter>
-
-                <!-- Make sure to update AlarmInitReceiver.kt if you edit this list -->
+                <!-- Remember to update AlarmInitReceiver.kt if you edit this list -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
