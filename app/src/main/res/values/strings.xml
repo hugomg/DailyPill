@@ -72,6 +72,7 @@
 -->If you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br"> send me an email</a>.
 All comments are welcome!\n\n<!--
 -->Daily Pill is a volunteer project, and is provided on an "as-is" basis.
-The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.
+The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.\n\n<!--
+-->Version %s
     </string>
 </resources>

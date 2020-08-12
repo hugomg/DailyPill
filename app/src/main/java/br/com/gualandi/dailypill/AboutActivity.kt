@@ -31,8 +31,11 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val version = packageManager.getPackageInfo(packageName, 0).versionName
+        val aboutMsg = String.format(getString(R.string.about_contents), version)
+
         val contents = findViewById<TextView>(R.id.contents)!!
-        contents.setText(R.string.about_contents)
+        contents.setText(aboutMsg)
         contents.movementMethod = LinkMovementMethod.getInstance()
     }
 }
