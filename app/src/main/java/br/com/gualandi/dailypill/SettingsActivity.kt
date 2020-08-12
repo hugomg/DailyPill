@@ -45,7 +45,7 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
             val reminderTime : TimePreference = findPreference("reminder_time")!!
-            reminderTime.summaryProvider = ReminderTimeSummaryProvider(activity!!)
+            reminderTime.summaryProvider = ReminderTimeSummaryProvider(requireActivity())
 
             val testButton : Preference = findPreference("test_reminder")!!
             testButton.setOnPreferenceClickListener { clickTestButton(); true  }
@@ -59,7 +59,7 @@ class SettingsActivity : AppCompatActivity() {
                 val fragment = TimePreferenceDialogFragmentCompat()
                 fragment.setArguments(bundle)
                 fragment.setTargetFragment(this, 0)
-                fragment.show(fragmentManager!!, null)
+                fragment.show(requireFragmentManager(), null)
             } else {
                 super.onDisplayPreferenceDialog(preference)
             }

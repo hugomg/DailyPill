@@ -202,7 +202,7 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
         }
 
         private fun gotoSettings() {
-            val intent = Intent(activity!!, SettingsActivity::class.java)
+            val intent = Intent(requireActivity(), SettingsActivity::class.java)
             startActivity(intent)
         }
     }
