@@ -21,12 +21,12 @@
     comment, make sure to update all other uses of that word in the rest of
     the file -->
 <resources>
-    <string name="app_name">Remédio Diário</string> <!-- [reused -->
+    <string name="app_name">Remédio Diário</string> <!--[reused-->
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Você já tomou o remédio de hoje?</string>
     <string name="drug_taken_message">Remédio tomado antes das %s</string>
-    <string name="action_take_drug">Já tomei</string> <!-- [reused] -->
+    <string name="action_take_drug">Já tomei</string> <!--[reused]-->
     <string name="action_reset">Desfazer</string>
     <string name="reminders_are_disabled">Lembretes estão desativados.</string>
     <string name="enable_reminders">Ativar</string>
@@ -38,7 +38,7 @@
     <!-- Reset confirmation dialog -->
     <!-- note: the button name should match "action_take_drug" -->
     <string name="reset_confirmation_title">Esquecer último horário?</string>
-    <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>Já tomei</i></string>
+    <string name="reset_confirmation_message">Desfaz a última vez que você apertou o botão <i>Já tomei</i></string> <!--[reused]-->
     <string name="reset_confirmation_ok">Esquecer</string>
     <string name="reset_confirmation_cancel">Cancelar</string>
 
@@ -68,12 +68,5 @@
 
     <!-- About -->
     <string name="about_title">Sobre</string>
-    <string name="about_contents"><!--
--->Copyright © 2019 Hugo Musso Gualandi.\n\n<!--
--->Se você tiver alguma sugestão, ou encontrar algum problema, por favor <a href="mailto:dailypill@gualandi.com.br"> me mande um e-mail</a>.
-Todos os comentários são bem vindos!\n\n<!--
--->O Remédio Diário e um projeto desenvolvido de forma voluntária.
-O código fonte está disponível no <a href="https://www.github.com/hugomg/DailyPill">Github</a>.\n\n<!--
--->Versão %s
-    </string>
+    <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nSe você tiver alguma sugestão, ou encontrar algum problema, por favor <a href="mailto:dailypill@gualandi.com.br"> me mande um e-mail</a>. Todos os comentários são bem vindos!\n\nO Remédio Diário e um projeto desenvolvido de forma voluntária. O código fonte está disponível <a href="https://www.github.com/hugomg/DailyPill">no Github</a>.\n\nVersão %s</string> <!--[reused]-->
 </resources>

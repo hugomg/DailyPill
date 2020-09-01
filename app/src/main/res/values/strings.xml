@@ -21,12 +21,12 @@
     comment, make sure to update all other uses of that word in the rest of
     the file -->
 <resources>
-    <string name="app_name">Daily Pill</string> <!-- [reused] -->
+    <string name="app_name">Daily Pill</string> <!-- [reused]-->
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Have you taken your medicine today?</string>
     <string name="drug_taken_message">Medicine taken before %s</string>
-    <string name="action_take_drug">Yes, I have</string>  <!-- [reused] -->
+    <string name="action_take_drug">Yes, I have</string>  <!--[reused]-->
     <string name="action_reset">Reset</string>
     <string name="reminders_are_disabled">Reminders are disabled.</string>
     <string name="enable_reminders">Enable</string>
@@ -37,7 +37,7 @@
 
     <!-- Reset confirmation dialog -->
     <string name="reset_confirmation_title">Forget last time?</string>
-    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>Yes, I have</i> button</string>
+    <string name="reset_confirmation_message">Undoes the last time you pressed the <i>Yes, I have</i> button</string> <!--[reused]-->
     <string name="reset_confirmation_ok">Forget</string>
     <string name="reset_confirmation_cancel">Cancel</string>
 
@@ -67,12 +67,5 @@
 
     <!-- About -->
     <string name="about_title">About</string>
-    <string name="about_contents"><!--
--->Copyright © 2019 Hugo Musso Gualandi.\n\n<!--
--->If you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br"> send me an email</a>.
-All comments are welcome!\n\n<!--
--->Daily Pill is a volunteer project, and is provided on an "as-is" basis.
-The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.\n\n<!--
--->Version %s
-    </string>
+    <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nIf you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br"> send me an email</a>.All comments are welcome!\n\nDaily Pill is a volunteer project, and is provided on an "as-is" basis. The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.\n\nVersion %s</string> <!--[reused]-->
 </resources>
