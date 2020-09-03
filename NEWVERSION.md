@@ -2,9 +2,10 @@
 
 Currently I only know how to do it by hand via the Play console
 
-1. In Android Studio, run Build -> Generate Signed Bundle
-2. Upload the .aab file to the Play Console, in the Release Management tab
-3. Fill inn the "What's new" field by hand.
+1. Update the CHANGELOG.txt file
+2. In Android Studio, run Build -> Generate Signed Bundle
+3. Upload the .aab file to the Play Console, in the Release Management tab
+4. Fill inn the "What's new" field by hand.
 
 # How to update the play store listings
 
