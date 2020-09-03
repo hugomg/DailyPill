@@ -66,6 +66,11 @@
     <string name="reminder_time_edittext_hint">HH:MM</string>
     <string name="reminder_time_edittext_format">A hora deve estar em formato HH:MM de 24 horas</string>
 
+    <string name="theme_label">Tema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="theme_system">Padrão do sistema</string>
+
     <!-- About -->
     <string name="about_title">Sobre</string>
     <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nSe você tiver alguma sugestão, ou encontrar algum problema, por favor <a href="mailto:dailypill@gualandi.com.br"> me mande um e-mail</a>. Todos os comentários são bem vindos!\n\nO Remédio Diário e um projeto desenvolvido de forma voluntária. O código fonte está disponível <a href="https://www.github.com/hugomg/DailyPill">no Github</a>.\n\nVersão %s</string> <!--[reused]-->

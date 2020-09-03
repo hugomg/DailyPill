@@ -65,6 +65,11 @@
     <string name="reminder_time_edittext_hint">HH:MM</string>
     <string name="reminder_time_edittext_format">The time must be in 24-hour HH:MM format</string>
 
+    <string name="theme_label">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">System default</string>
+
     <!-- About -->
     <string name="about_title">About</string>
     <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nIf you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br"> send me an email</a>.All comments are welcome!\n\nDaily Pill is a volunteer project, and is provided on an "as-is" basis. The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.\n\nVersion %s</string> <!--[reused]-->

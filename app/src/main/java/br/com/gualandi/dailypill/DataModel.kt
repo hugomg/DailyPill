@@ -33,6 +33,7 @@ object DataModel {
     const val REMINDER_TIME        = "reminder_time"
     const val REMINDER_LOCK_SCREEN = "reminder_lock_screen"
     const val NEXT_ALARM_TIMESTAMP = "next_alarm_timestamp"
+    const val THEME_SETTING        = "theme"
 
     private lateinit var sharedPrefs: SharedPreferences
 
@@ -124,6 +125,20 @@ object DataModel {
     fun setNextAlarmTimestamp(timestamp: Long) {
         sharedPrefs.edit()
             .putLong(NEXT_ALARM_TIMESTAMP, timestamp)
+            .apply()
+    }
+
+    //
+    // THEME
+    //
+
+    fun getTheme(): String {
+        return sharedPrefs.getString(THEME_SETTING, "SYSTEM")!!
+    }
+
+    fun setTheme(theme: String) {
+        sharedPrefs.edit()
+            .putString(THEME_SETTING, theme)
             .apply()
     }
 

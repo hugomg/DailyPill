@@ -26,5 +26,6 @@ class MyApplication : Application() {
         super.onCreate()
         DataModel.init(this)
         Notifications.init(this)
+        NightTheme.init(this)
     }
 }
