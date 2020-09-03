@@ -17,7 +17,11 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<!-- Note: shared preferences that contain a GCM registration Id should be excluded from backup -->
+<!-- To test if backups are working, follow the instruction found on
+     https://developer.android.com/guide/topics/data/testingbackup -->
+
+<!-- Note: data that contains device specific IDs should be excluded from backup.
+     For example, shared preferences that contain a GCM registration ID. -->
 <full-backup-content>
     <include domain="sharedpref" path="."/>
 </full-backup-content>
