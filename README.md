@@ -1,11 +1,15 @@
 # DailyPill
 
-This is the official source code repository for Daily Pill, the easy-to-use medication app for Android.
+This is the official source code repository for Daily Pill,
+the easy-to-use medication app for Android.
 
 [<img
     src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
     alt='Get it on Google Play'
-    height="90"/>](https://play.google.com/store/apps/details?id=br.com.gualandi.dailypill)
+    height="80"/>](https://play.google.com/store/apps/details?id=br.com.gualandi.dailypill)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+    alt="Get it on F-Droid"
+    height="80">](https://f-droid.org/packages/br.com.gualandi.dailypill)
 
 # License
 
