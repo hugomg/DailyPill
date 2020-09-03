@@ -1,1 +1,1 @@
-Icon color tweak.
+Daily Pill now respects the systemwide dark mode setting.
