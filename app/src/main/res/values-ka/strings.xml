@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright © 2019 Hugo Musso Gualandi.
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!--
+    Translators: if you update an entry that is marked with a "[reused]"
+    comment, make sure to update all other uses of that word in the rest of
+    the file -->
+<resources>
+    <string name="app_name">დღიური აბი</string> <!-- [reused]-->
+
+    <!-- MainActivity -->
+    <string name="drug_not_taken_message">მიიღეთ თქვენი წამალი დღეს?</string>
+    <string name="drug_taken_message">წამალი მიღებულია %s-მდე</string>
+    <string name="action_take_drug">დიახ, მივიღე</string>  <!--[reused]-->
+    <string name="action_reset">ჩამოყრა</string>
+    <string name="reminders_are_disabled">შეხსენებები გათიშულია.</string>
+    <string name="enable_reminders">ჩართვა</string>
+
+    <string name="missed_reminder_title">გამოტოვებული შეხსენებები</string>
+    <string name="missed_reminder_message">როგორც სჩანს დაგეგმილი შეხსენებების ჩვენება არ ხერხდება.\n\nეს შეიძლება გამოწვეული იყოს თქვენი მოწყობილობის  ელემენტების ენერგიის დაზოგვის პარამეტრით (Battery Saver Mode).</string>
+    <string name="missed_reminder_button">შეხსენებების ჩამოყრა</string>
+
+    <!-- Reset confirmation dialog -->
+    <string name="reset_confirmation_title">დაგავიწყდა წინა ჯერზე?</string>
+    <string name="reset_confirmation_message">აუქმებს წინა ჯერზე დაჭერილ <i>დიახ, მივიღე</i> ღილაკს</string> <!--[reused]-->
+    <string name="reset_confirmation_ok">დავიწყება</string>
+    <string name="reset_confirmation_cancel">უარყოფა</string>
+
+    <!-- ReminderActivity-->
+    <string name="reminder_title">მიიღეთ თქვენი წამალი?</string>
+    <string name="reminder_snooze">ჯერ არა</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_description_1">ნაგულისხმევად, ამ შეხსენებას მიიღებთ შუა ღამეს, როდესაც თქვენ გძინავთ. ეს ხსნის შეხსენების დიალოგს. პირველი, რასაც დილით ტელეფონის ხელში აღებისას ნახავთ,სწორედ ეს იქნება.</string>
+    <string name="notification_title">თქვენი წამლის მიღების დროა</string>
+    <string name="notification_description">დააჭირეთ აქ მიღების შემდეგ</string>
+
+    <!-- Preferences -->
+    <string name="settings_title">პარამეტრები</string>
+
+    <!-- Preference Titles -->
+    <string name="reminder">შეხსენებები</string>
+    <string name="reminder_enabled_summary">დღიურად</string>
+    <string name="reminder_disabled_summary">გამორთულია</string>
+    <string name="reminder_time">შეხსენების დრო</string>
+    <string name="reminder_lock_screen">ეკრანის ბლოკირატორის გვერდის ავლა</string>
+    <string name="reminder_lock_screen_summary">საშუალებას იძლევა შეხსენებაზე რეაგირებას ტელეფონის განბლოკვის გარეშე</string>
+    <string name="reminder_test">შეხსენების ტესტირება</string>
+
+    <string name="reminder_time_edittext_hint">HH:MM</string>
+    <string name="reminder_time_edittext_format">დრო უნდა იყოს 24 საათიან HH:MM ფორმატში</string>
+
+    <string name="theme_label">თემა</string>
+    <string name="theme_light">ნათელი</string>
+    <string name="theme_dark">ბნელი</string>
+    <string name="theme_system">ნაგულისხმევი (სისტემური)</string>
+
+    <!-- About -->
+    <string name="about_title">პროგრამის შესახებ</string>
+    <string name="about_contents">ყველა უფლება დაცულია © 2019 Hugo Musso Gualandi.\n\თუ რაიმე რჩევა გაქვთ ან პრობლემას წააწყდით, გთხოვთ <a href="mailto:dailypill@gualandi.com.br"> მომწეროთ</a>.ყველა შენიშვნა სასიხარულოა!\n\nდღიური აბი მოხალისეობრივი პროექტია და ხელმისაწვდომია როგორც არის,გარანტიების გარეშე. პროგრამის კოდი ხელმისაწვდომია <a href="https://www.github.com/hugomg/DailyPill">ჯითჰაბზე</a>.\n\nვერსია %s</string> <!--[reused]-->
+</resources>
