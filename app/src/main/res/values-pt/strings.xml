@@ -73,5 +73,6 @@
 
     <!-- About -->
     <string name="about_title">Sobre</string>
-    <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nSe você tiver alguma sugestão, ou encontrar algum problema, por favor <a href="mailto:dailypill@gualandi.com.br"> me mande um e-mail</a>. Todos os comentários são bem vindos!\n\nO Remédio Diário e um projeto desenvolvido de forma voluntária. O código fonte está disponível <a href="https://www.github.com/hugomg/DailyPill">no Github</a>.\n\nVersão %s</string> <!--[reused]-->
+    <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nSe você tiver alguma sugestão, ou encontrar algum problema, por favor <a href="mailto:dailypill@gualandi.com.br"> me mande um e-mail</a>. Todos os comentários são bem vindos!\n\nO Remédio Diário e um projeto desenvolvido con ajuda de <a href="https://hugomg.github.io/DailyPill/contributors.html">muitas pessoas</a> de todos os cantos do mundo. O código fonte está disponível <a href="https://www.github.com/hugomg/DailyPill">no Github</a>.</string> <!--[reused]-->
+    <string name="about_version">Versão %s</string>
 </resources>

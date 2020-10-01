@@ -27,10 +27,23 @@
 
     <include layout="@layout/toolbar" />
 
-    <TextView
-        android:id="@+id/contents"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:text="@string/about_contents"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+        <TextView
+            android:id="@+id/contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_contents"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp"/>
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_version"/>
+    </LinearLayout>
 </LinearLayout>

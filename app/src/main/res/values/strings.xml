@@ -72,5 +72,6 @@
 
     <!-- About -->
     <string name="about_title">About</string>
-    <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nIf you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br"> send me an email</a>.All comments are welcome!\n\nDaily Pill is a volunteer project, and is provided on an "as-is" basis. The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.\n\nVersion %s</string> <!--[reused]-->
+    <string name="about_contents">Copyright © 2019 Hugo Musso Gualandi.\n\nIf you have any suggestions, or encounter any problems, please <a href="mailto:dailypill@gualandi.com.br">send me an email</a>. All comments are welcome!\n\nDaily Pill is developed with help from <a href="https://hugomg.github.io/DailyPill/contributors.html">many people</a> from all over the world. The source code is available on <a href="https://www.github.com/hugomg/DailyPill">Github</a>.</string> <!--[reused]-->
+    <string name="about_version">Version %s</string>
 </resources>
