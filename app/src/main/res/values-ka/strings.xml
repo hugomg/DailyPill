@@ -72,5 +72,6 @@
 
     <!-- About -->
     <string name="about_title">პროგრამის შესახებ</string>
-    <string name="about_contents">ყველა უფლება დაცულია © 2019 Hugo Musso Gualandi.\n\თუ რაიმე რჩევა გაქვთ ან პრობლემას წააწყდით, გთხოვთ <a href="mailto:dailypill@gualandi.com.br"> მომწეროთ</a>.ყველა შენიშვნა სასიხარულოა!\n\nდღიური აბი მოხალისეობრივი პროექტია და ხელმისაწვდომია როგორც არის,გარანტიების გარეშე. პროგრამის კოდი ხელმისაწვდომია <a href="https://www.github.com/hugomg/DailyPill">ჯითჰაბზე</a>.\n\nვერსია %s</string> <!--[reused]-->
+    <string name="about_contents">საავტორო უფლებები © 2019 Hugo Musso Gualandi.nnთუ გაქვთ რაიმე წინადადება ან პრობლემებს წააწყდით, გთხოვთ <a href="mailto:dailypill@gualandi.com.br">მომწეროთ ელ-ფოსტის საშუალებით</a>. ყველა შენიშვნა სასიხარულოა!nnDaily Pill შექმნილია <a href="https://hugomg.github.io/DailyPill/contributors.html">მრავალი ადამიანის</a> წყალობით მთელი მსოფლიოდან. საწყისი კოდი ხელმისაწვდომია <a href="https://www.github.com/hugomg/DailyPill">Github</a>.</string> <!--[reused]-->
+    <string name="about_version">ვერსია %s</string>
 </resources>
