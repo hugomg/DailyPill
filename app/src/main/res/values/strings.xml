@@ -25,7 +25,7 @@
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Have you taken your medicine today?</string>
-    <string name="drug_taken_message">Medicine taken before %s</string>
+    <string name="drug_taken_message">(%s) Medicine taken before %s</string>
     <string name="action_take_drug">Yes, I have</string>  <!--[reused]-->
     <string name="action_reset">Reset</string>
     <string name="reminders_are_disabled">Reminders are disabled.</string>

@@ -25,7 +25,7 @@
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">მიიღეთ თქვენი წამალი დღეს?</string>
-    <string name="drug_taken_message">წამალი მიღებულია %s-მდე</string>
+    <string name="drug_taken_message">(%s) წამალი მიღებულია %s-მდე</string>
     <string name="action_take_drug">დიახ, მივიღე</string>  <!--[reused]-->
     <string name="action_reset">ჩამოყრა</string>
     <string name="reminders_are_disabled">შეხსენებები გათიშულია.</string>

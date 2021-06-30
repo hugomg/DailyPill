@@ -25,7 +25,7 @@
 
     <!-- MainActivity -->
     <string name="drug_not_taken_message">Você já tomou o remédio de hoje?</string>
-    <string name="drug_taken_message">Remédio tomado antes das %s</string>
+    <string name="drug_taken_message">(%s) Remédio tomado antes das %s</string>
     <string name="action_take_drug">Já tomei</string> <!--[reused]-->
     <string name="action_reset">Desfazer</string>
     <string name="reminders_are_disabled">Lembretes estão desativados.</string>

@@ -194,8 +194,10 @@ class MainActivity : AppCompatActivity(), SharedPreferencesListener {
             val timeStr = DateFormat.getTimeFormat(activity).format(timestamp)
             val nbspTimeStr = timeStr.replace(" ", "\u00A0" )
 
+            val weekday = DateFormat.format("EEEE", timestamp)
+
             val drugTakenMessage = getString(R.string.drug_taken_message)
-            drugTakenMessageView.text = String.format(drugTakenMessage, nbspTimeStr)
+            drugTakenMessageView.text = String.format(drugTakenMessage, weekday, nbspTimeStr)
 
             bannerView.visibility =
                 if (DataModel.reminderIsEnabled()) { View.GONE } else { View.VISIBLE }
