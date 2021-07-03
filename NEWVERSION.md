@@ -1,11 +1,16 @@
+# Generate a new version
+
+1. Update the CHANGELOG.txt file
+2. Update the version number in build.gradle
+3. git tag vA.B.C
+
 # How to release a new version
 
 Currently I only know how to do it by hand via the Play console
 
-1. Update the CHANGELOG.txt file
-2. In Android Studio, run Build -> Generate Signed Bundle
-3. Upload the .aab file to the Play Console, in the Release Management tab
-4. Fill inn the "What's new" field by hand.
+1. In Android Studio, run Build -> Generate Signed Bundle
+2. Upload the .aab file to the Play Console, in the Release Management tab
+3. Fill inn the "What's new" field by hand.
 
 # How to update the play store listings
 
