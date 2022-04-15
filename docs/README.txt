@@ -3,7 +3,7 @@ https://docs.github.com/en/github/working-with-github-pages/testing-your-github-
 
 # How to install dependencies
 
-    bundle instal
+    bundle install
 
 # How to update
 
